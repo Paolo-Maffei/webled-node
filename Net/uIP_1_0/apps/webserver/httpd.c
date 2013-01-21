@@ -221,27 +221,23 @@ PT_THREAD(handle_output(struct httpd_state *s))
   
   PT_BEGIN(&s->outputpt);
  
-  if(!httpd_fs_open(s->filename, &s->file)) {
-    httpd_fs_open(http_404_html, &s->file);
+  if(!httpd_fs_open(s->filename,&s->file)) {
+    httpd_fs_open(http_404_html,&s->file);
     strcpy(s->filename, http_404_html);
-    PT_WAIT_THREAD(&s->outputpt,
-		   send_headers(s,
-		   http_header_404));
-    PT_WAIT_THREAD(&s->outputpt,
-		   send_file(s));
-  } else {
-    PT_WAIT_THREAD(&s->outputpt,
-		   send_headers(s,
-		   http_header_200));
+    PT_WAIT_THREAD(&s->outputpt,send_headers(s, http_header_404));
+    PT_WAIT_THREAD(&s->outputpt,send_file(s));
+		} 
+	else {
+    PT_WAIT_THREAD(&s->outputpt,send_headers(s,http_header_200));
     ptr = strchr(s->filename, ISO_period);
     if(ptr != NULL && strncmp(ptr, http_shtml, 6) == 0) {
       PT_INIT(&s->scriptpt);
-      PT_WAIT_THREAD(&s->outputpt, handle_script(s));
-    } else {
-      PT_WAIT_THREAD(&s->outputpt,
-		     send_file(s));
-    }
-  }
+      PT_WAIT_THREAD(&s->outputpt,handle_script(s));
+			} 
+		else {
+      PT_WAIT_THREAD(&s->outputpt,send_file(s));
+			}
+		}
   PSOCK_CLOSE(&s->sout);
   PT_END(&s->outputpt);
 }
@@ -353,8 +349,10 @@ httpd_appcall(void)
 {
   struct httpd_state *s = (struct httpd_state *)&(uip_conn->appstate);
 
-  if(uip_closed() || uip_aborted() || uip_timedout()) {
-  } else if(uip_connected()) {
+  if(uip_closed() || uip_aborted() || uip_timedout()) 
+	{} 
+	else if(uip_connected()) 
+	{
     PSOCK_INIT(&s->sin, s->inputbuf, sizeof(s->inputbuf) - 1);
     PSOCK_INIT(&s->sout, s->inputbuf, sizeof(s->inputbuf) - 1);
     PT_INIT(&s->outputpt);
@@ -362,19 +360,23 @@ httpd_appcall(void)
     /*    timer_set(&s->timer, CLOCK_SECOND * 100);*/
     s->timer = 0;
     handle_connection(s);
-  } else if(s != NULL) {
-    if(uip_poll()) {
+  } 
+	else if(s != NULL) 
+	{
+    if(uip_poll()) 
+		{
       ++s->timer;
-      if(s->timer >= 20) {
-	uip_abort();
-      }
-    } else {
+      if(s->timer >= 20)
+			{
+					uip_abort();
+			}
+		} 
+		else 
       s->timer = 0;
-    }
     handle_connection(s);
-  } else {
+  } 
+	else 
     uip_abort();
-  }
 }
 /*---------------------------------------------------------------------------*/
 /**
