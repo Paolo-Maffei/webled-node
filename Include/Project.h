@@ -43,6 +43,7 @@ STM32 WIFI ¿ª·¢°å
 #include "Relay.h"
 #include "Flash.h"
 #include "EEPROM.h"
+#include "KEY.h"
 #include "Led.h"
 #include "Uart.h"
 #include "Console.h"
