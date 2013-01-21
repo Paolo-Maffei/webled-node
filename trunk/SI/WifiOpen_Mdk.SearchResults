@@ -1,0 +1,247 @@
+---- uip_buf Matches (246 in 36 files) ----
+A00042.html (net\uip_1_0\doc\html):<a name="l00007"></a>00007 <span class="preprocessor">#define BUF ((struct uip_eth_hdr *)&amp;uip_buf[0])</span>
+A00135.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#g24f52ac52d6e714cb04a5aa01be3bdd0">BUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00094.html">uip_tcpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00135.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#g4309376690872fa4beb4f025f5cc199b">ICMPBUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00091.html">uip_icmpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00135.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#gb9435261753469accec0c9bf8a5a2686">UDPBUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00096.html">uip_udpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00135.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="a00150.html#g2addf34c7d457c1a7899a7e2171ef1e9"></a><br></td></tr>
+A00135.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="a00150.html#g85b65e38aa74eba18979156f97a94a87"></a><br></td></tr>
+A00135.html (net\uip_1_0\doc\html):<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> [UIP_BUFSIZE+2]</td></tr>
+A00135.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="a00150.html#g12a33f0c09711167bdf3dd7d7cf8c5a1"></a><br></td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The buffer size available for user data in the <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> buffer.  <a href="a00150.html#ge0825474feee11b4e038bfe71757875f"></a><br></td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="a00150.html#g2addf34c7d457c1a7899a7e2171ef1e9"></a><br></td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="a00150.html#g85b65e38aa74eba18979156f97a94a87"></a><br></td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the UDP checksum of the packet in uip_buf and uip_appdata.  <a href="a00150.html#g7023a34ba9e9d03b5fbedbcb32924453"></a><br></td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> [UIP_BUFSIZE+2]</td></tr>
+A00136.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="a00149.html#g12a33f0c09711167bdf3dd7d7cf8c5a1"></a><br></td></tr>
+A00137.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="a00151.html#g2addf34c7d457c1a7899a7e2171ef1e9"></a><br></td></tr>
+A00137.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="a00151.html#g85b65e38aa74eba18979156f97a94a87"></a><br></td></tr>
+A00138.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#g24f52ac52d6e714cb04a5aa01be3bdd0">BUF</a>&nbsp;&nbsp;&nbsp;((struct arp_hdr *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0])</td></tr>
+A00138.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#g9f2196e2705036869611962425e404bf">IPBUF</a>&nbsp;&nbsp;&nbsp;((struct ethip_hdr *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0])</td></tr>
+A00146.html (net\uip_1_0\doc\html):<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> [UIP_BUFSIZE+2]</td></tr>
+A00146.html (net\uip_1_0\doc\html):This function should be called when the device driver has received a packet from the network. The packet from the device driver must be present in the uip_buf buffer, and the length of the packet should be placed in the uip_len variable.<p>
+A00146.html (net\uip_1_0\doc\html):When the function returns, there may be an outbound packet placed in the uip_buf packet buffer. If so, the uip_len variable is set to the length of the packet. If no packet is to be sent out, the uip_len variable is set to 0.<p>
+A00146.html (net\uip_1_0\doc\html):<dl compact><dt><b>Note:</b></dt><dd>If you are writing a uIP device driver that needs ARP (Address Resolution Protocol), e.g., when running uIP over Ethernet, you will need to call the uIP ARP code before calling this function: <div class="fragment"><pre class="fragment"><span class="preprocessor">  #define BUF ((struct uip_eth_hdr *)&amp;uip_buf[0])</span>
+A00146.html (net\uip_1_0\doc\html):<a class="anchor" name="gb81e78f890dbbee50c533a9734b74fd9"></a><!-- doxytag: member="uip.h::uip_buf" ref="gb81e78f890dbbee50c533a9734b74fd9" args="[UIP_BUFSIZE+2]" --><p>
+A00146.html (net\uip_1_0\doc\html):          <td class="md" nowrap valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a> <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_BUFSIZE+2]          </td>
+A00146.html (net\uip_1_0\doc\html):The uip_buf array is used to hold incoming and outgoing packets. The device driver should place incoming data into this buffer. When sending data, the device driver should read the link level headers and the TCP/IP headers from this buffer. The size of the link level headers is configured by the UIP_LLH_LEN define.<p>
+A00146.html (net\uip_1_0\doc\html):    hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0], <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>);
+A00146.html (net\uip_1_0\doc\html):      hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00149.html#g12a33f0c09711167bdf3dd7d7cf8c5a1">uip_len</a> - UIP_LLH_LEN);
+A00146.html (net\uip_1_0\doc\html):      hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a>);
+A00147.html (net\uip_1_0\doc\html):This function can only be called in response to a UDP event (poll or newdata). The data must be present in the uip_buf buffer, at the place pointed to by the uip_appdata pointer.<p>
+A00147.html (net\uip_1_0\doc\html):    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>The length of the data in the uip_buf buffer. </td></tr>
+A00149.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="#g12a33f0c09711167bdf3dd7d7cf8c5a1"></a><br></td></tr>
+A00149.html (net\uip_1_0\doc\html):The length of the packet in the uip_buf buffer. 
+A00149.html (net\uip_1_0\doc\html):The global variable uip_len holds the length of the packet in the uip_buf buffer.<p>
+A00149.html (net\uip_1_0\doc\html):When the network device driver calls the uIP input function, uip_len should be set to the length of the packet in the uip_buf buffer.<p>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The buffer size available for user data in the <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> buffer.  <a href="#ge0825474feee11b4e038bfe71757875f"></a><br></td></tr>
+A00150.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#g24f52ac52d6e714cb04a5aa01be3bdd0">BUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00094.html">uip_tcpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00150.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#g4309376690872fa4beb4f025f5cc199b">ICMPBUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00091.html">uip_icmpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00150.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#gb9435261753469accec0c9bf8a5a2686">UDPBUF</a>&nbsp;&nbsp;&nbsp;((struct <a class="el" href="a00096.html">uip_udpip_hdr</a> *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_LLH_LEN])</td></tr>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="#g2addf34c7d457c1a7899a7e2171ef1e9"></a><br></td></tr>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="#g85b65e38aa74eba18979156f97a94a87"></a><br></td></tr>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the UDP checksum of the packet in uip_buf and uip_appdata.  <a href="#g7023a34ba9e9d03b5fbedbcb32924453"></a><br></td></tr>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> [UIP_BUFSIZE+2]</td></tr>
+A00150.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The length of the packet in the uip_buf buffer.  <a href="#g12a33f0c09711167bdf3dd7d7cf8c5a1"></a><br></td></tr>
+A00150.html (net\uip_1_0\doc\html):The buffer size available for user data in the <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> buffer. 
+A00150.html (net\uip_1_0\doc\html):This macro holds the available size for user data in the <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a> buffer. The macro is intended to be used for checking bounds of available user data.<p>
+A00150.html (net\uip_1_0\doc\html):Calculate the IP header checksum of the packet header in uip_buf. 
+A00150.html (net\uip_1_0\doc\html):<dl compact><dt><b>Returns:</b></dt><dd>The IP header checksum of the IP header in the uip_buf buffer. </dd></dl>
+A00150.html (net\uip_1_0\doc\html):Calculate the TCP checksum of the packet in uip_buf and uip_appdata. 
+A00150.html (net\uip_1_0\doc\html):<dl compact><dt><b>Returns:</b></dt><dd>The TCP checksum of the TCP segment in uip_buf and pointed to by uip_appdata. </dd></dl>
+A00150.html (net\uip_1_0\doc\html):Calculate the UDP checksum of the packet in uip_buf and uip_appdata. 
+A00150.html (net\uip_1_0\doc\html):<dl compact><dt><b>Returns:</b></dt><dd>The UDP checksum of the UDP segment in uip_buf and pointed to by uip_appdata. </dd></dl>
+A00150.html (net\uip_1_0\doc\html):<a class="anchor" name="gb81e78f890dbbee50c533a9734b74fd9"></a><!-- doxytag: member="uip.c::uip_buf" ref="gb81e78f890dbbee50c533a9734b74fd9" args="[UIP_BUFSIZE+2]" --><p>
+A00150.html (net\uip_1_0\doc\html):          <td class="md" nowrap valign="top"><a class="el" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a> <a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[UIP_BUFSIZE+2]          </td>
+A00150.html (net\uip_1_0\doc\html):The uip_buf array is used to hold incoming and outgoing packets. The device driver should place incoming data into this buffer. When sending data, the device driver should read the link level headers and the TCP/IP headers from this buffer. The size of the link level headers is configured by the UIP_LLH_LEN define.<p>
+A00150.html (net\uip_1_0\doc\html):    hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0], <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>);
+A00150.html (net\uip_1_0\doc\html):      hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00149.html#g12a33f0c09711167bdf3dd7d7cf8c5a1">uip_len</a> - UIP_LLH_LEN);
+A00150.html (net\uip_1_0\doc\html):      hwsend(&amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a>);
+A00150.html (net\uip_1_0\doc\html):The length of the packet in the uip_buf buffer. 
+A00150.html (net\uip_1_0\doc\html):The global variable uip_len holds the length of the packet in the uip_buf buffer.<p>
+A00150.html (net\uip_1_0\doc\html):When the network device driver calls the uIP input function, uip_len should be set to the length of the packet in the uip_buf buffer.<p>
+A00151.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the IP header checksum of the packet header in uip_buf.  <a href="#g2addf34c7d457c1a7899a7e2171ef1e9"></a><br></td></tr>
+A00151.html (net\uip_1_0\doc\html):<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Calculate the TCP checksum of the packet in uip_buf and uip_appdata.  <a href="#g85b65e38aa74eba18979156f97a94a87"></a><br></td></tr>
+A00151.html (net\uip_1_0\doc\html):Calculate the IP header checksum of the packet header in uip_buf. 
+A00151.html (net\uip_1_0\doc\html):<dl compact><dt><b>Returns:</b></dt><dd>The IP header checksum of the IP header in the uip_buf buffer. </dd></dl>
+A00151.html (net\uip_1_0\doc\html):Calculate the TCP checksum of the packet in uip_buf and uip_appdata. 
+A00151.html (net\uip_1_0\doc\html):<dl compact><dt><b>Note:</b></dt><dd>The uip_appdata pointer that points to the packet data may point anywhere in memory, so it is not possible to simply calculate the Internet checksum of the contents of the uip_buf buffer.</dd></dl>
+A00151.html (net\uip_1_0\doc\html):<dl compact><dt><b>Returns:</b></dt><dd>The TCP checksum of the TCP segment in uip_buf and pointed to by uip_appdata. </dd></dl>
+A00152.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#g24f52ac52d6e714cb04a5aa01be3bdd0">BUF</a>&nbsp;&nbsp;&nbsp;((struct arp_hdr *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0])</td></tr>
+A00152.html (net\uip_1_0\doc\html):#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00152.html#g9f2196e2705036869611962425e404bf">IPBUF</a>&nbsp;&nbsp;&nbsp;((struct ethip_hdr *)&amp;<a class="el" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[0])</td></tr>
+A00152.html (net\uip_1_0\doc\html):This function should be called by the device driver when an ARP packet has been received. The function will act differently depending on the ARP packet type: if it is a reply for a request that we previously sent out, the ARP cache will be filled in with the values from the ARP reply. If the incoming ARP packet is an ARP request for our IP address, an ARP reply packet is created and put into the uip_buf[] buffer.<p>
+A00152.html (net\uip_1_0\doc\html):When the function returns, the value of the global variable uip_len indicates whether the device driver should send out a packet or not. If uip_len is zero, no packet should be sent. If uip_len is non-zero, it contains the length of the outbound packet that is present in the uip_buf[] buffer.<p>
+A00152.html (net\uip_1_0\doc\html):This function expects an ARP packet with a prepended Ethernet header in the uip_buf[] buffer, and the length of the packet in the global variable uip_len. <dl compact><dt><b>Examples: </b></dt><dd>
+A00152.html (net\uip_1_0\doc\html):If the destination IP address is in the local network (determined by logical ANDing of netmask and our IP address), the function checks the ARP cache to see if an entry for the destination IP address is found. If so, an Ethernet header is prepended and the function returns. If no ARP cache entry is found for the destination IP address, the packet in the uip_buf[] is replaced by an ARP request packet for the IP address. The IP packet is dropped and it is assumed that they higher level protocols (e.g., TCP) eventually will retransmit the dropped packet.<p>
+A00152.html (net\uip_1_0\doc\html):When the function returns, a packet is present in the uip_buf[] buffer, and the length of the packet is in the global variable uip_len. <dl compact><dt><b>Examples: </b></dt><dd>
+A00153.html (net\uip_1_0\doc\html):This is the offset into the uip_buf where the IP header can be found. For Ethernet, this should be set to 14. For SLIP, this should be set to 0. 
+A00153.html (net\uip_1_0\doc\html):uIP supports reassembly of fragmented IP packets. This features requires an additonal amount of RAM to hold the reassembly buffer and the reassembly code size is approximately 700 bytes. The reassembly buffer is of the same size as the uip_buf buffer (configured by UIP_BUFSIZE).<p>
+A00153.html (net\uip_1_0\doc\html):Should be set low (i.e., to the size of the uip_buf buffer) is the application is slow to process incoming data, or high (32768 bytes) if the application processes data quickly. 
+A00154.html (net\uip_1_0\doc\html):This function inspects an outgoing packet in the uip_buf buffer and sends it out using the uip_fw_output() function. If the packet is a full-sized TCP segment it will be split into two segments and transmitted separately. This function should be called instead of the actual device driver output function, or the uip_fw_output() function.<p>
+A00154.html (net\uip_1_0\doc\html):The headers of the outgoing packet is assumed to be in the uip_buf buffer and the payload is assumed to be wherever uip_appdata points. The length of the outgoing packet is assumed to be in the uip_len variable. 
+A00199.html (net\uip_1_0\doc\html):<a name="l00045"></a>00045 <span class="preprocessor">#define BUF ((struct uip_tcpip_hdr *)&amp;uip_buf[UIP_LLH_LEN])</span>
+A00200.html (net\uip_1_0\doc\html):<a name="l00078"></a>00078 <span class="comment"> * This function inspects an outgoing packet in the uip_buf buffer and</span>
+A00200.html (net\uip_1_0\doc\html):<a name="l00085"></a>00085 <span class="comment"> * The headers of the outgoing packet is assumed to be in the uip_buf</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00066"></a>00066 <span class="comment"> * The principle is that we have a small buffer, called the uip_buf,</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00070"></a>00070 <span class="comment"> * this data is present in the uip_buf and the application read the</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00076"></a>00076 <span class="comment"> * its data into the uip_buf. The uip_appdata pointer points to the</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00139"></a><a class="code" href="a00150.html#gb81e78f890dbbee50c533a9734b74fd9">00139</a> <span class="preprocessor"></span><a class="code" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a> <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#g3589822ecb9d9c4145209756396b8a6b">UIP_BUFSIZE</a> + 2];   <span class="comment">/* The packet buffer that contains</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00226"></a><a class="code" href="a00150.html#g24f52ac52d6e714cb04a5aa01be3bdd0">00226</a> <span class="preprocessor">#define BUF ((struct uip_tcpip_hdr *)&amp;uip_buf[UIP_LLH_LEN])</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00228"></a><a class="code" href="a00150.html#g4309376690872fa4beb4f025f5cc199b">00228</a> <span class="preprocessor"></span><span class="preprocessor">#define ICMPBUF ((struct uip_icmpip_hdr *)&amp;uip_buf[UIP_LLH_LEN])</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00229"></a><a class="code" href="a00150.html#gb9435261753469accec0c9bf8a5a2686">00229</a> <span class="preprocessor"></span><span class="preprocessor">#define UDPBUF ((struct uip_udpip_hdr *)&amp;uip_buf[UIP_LLH_LEN])</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l00322"></a>00322   sum = chksum(0, &amp;uip_buf[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>], <a class="code" href="a00150.html#g6bc12c6c7b56f73ce5d57abfdcdc6eb5">UIP_IPH_LEN</a>);
+A00201.html (net\uip_1_0\doc\html):<a name="l00348"></a>00348   sum = chksum(sum, &amp;uip_buf[<a class="code" href="a00150.html#g6bc12c6c7b56f73ce5d57abfdcdc6eb5">UIP_IPH_LEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>],
+A00201.html (net\uip_1_0\doc\html):<a name="l00692"></a>00692   <a class="code" href="a00150.html#ga05a3dde2048480fa3ab2a5961898d18">uip_sappdata</a> = <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#g15f2617f7dc1713f9d10282125c6027b">UIP_IPTCPH_LEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>];
+A00201.html (net\uip_1_0\doc\html):<a name="l00815"></a>00815       <a class="code" href="a00150.html#ga05a3dde2048480fa3ab2a5961898d18">uip_sappdata</a> = <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + <a class="code" href="a00150.html#g6f2b90c597ec23f39ec716ccec11233c">UIP_IPUDPH_LEN</a>];
+A00201.html (net\uip_1_0\doc\html):<a name="l01090"></a>01090   <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + UIP_IPUDPH_LEN];
+A00201.html (net\uip_1_0\doc\html):<a name="l01128"></a>01128   <a class="code" href="a00150.html#ga05a3dde2048480fa3ab2a5961898d18">uip_sappdata</a> = <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + <a class="code" href="a00150.html#g6f2b90c597ec23f39ec716ccec11233c">UIP_IPUDPH_LEN</a>];
+A00201.html (net\uip_1_0\doc\html):<a name="l01159"></a>01159   <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + <a class="code" href="a00150.html#g15f2617f7dc1713f9d10282125c6027b">UIP_IPTCPH_LEN</a>];
+A00201.html (net\uip_1_0\doc\html):<a name="l01329"></a>01329       opt = <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01337"></a>01337                 <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c] == <a class="code" href="a00150.html#g12f3bf821224b8e7b48a57ed3cea15cf">TCP_OPT_MSS_LEN</a>) {
+A00201.html (net\uip_1_0\doc\html):<a name="l01339"></a>01339         tmp16 = ((<a class="code" href="a00153.html#g77570ac4fcab86864fa1916e55676da2">u16_t</a>)<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 2 + c] &lt;&lt; 8) |
+A00201.html (net\uip_1_0\doc\html):<a name="l01340"></a>01340           (<a class="code" href="a00153.html#g77570ac4fcab86864fa1916e55676da2">u16_t</a>)<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#g15f2617f7dc1713f9d10282125c6027b">UIP_IPTCPH_LEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 3 + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01349"></a>01349         <span class="keywordflow">if</span>(<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c] == 0) {
+A00201.html (net\uip_1_0\doc\html):<a name="l01354"></a>01354         c += <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01498"></a>01498           opt = <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#g15f2617f7dc1713f9d10282125c6027b">UIP_IPTCPH_LEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01506"></a>01506                     <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c] == TCP_OPT_MSS_LEN) {
+A00201.html (net\uip_1_0\doc\html):<a name="l01508"></a>01508             tmp16 = (<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 2 + c] &lt;&lt; 8) |
+A00201.html (net\uip_1_0\doc\html):<a name="l01509"></a>01509               <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 3 + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01518"></a>01518             <span class="keywordflow">if</span>(<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c] == 0) {
+A00201.html (net\uip_1_0\doc\html):<a name="l01523"></a>01523             c += <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a> + 1 + c];
+A00201.html (net\uip_1_0\doc\html):<a name="l01550"></a>01550 <span class="comment">    data into the uip_buf. If the UIP_ACKDATA flag is set, the</span>
+A00201.html (net\uip_1_0\doc\html):<a name="l01638"></a>01638 <span class="comment">       bytes into the uip_buf array.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00212"></a>00212 <span class="comment"> * be present in the uip_buf buffer, and the length of the packet</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00216"></a>00216 <span class="comment"> * in the uip_buf packet buffer. If so, the uip_len variable is set to</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00237"></a>00237 <span class="comment">  #define BUF ((struct uip_eth_hdr *)&amp;uip_buf[0])</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00399"></a>00399 <span class="comment"> * The uip_buf array is used to hold incoming and outgoing</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00412"></a>00412 <span class="comment">    hwsend(&amp;uip_buf[0], UIP_LLH_LEN);</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00414"></a>00414 <span class="comment">      hwsend(&amp;uip_buf[UIP_LLH_LEN], uip_len - UIP_LLH_LEN);</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00416"></a>00416 <span class="comment">      hwsend(&amp;uip_buf[UIP_LLH_LEN], UIP_TCPIP_HLEN);</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00422"></a>00422 <span class="keyword">extern</span> <a class="code" href="a00153.html#g4caecabca98b43919dd11be1c0d4cd8e">u8_t</a> <a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00153.html#g3589822ecb9d9c4145209756396b8a6b">UIP_BUFSIZE</a>+2];
+A00202.html (net\uip_1_0\doc\html):<a name="l00793"></a>00793 <span class="comment"> * or newdata). The data must be present in the uip_buf buffer, at the</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l00796"></a>00796 <span class="comment"> * \param len The length of the data in the uip_buf buffer.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01120"></a>01120 <span class="comment"> * The length of the packet in the uip_buf buffer.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01123"></a>01123 <span class="comment"> * uip_buf buffer.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01126"></a>01126 <span class="comment"> * uip_len should be set to the length of the packet in the uip_buf</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01357"></a>01357 <span class="comment">                                   data in the uip_buf buffer. The</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01366"></a>01366 <span class="comment">                                   uip_buf buffer. */</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01493"></a>01493 <span class="comment"> * The buffer size available for user data in the \ref uip_buf buffer.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01496"></a>01496 <span class="comment"> * uip_buf buffer. The macro is intended to be used for checking</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01565"></a>01565 <span class="comment"> * Calculate the IP header checksum of the packet header in uip_buf.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01570"></a>01570 <span class="comment"> * \return The IP header checksum of the IP header in the uip_buf</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01576"></a>01576 <span class="comment"> * Calculate the TCP checksum of the packet in uip_buf and uip_appdata.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01581"></a>01581 <span class="comment"> * \return The TCP checksum of the TCP segment in uip_buf and pointed</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01587"></a>01587 <span class="comment"> * Calculate the UDP checksum of the packet in uip_buf and uip_appdata.</span>
+A00202.html (net\uip_1_0\doc\html):<a name="l01592"></a>01592 <span class="comment"> * \return The UDP checksum of the UDP segment in uip_buf and pointed</span>
+A00203.html (net\uip_1_0\doc\html):<a name="l00108"></a>00108 <span class="comment"> * Calculate the IP header checksum of the packet header in uip_buf.</span>
+A00203.html (net\uip_1_0\doc\html):<a name="l00113"></a>00113 <span class="comment"> * \return The IP header checksum of the IP header in the uip_buf</span>
+A00203.html (net\uip_1_0\doc\html):<a name="l00119"></a>00119 <span class="comment"> * Calculate the TCP checksum of the packet in uip_buf and uip_appdata.</span>
+A00203.html (net\uip_1_0\doc\html):<a name="l00126"></a>00126 <span class="comment"> * the Internet checksum of the contents of the uip_buf buffer.</span>
+A00203.html (net\uip_1_0\doc\html):<a name="l00128"></a>00128 <span class="comment"> * \return The TCP checksum of the TCP segment in uip_buf and pointed</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00116"></a><a class="code" href="a00152.html#g24f52ac52d6e714cb04a5aa01be3bdd0">00116</a> <span class="preprocessor">#define BUF   ((struct arp_hdr *)&amp;uip_buf[0])</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00117"></a><a class="code" href="a00152.html#g9f2196e2705036869611962425e404bf">00117</a> <span class="preprocessor"></span><span class="preprocessor">#define IPBUF ((struct ethip_hdr *)&amp;uip_buf[0])</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00229"></a>00229 <span class="comment"> * in the uip_buf[] buffer, and the length of the packet in the global</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00264"></a>00264 <span class="comment"> * into the uip_buf[] buffer.</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00270"></a>00270 <span class="comment"> * present in the uip_buf[] buffer.</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00273"></a>00273 <span class="comment"> * header in the uip_buf[] buffer, and the length of the packet in the</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00340"></a>00340 <span class="comment"> * destination IP address, the packet in the uip_buf[] is replaced by</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00348"></a>00348 <span class="comment"> * When the function returns, a packet is present in the uip_buf[]</span>
+A00204.html (net\uip_1_0\doc\html):<a name="l00405"></a>00405       <a class="code" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip_appdata</a> = &amp;<a class="code" href="a00146.html#gb81e78f890dbbee50c533a9734b74fd9">uip_buf</a>[<a class="code" href="a00150.html#gee37386b2ab828787c05227eb109def7">UIP_TCPIP_HLEN</a> + <a class="code" href="a00153.html#ge6f4a2453dbd8bc60e6a82774552366a">UIP_LLH_LEN</a>];
+A00205.html (net\uip_1_0\doc\html):<a name="l00081"></a>00081 <span class="comment">   IP packet with an Ethernet header is present in the uip_buf buffer</span>
+A00205.html (net\uip_1_0\doc\html):<a name="l00088"></a>00088 <span class="comment">   Ethernet frame is present in the uip_buf buffer. When the</span>
+A00205.html (net\uip_1_0\doc\html):<a name="l00089"></a>00089 <span class="comment">   uip_arp_arpin() function returns, the contents of the uip_buf</span>
+A00205.html (net\uip_1_0\doc\html):<a name="l00096"></a>00096 <span class="comment">   Ethernet header before the IP header in the uip_buf buffer. The</span>
+A00206.html (net\uip_1_0\doc\html):<a name="l00149"></a>00149 <span class="comment"> * reassembly buffer is of the same size as the uip_buf buffer</span>
+A00206.html (net\uip_1_0\doc\html):<a name="l00310"></a>00310 <span class="comment"> * Should be set low (i.e., to the size of the uip_buf buffer) is the</span>
+A00206.html (net\uip_1_0\doc\html):<a name="l00439"></a>00439 <span class="comment"> * This is the offset into the uip_buf where the IP header can be</span>
+Example-mainloop-with-arp.c (net\uip_1_0\doc):#define BUF ((struct uip_eth_hdr *)&uip_buf[0])
+Globals_0x75.html (net\uip_1_0\doc\html):: <a class="el" href="a00153.html#g156dd2891a57035e4afdc4c2bc0b0ebf">uipopt.h</a><li>uip_buf
+Globals_vars.html (net\uip_1_0\doc\html):: <a class="el" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip.c</a>, <a class="el" href="a00150.html#g561b8eda32e059d4e7397f776268cc63">uip.h</a><li>uip_buf
+Tapdev.c (net\uip_1_0\unix):	WlanAdapter_RcvePkt(g_pWlanAdapter, uip_buf, &nLen);
+Tapdev.c (net\uip_1_0\unix):	WlanAdapter_SendPkt(g_pWlanAdapter, uip_buf, uip_len);
+Uip-1.0-changelog.txt (net\uip_1_0):  the uip_buf buffer.
+Uip-fw.c (net\uip_1_0\uip): * Pointer to the TCP/IP headers of the packet in the uip_buf buffer.
+Uip-fw.c (net\uip_1_0\uip):#define BUF ((struct tcpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip-fw.c (net\uip_1_0\uip): * Pointer to the ICMP/IP headers of the packet in the uip_buf buffer.
+Uip-fw.c (net\uip_1_0\uip):#define ICMPBUF ((struct icmpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip-fw.c (net\uip_1_0\uip): * This function replaces the packet in the uip_buf buffer with the
+Uip-fw.c (net\uip_1_0\uip): * Find a network interface for the IP packet in uip_buf.
+Uip-fw.c (net\uip_1_0\uip): * The IP packet should be present in the uip_buf buffer and its
+Uip-fw.c (net\uip_1_0\uip): * Forward an IP packet in the uip_buf buffer.
+Uip-fw.c (net\uip_1_0\uip):     in the uip_buf buffer and forward that packet back to the sender
+Uip-fw.c (net\uip_1_0\uip):    uip_appdata = &uip_buf[UIP_LLH_LEN + UIP_TCPIP_HLEN];
+Uip-split.c (net\uip_1_0\uip):#define BUF ((struct uip_tcpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip-split.h (net\uip_1_0\uip): * This function inspects an outgoing packet in the uip_buf buffer and
+Uip-split.h (net\uip_1_0\uip): * The headers of the outgoing packet is assumed to be in the uip_buf
+Uip.c (net\uip_1_0\uip): * The principle is that we have a small buffer, called the uip_buf,
+Uip.c (net\uip_1_0\uip): * this data is present in the uip_buf and the application read the
+Uip.c (net\uip_1_0\uip): * its data into the uip_buf. The uip_appdata pointer points to the
+Uip.c (net\uip_1_0\uip):u8_t uip_buf[UIP_BUFSIZE + 2];   /* The packet buffer that contains
+Uip.c (net\uip_1_0\uip):#define BUF ((struct uip_tcpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip.c (net\uip_1_0\uip):#define ICMPBUF ((struct uip_icmpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip.c (net\uip_1_0\uip):#define UDPBUF ((struct uip_udpip_hdr *)&uip_buf[UIP_LLH_LEN])
+Uip.c (net\uip_1_0\uip):  sum = chksum(0, &uip_buf[UIP_LLH_LEN], UIP_IPH_LEN);
+Uip.c (net\uip_1_0\uip):  sum = chksum(sum, &uip_buf[UIP_IPH_LEN + UIP_LLH_LEN],
+Uip.c (net\uip_1_0\uip):  uip_sappdata = uip_appdata = &uip_buf[UIP_IPTCPH_LEN + UIP_LLH_LEN];
+Uip.c (net\uip_1_0\uip):      uip_sappdata = uip_appdata = &uip_buf[UIP_LLH_LEN + UIP_IPUDPH_LEN];
+Uip.c (net\uip_1_0\uip):  uip_appdata = &uip_buf[UIP_LLH_LEN + UIP_IPUDPH_LEN];
+Uip.c (net\uip_1_0\uip):  uip_sappdata = uip_appdata = &uip_buf[UIP_LLH_LEN + UIP_IPUDPH_LEN];
+Uip.c (net\uip_1_0\uip):  uip_appdata = &uip_buf[UIP_LLH_LEN + UIP_IPTCPH_LEN];
+Uip.c (net\uip_1_0\uip):      opt = uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + c];
+Uip.c (net\uip_1_0\uip):		uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c] == TCP_OPT_MSS_LEN) {
+Uip.c (net\uip_1_0\uip):	tmp16 = ((u16_t)uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 2 + c] << 8) |
+Uip.c (net\uip_1_0\uip):	  (u16_t)uip_buf[UIP_IPTCPH_LEN + UIP_LLH_LEN + 3 + c];
+Uip.c (net\uip_1_0\uip):	if(uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c] == 0) {
+Uip.c (net\uip_1_0\uip):	c += uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c];
+Uip.c (net\uip_1_0\uip):	  opt = uip_buf[UIP_IPTCPH_LEN + UIP_LLH_LEN + c];
+Uip.c (net\uip_1_0\uip):		    uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c] == TCP_OPT_MSS_LEN) {
+Uip.c (net\uip_1_0\uip):	    tmp16 = (uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 2 + c] << 8) |
+Uip.c (net\uip_1_0\uip):	      uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 3 + c];
+Uip.c (net\uip_1_0\uip):	    if(uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c] == 0) {
+Uip.c (net\uip_1_0\uip):	    c += uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN + 1 + c];
+Uip.c (net\uip_1_0\uip):    data into the uip_buf. If the UIP_ACKDATA flag is set, the
+Uip.c (net\uip_1_0\uip):       bytes into the uip_buf array.
+Uip.h (net\uip_1_0\uip): * be present in the uip_buf buffer, and the length of the packet
+Uip.h (net\uip_1_0\uip): * in the uip_buf packet buffer. If so, the uip_len variable is set to
+Uip.h (net\uip_1_0\uip):  #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
+Uip.h (net\uip_1_0\uip): * The uip_buf array is used to hold incoming and outgoing
+Uip.h (net\uip_1_0\uip):    hwsend(&uip_buf[0], UIP_LLH_LEN);
+Uip.h (net\uip_1_0\uip):      hwsend(&uip_buf[UIP_LLH_LEN], uip_len - UIP_LLH_LEN);
+Uip.h (net\uip_1_0\uip):      hwsend(&uip_buf[UIP_LLH_LEN], UIP_TCPIP_HLEN);
+Uip.h (net\uip_1_0\uip):extern u8_t uip_buf[UIP_BUFSIZE+2];
+Uip.h (net\uip_1_0\uip): * or newdata). The data must be present in the uip_buf buffer, at the
+Uip.h (net\uip_1_0\uip): * \param len The length of the data in the uip_buf buffer.
+Uip.h (net\uip_1_0\uip): * The length of the packet in the uip_buf buffer.
+Uip.h (net\uip_1_0\uip): * uip_buf buffer.
+Uip.h (net\uip_1_0\uip): * uip_len should be set to the length of the packet in the uip_buf
+Uip.h (net\uip_1_0\uip):				   data in the uip_buf buffer. The
+Uip.h (net\uip_1_0\uip):				   uip_buf buffer. */
+Uip.h (net\uip_1_0\uip): * The buffer size available for user data in the \ref uip_buf buffer.
+Uip.h (net\uip_1_0\uip): * uip_buf buffer. The macro is intended to be used for checking
+Uip.h (net\uip_1_0\uip): * Calculate the IP header checksum of the packet header in uip_buf.
+Uip.h (net\uip_1_0\uip): * \return The IP header checksum of the IP header in the uip_buf
+Uip.h (net\uip_1_0\uip): * Calculate the TCP checksum of the packet in uip_buf and uip_appdata.
+Uip.h (net\uip_1_0\uip): * \return The TCP checksum of the TCP segment in uip_buf and pointed
+Uip.h (net\uip_1_0\uip): * Calculate the UDP checksum of the packet in uip_buf and uip_appdata.
+Uip.h (net\uip_1_0\uip): * \return The UDP checksum of the UDP segment in uip_buf and pointed
+Uipopt.h (net\uip_1_0\uip): * reassembly buffer is of the same size as the uip_buf buffer
+Uipopt.h (net\uip_1_0\uip): * Should be set low (i.e., to the size of the uip_buf buffer) is the
+Uipopt.h (net\uip_1_0\uip): * This is the offset into the uip_buf where the IP header can be
+uIP_App.c (net\uip_1_0\unix):#define BUF ((struct uip_eth_hdr *)&uip_buf[0])
+Uip_arch.h (net\uip_1_0\uip): * Calculate the IP header checksum of the packet header in uip_buf.
+Uip_arch.h (net\uip_1_0\uip): * \return The IP header checksum of the IP header in the uip_buf
+Uip_arch.h (net\uip_1_0\uip): * Calculate the TCP checksum of the packet in uip_buf and uip_appdata.
+Uip_arch.h (net\uip_1_0\uip): * the Internet checksum of the contents of the uip_buf buffer.
+Uip_arch.h (net\uip_1_0\uip): * \return The TCP checksum of the TCP segment in uip_buf and pointed
+Uip_arp.c (net\uip_1_0\uip):#define BUF   ((struct arp_hdr *)&uip_buf[0])
+Uip_arp.c (net\uip_1_0\uip):#define IPBUF ((struct ethip_hdr *)&uip_buf[0])
+Uip_arp.c (net\uip_1_0\uip): * in the uip_buf[] buffer, and the length of the packet in the global
+Uip_arp.c (net\uip_1_0\uip): * into the uip_buf[] buffer.
+Uip_arp.c (net\uip_1_0\uip): * present in the uip_buf[] buffer.
+Uip_arp.c (net\uip_1_0\uip): * header in the uip_buf[] buffer, and the length of the packet in the
+Uip_arp.c (net\uip_1_0\uip): * destination IP address, the packet in the uip_buf[] is replaced by
+Uip_arp.c (net\uip_1_0\uip): * When the function returns, a packet is present in the uip_buf[]
+Uip_arp.c (net\uip_1_0\uip):      uip_appdata = &uip_buf[UIP_TCPIP_HLEN + UIP_LLH_LEN];
+Uip_arp.h (net\uip_1_0\uip):   IP packet with an Ethernet header is present in the uip_buf buffer
+Uip_arp.h (net\uip_1_0\uip):   Ethernet frame is present in the uip_buf buffer. When the
+Uip_arp.h (net\uip_1_0\uip):   uip_arp_arpin() function returns, the contents of the uip_buf
+Uip_arp.h (net\uip_1_0\uip):   Ethernet header before the IP header in the uip_buf buffer. The
