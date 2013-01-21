@@ -63,9 +63,8 @@ static void Net_Task(void* p_arg)
 		WiFiCmd_RunCommand ("set ssid WEBLED");
 		WiFiCmd_RunCommand ("set networktype adhoc");
 		WiFiCmd_RunCommand ("set authmode open");
-		WiFiCmd_RunCommand ("set encrymode wep");
+		WiFiCmd_RunCommand ("set encrymode disable");
 		WiFiCmd_RunCommand ("set keyascii 12345");
-
 	}
 	else{
 		// uIP Init

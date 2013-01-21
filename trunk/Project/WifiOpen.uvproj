@@ -349,7 +349,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\lingtone_apps;</IncludePath>
+              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\lingtone_apps;</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -513,6 +513,11 @@
               <FileName>EEPROM.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\IntFlash\EEPROM.c</FilePath>
+            </File>
+            <File>
+              <FileName>KEY.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\KEY\KEY.c</FilePath>
             </File>
           </Files>
         </Group>
