@@ -12,6 +12,9 @@
 /*uIP  stack*/
 #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
 
+/*uIP的应用程序，设成函数指针，以便实现在开机时根据设置进入不同应用*/
+void (*p_appcall)(void);
+
 /*******************************************************************************
 *   函数名：UipPro
 *   输  入:
@@ -61,20 +64,4 @@ void UipPro(void)
 ************************************************************/
 void uIP_Net_Init(void)
 {
-	uip_ipaddr_t ipaddr;
-
-	WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
-	uip_init();
-	Dhcp_Init(uip_ethaddr.addr, 6);
-	LT_UdpApp_Init(uip_ethaddr.addr, 6);
-
-	uip_ipaddr(ipaddr, 192, 168, 1, 108);
-	uip_sethostaddr(ipaddr);
-	uip_ipaddr(ipaddr, 192, 168, 1, 1);
-	uip_setdraddr(ipaddr);
-	uip_ipaddr(ipaddr, 255, 255, 255, 0);
-	uip_setnetmask(ipaddr);
-
-	uip_listen(HTONS(1200));
-	uip_listen(HTONS(80));
 }

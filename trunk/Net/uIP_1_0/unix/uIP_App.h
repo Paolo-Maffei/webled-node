@@ -11,6 +11,7 @@ void eth_poll(void);
 void UipPro(void);
 void uIP_Net_Init(void);
 
+extern void (*p_appcall)(void);
 //
 // Exported varialbes declare
 //

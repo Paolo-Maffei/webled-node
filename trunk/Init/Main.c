@@ -24,6 +24,7 @@ static OS_STK  Net_Task_STK[NET_TASK_STK_SIZE];
 volatile int32_t uIP_RunTime = 0;//__IO == volatile
 OS_EVENT *WIFI_INT_Mbox;
 
+
 static void Net_Task(void* p_arg)
 {
 	FlagStatus *WIFI_INT;
@@ -39,10 +40,52 @@ static void Net_Task(void* p_arg)
 		return;
 	}
 
-	// uIP Init
-	uIP_Net_Init();
-	
-	if (1) { // Create default profile
+	if (!Get_KEY1()) { // 启动时KEY1按下进入模块的设置模式
+		
+		// uIP Init
+		uip_ipaddr_t ipaddr;
+
+		WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
+		uip_init();
+		Dhcp_Init(uip_ethaddr.addr, 6);  //DHCP Server using UDP
+		LT_UdpApp_Init(uip_ethaddr.addr, 6);
+
+		uip_ipaddr(ipaddr, 192, 168, 1, 1);
+		uip_sethostaddr(ipaddr);
+		uip_ipaddr(ipaddr, 192, 168, 1, 1);
+		uip_setdraddr(ipaddr);
+		uip_ipaddr(ipaddr, 255, 255, 255, 0);
+		uip_setnetmask(ipaddr);
+			
+		p_appcall = httpd_appcall;
+		httpd_init();
+			
+		WiFiCmd_RunCommand ("set ssid WEBLED");
+		WiFiCmd_RunCommand ("set networktype adhoc");
+		WiFiCmd_RunCommand ("set authmode open");
+		WiFiCmd_RunCommand ("set encrymode wep");
+		WiFiCmd_RunCommand ("set keyascii 12345");
+
+	}
+	else{
+		// uIP Init
+		uip_ipaddr_t ipaddr;
+
+		WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
+		uip_init();
+		Dhcp_Init(uip_ethaddr.addr, 6);  //DHCP Server using UDP
+		LT_UdpApp_Init(uip_ethaddr.addr, 6);
+
+		uip_ipaddr(ipaddr, 192, 168, 1, 2);
+		uip_sethostaddr(ipaddr);
+		uip_ipaddr(ipaddr, 192, 168, 1, 1);
+		uip_setdraddr(ipaddr);
+		uip_ipaddr(ipaddr, 255, 255, 255, 0);
+		uip_setnetmask(ipaddr);
+			
+		p_appcall = httpd_appcall;
+		httpd_init();
+		
 		WiFiCmd_RunCommand ("set ssid CDDC");
 		WiFiCmd_RunCommand ("set networktype infra");
 		WiFiCmd_RunCommand ("set authmode open");
@@ -50,18 +93,18 @@ static void Net_Task(void* p_arg)
 		WiFiCmd_RunCommand ("set keyascii 12345");
 	}
 	WiFiCmd_RunCommand ("ctrl connect");
-
-	while(1) {
-		if (WIFI_GET_FLAG(g_pWlanAdapter, FLAG_PKTRCVED)) {
-			WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
-			UipPro();
-		}
-		if (g_Console.ucState & CONSOLE_STATE_RECEIVED) {
-			WiFiCmd_RunCommand ((char*)g_Console.ucConsoleRxBuffer);
-			Console_ResetRx();
-		}
-	}		
-}
+		
+		while(1) {
+			if (WIFI_GET_FLAG(g_pWlanAdapter, FLAG_PKTRCVED)) {
+				WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
+				UipPro();
+			}
+			if (g_Console.ucState & CONSOLE_STATE_RECEIVED) {
+				WiFiCmd_RunCommand ((char*)g_Console.ucConsoleRxBuffer);
+				Console_ResetRx();
+			}
+		}		
+	}
 
 static void Startup_Task(void* p_arg)
 {
@@ -74,6 +117,7 @@ static void Startup_Task(void* p_arg)
 	// Drivers init
 	Flash_Init();
   EE_Init(); 	//Flash_Unlock already done in Flash_Init()
+	KEY_Init();
 	Buzzer_Init ();
 	Relay_Init ();
 	LED_Init ();

@@ -497,8 +497,8 @@ void uip_log(char *msg);
  * The following example illustrates how this can look.
  \code
 */
-
-#define UIP_APPCALL     httpd_appcall
+extern void (*p_appcall)(void);
+#define UIP_APPCALL     p_appcall
 
 /**
  * \var typedef uip_tcp_appstate_t
