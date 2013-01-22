@@ -14,20 +14,16 @@ STM32 WIFI ¿ª·¢°å
 // Compile option
 //#define BUILD_FOR_WRITEFIRMWARE
 
-//#define NO_TRACE
-//#define NO_DEBUG
+#define NO_TRACE
+#define NO_DEBUG
 
 //------------------------------------------------------------------------------
 // Firmware in flash
 //------------------------------------------------------------------------------
-#define SYSTEM_FLASH_ADDR			0x08000000UL
-#define WIFI_FW_HELPER_ADDR			(SYSTEM_FLASH_ADDR + KBytes(380))	// 0x0805F000
-#define WIFI_FW_HELPER_SIZE			KBytes(3) // in bytes
-#define WIFI_FW_FW_ADDR				(WIFI_FW_HELPER_ADDR + WIFI_FW_HELPER_SIZE)
-#define WIFI_FW_FW_SIZE				KBytes(120) // in bytes
+#define SYSTEM_FLASH_ADDR			   0x08000000UL
+#define WIFI_PROFILE_ADDR				(SYSTEM_FLASH_ADDR + KBytes(380))	// 0x0805F000
 
-#define WIFI_PROFILE_ADDR			(WIFI_FW_FW_ADDR + WIFI_FW_FW_SIZE)
-
+//now the firmware is located in data array
 //#define FIRMWARE_IN_FLASH		1
 
 //------------------------------------------------------------------------------
