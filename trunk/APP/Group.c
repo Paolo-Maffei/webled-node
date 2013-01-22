@@ -35,9 +35,10 @@ static void GroupTable_Save(void)
 
 void GroupTable_Add(int GroupID)
 {
-	Group_Match_Table.table[Group_Match_Table.size] = GroupID;
+	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)+Group_Match_Table.size),(PBYTE)&GroupID,sizeof(GroupID));
 	Group_Match_Table.size++;
-	GroupTable_Save();
+	Flash_Write(GROUP_TABLE_ADDR,(PBYTE)&Group_Match_Table.size,sizeof(Group_Match_Table.size));
+	GroupTable_Init();
 	Console_Print("GroupTable Added,table size:%d\n",Group_Match_Table.size);
 }
 void GroupTable_Del(int GroupID)
@@ -53,6 +54,7 @@ void GroupTable_Del(int GroupID)
 		}
 		Group_Match_Table.size--;
 		GroupTable_Save();
+		GroupTable_Init();
 		Console_Print("GroupTable_Del,table size:%d\n",Group_Match_Table.size);
 	}
 	Console_Print("GroupTable_Del,GroupID not found!:%d\n",Group_Match_Table.size);
