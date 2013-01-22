@@ -6,8 +6,6 @@
 #include "clock-arch.h"
 #include "timer.h"
 #include "uip_arp.h"
-#include "dhcps.h"
-#include "lingtone_udp_app.h"
 
 /*uIP  stack*/
 #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
