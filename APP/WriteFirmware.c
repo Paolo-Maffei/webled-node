@@ -9,6 +9,7 @@ void main(void)
 
 	TraceInit();
 	Board_Init ();
+	Console_Init ();
 	Flash_Init();
   
 	GroupTable_Init();
