@@ -54,7 +54,6 @@
  *
  * $Id: httpd.c,v 1.2 2006/06/11 21:46:38 adam Exp $
  */
-#include "Project.h"
 
 #include "uip.h"
 #include "httpd.h"
@@ -67,14 +66,14 @@
 #define STATE_WAITING 0
 #define STATE_OUTPUT  1
 
-#define ISO_nl      0x0a			   //
-#define ISO_space   0x20			   //" "
-#define ISO_bang    0x21			   //"!"
-#define ISO_percent 0x25			   //"%"
-#define ISO_period  0x2e			   //"."
-#define ISO_slash   0x2f			   // "/"
-#define ISO_colon   0x3a			   // ":"
-#define ISO_why     0x3f			   //"?"
+#define ISO_nl      0x0a
+#define ISO_space   0x20
+#define ISO_bang    0x21
+#define ISO_percent 0x25
+#define ISO_period  0x2e
+#define ISO_slash   0x2f
+#define ISO_colon   0x3a
+
 
 /*---------------------------------------------------------------------------*/
 static unsigned short
@@ -221,23 +220,27 @@ PT_THREAD(handle_output(struct httpd_state *s))
   
   PT_BEGIN(&s->outputpt);
  
-  if(!httpd_fs_open(s->filename,&s->file)) {
-    httpd_fs_open(http_404_html,&s->file);
+  if(!httpd_fs_open(s->filename, &s->file)) {
+    httpd_fs_open(http_404_html, &s->file);
     strcpy(s->filename, http_404_html);
-    PT_WAIT_THREAD(&s->outputpt,send_headers(s, http_header_404));
-    PT_WAIT_THREAD(&s->outputpt,send_file(s));
-		} 
-	else {
-    PT_WAIT_THREAD(&s->outputpt,send_headers(s,http_header_200));
+    PT_WAIT_THREAD(&s->outputpt,
+		   send_headers(s,
+		   http_header_404));
+    PT_WAIT_THREAD(&s->outputpt,
+		   send_file(s));
+  } else {
+    PT_WAIT_THREAD(&s->outputpt,
+		   send_headers(s,
+		   http_header_200));
     ptr = strchr(s->filename, ISO_period);
     if(ptr != NULL && strncmp(ptr, http_shtml, 6) == 0) {
       PT_INIT(&s->scriptpt);
-      PT_WAIT_THREAD(&s->outputpt,handle_script(s));
-			} 
-		else {
-      PT_WAIT_THREAD(&s->outputpt,send_file(s));
-			}
-		}
+      PT_WAIT_THREAD(&s->outputpt, handle_script(s));
+    } else {
+      PT_WAIT_THREAD(&s->outputpt,
+		     send_file(s));
+    }
+  }
   PSOCK_CLOSE(&s->sout);
   PT_END(&s->outputpt);
 }
@@ -259,67 +262,14 @@ PT_THREAD(handle_input(struct httpd_state *s))
     PSOCK_CLOSE_EXIT(&s->sin);
   }
 
-  if(s->inputbuf[1] == ISO_space||s->inputbuf[1] == ISO_why ) {
-    strncpy(s->filename, http_index_html, sizeof(s->filename)); //当"/"后为空白时，将"/index.html" 作为文件名
-  }
- else 
- {
+  if(s->inputbuf[1] == ISO_space) {
+    strncpy(s->filename, http_index_html, sizeof(s->filename));
+  } else {
     s->inputbuf[PSOCK_DATALEN(&s->sin) - 1] = 0;
     strncpy(s->filename, &s->inputbuf[0], sizeof(s->filename));
   }
 
   /*  httpd_log_file(uip_conn->ripaddr, s->filename);*/
-  
-  if(s->inputbuf[1] == '?') {
-	  if (strncmp(&s->inputbuf[2], "LED1", 4) == 0) { // LED1 control
-		 if (strncmp(&s->inputbuf[7], "ON", 2) == 0) { // LED1 ON
-		  	LED_TurnOn(LED1);
-	  	}
-		 else if (strncmp(&s->inputbuf[7], "OFF", 3) == 0) { // LED1 OFF
-		  	LED_TurnOff(LED1);
-	  	}
-	  }
-	  else if (strncmp(&s->inputbuf[2], "LED2", 4) == 0) { // LED2 control
-		 if (strncmp(&s->inputbuf[7], "ON", 2) == 0) { // LED2 ON
-		  	LED_TurnOn(LED2);
-	  	}
-		 else if (strncmp(&s->inputbuf[7], "OFF", 3) == 0) { // LED2 OFF
-		  	LED_TurnOff(LED2);
-	  	}
-	  }
-	  else if (strncmp(&s->inputbuf[2], "LED3", 4) == 0) { // LED3 control
-		 if (strncmp(&s->inputbuf[7], "ON", 2) == 0) { // LED3 ON
-		  	LED_TurnOn(LED3);
-	  	}
-		 else if (strncmp(&s->inputbuf[7], "OFF", 3) == 0) { // LED3 OFF
-		  	LED_TurnOff(LED3);
-	  	}
-	  }
-	  else if (strncmp(&s->inputbuf[2], "LED4", 4) == 0) { // LED4 control
-		 if (strncmp(&s->inputbuf[7], "ON", 2) == 0) { // LED4 ON
-		  	LED_TurnOn(LED4);
-	  	}
-		 else if (strncmp(&s->inputbuf[7], "OFF", 3) == 0) { // LED4 OFF
-		  	LED_TurnOff(LED4);
-	  	}
-	  }
-	  else if (strncmp(&s->inputbuf[2], "BUZZER", 6) == 0) { // BUZZER control
-		 if (strncmp(&s->inputbuf[9], "ON", 2) == 0) { // Buzzer ON
-		  	Buzzer_On();
-	  	}
-		 else if (strncmp(&s->inputbuf[9], "OFF", 3) == 0) { // Buzzer OFF
-		  	Buzzer_Off();
-	  	}
-	  }
-	  else if (strncmp(&s->inputbuf[2], "RELAY", 5) == 0) { // RELAY control
-		 if (strncmp(&s->inputbuf[8], "ON", 2) == 0) { // Relay ON
-		  	Relay_On();
-	  	}
-		 else if (strncmp(&s->inputbuf[8], "OFF", 3) == 0) { // Relay OFF
-		  	Relay_Off();
-	  	}
-	  }
-  }
   
   s->state = STATE_OUTPUT;
 
@@ -349,10 +299,8 @@ httpd_appcall(void)
 {
   struct httpd_state *s = (struct httpd_state *)&(uip_conn->appstate);
 
-  if(uip_closed() || uip_aborted() || uip_timedout()) 
-	{} 
-	else if(uip_connected()) 
-	{
+  if(uip_closed() || uip_aborted() || uip_timedout()) {
+  } else if(uip_connected()) {
     PSOCK_INIT(&s->sin, s->inputbuf, sizeof(s->inputbuf) - 1);
     PSOCK_INIT(&s->sout, s->inputbuf, sizeof(s->inputbuf) - 1);
     PT_INIT(&s->outputpt);
@@ -360,23 +308,19 @@ httpd_appcall(void)
     /*    timer_set(&s->timer, CLOCK_SECOND * 100);*/
     s->timer = 0;
     handle_connection(s);
-  } 
-	else if(s != NULL) 
-	{
-    if(uip_poll()) 
-		{
+  } else if(s != NULL) {
+    if(uip_poll()) {
       ++s->timer;
-      if(s->timer >= 20)
-			{
-					uip_abort();
-			}
-		} 
-		else 
+      if(s->timer >= 20) {
+	uip_abort();
+      }
+    } else {
       s->timer = 0;
+    }
     handle_connection(s);
-  } 
-	else 
+  } else {
     uip_abort();
+  }
 }
 /*---------------------------------------------------------------------------*/
 /**
