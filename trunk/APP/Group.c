@@ -17,8 +17,10 @@ void GroupTable_Init(void)
 	}
 	else if(0 != Group_Match_Table.size)
 	{
-		Group_Match_Table.table = AllocMemory(Group_Match_Table.size);
-		Flash_Read((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)),(PBYTE)Group_Match_Table.table,Group_Match_Table.size);
+		FreeMemory(Group_Match_Table.table);
+		Group_Match_Table.table = AllocMemory(sizeof(*Group_Match_Table.table)*Group_Match_Table.size);
+		Flash_Read((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)),(PBYTE)Group_Match_Table.table,
+		sizeof(*Group_Match_Table.table)*Group_Match_Table.size);
 	}
 	else
 	{
@@ -29,13 +31,17 @@ void GroupTable_Init(void)
 static void GroupTable_Save(void)
 {
 	Flash_Write(GROUP_TABLE_ADDR,(PBYTE)&Group_Match_Table.size,sizeof(Group_Match_Table.size));
-	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)),(PBYTE)Group_Match_Table.table,Group_Match_Table.size);
+	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)),(PBYTE)Group_Match_Table.table,
+	sizeof(*Group_Match_Table.table)*Group_Match_Table.size);
 	Console_Print("GroupTable Saved,table size:%d\n",Group_Match_Table.size);
 }
 
 void GroupTable_Add(int GroupID)
 {
-	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)+Group_Match_Table.size),(PBYTE)&GroupID,sizeof(GroupID));
+	if(0 != GroupTable_Exist(GroupID))
+		return;
+	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)+sizeof(*Group_Match_Table.table)*Group_Match_Table.size),
+	(PBYTE)&GroupID,sizeof(GroupID));
 	Group_Match_Table.size++;
 	Flash_Write(GROUP_TABLE_ADDR,(PBYTE)&Group_Match_Table.size,sizeof(Group_Match_Table.size));
 	GroupTable_Init();
