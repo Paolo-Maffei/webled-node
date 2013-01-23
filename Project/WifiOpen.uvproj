@@ -349,7 +349,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\lingtone_apps;</IncludePath>
+              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -730,19 +730,9 @@
               <FilePath>..\Net\uIP_1_0\unix\uIP_App.c</FilePath>
             </File>
             <File>
-              <FileName>DHCPS.c</FileName>
+              <FileName>webled_udp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Net\uIP_1_0\apps\dhcps\DHCPS.c</FilePath>
-            </File>
-            <File>
-              <FileName>lingtone_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Net\uIP_1_0\apps\lingtone_apps\lingtone_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>lingtone_udp_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Net\uIP_1_0\apps\lingtone_apps\lingtone_udp_app.c</FilePath>
+              <FilePath>..\Net\uIP_1_0\apps\webled_udp\webled_udp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -789,15 +779,80 @@
               <FileType>5</FileType>
               <FilePath>..\Include\WifiUser.h</FilePath>
             </File>
+            <File>
+              <FileName>uipopt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\uip\uipopt.h</FilePath>
+            </File>
+            <File>
+              <FileName>uip-conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\unix\uip-conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>uIP_App.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\unix\uIP_App.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Init</GroupName>
+          <GroupName>APP</GroupName>
           <Files>
             <File>
               <FileName>Main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Init\Main.c</FilePath>
+              <FilePath>..\APP\Main.c</FilePath>
+            </File>
+            <File>
+              <FileName>Group.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Group.c</FilePath>
+            </File>
+            <File>
+              <FileName>WriteFirmware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\WriteFirmware.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
           </Files>
         </Group>
