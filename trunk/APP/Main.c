@@ -20,6 +20,8 @@
 static OS_STK  Startup_Task_STK[STARTUP_TASK_STK_SIZE];
 static OS_STK  Net_Task_STK[NET_TASK_STK_SIZE];
 
+
+
 static void Startup_Task(void* p_arg)
 {
 	// Bsp Init
