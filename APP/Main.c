@@ -5,7 +5,7 @@
 
 #include "Project.h"
 #include "uip.h"
-#include "uIP_App.h"
+#include "uIP_TASK.h"
 #include "tapdev.h"
 #include "clock-arch.h"
 

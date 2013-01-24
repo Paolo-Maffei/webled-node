@@ -160,7 +160,7 @@
             <UseTargetDll>1</UseTargetDll>
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
-            <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
+            <UpdateFlashBeforeDebugging>0</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
             <DriverSelection>4099</DriverSelection>
           </Flash1>
@@ -349,7 +349,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;</IncludePath>
+              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -725,11 +725,6 @@
               <FilePath>..\Net\uIP_1_0\unix\tapdev.c</FilePath>
             </File>
             <File>
-              <FileName>uIP_App.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Net\uIP_1_0\unix\uIP_App.c</FilePath>
-            </File>
-            <File>
               <FileName>webled_udp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Net\uIP_1_0\apps\webled_udp\webled_udp.c</FilePath>
@@ -853,6 +848,16 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>AppTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\AppTask.c</FilePath>
+            </File>
+            <File>
+              <FileName>uIP_TASK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\uIP_TASK.c</FilePath>
             </File>
           </Files>
         </Group>
