@@ -349,7 +349,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;</IncludePath>
+              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -725,11 +725,6 @@
               <FilePath>..\Net\uIP_1_0\unix\tapdev.c</FilePath>
             </File>
             <File>
-              <FileName>uIP_App.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Net\uIP_1_0\unix\uIP_App.c</FilePath>
-            </File>
-            <File>
               <FileName>webled_udp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Net\uIP_1_0\apps\webled_udp\webled_udp.c</FilePath>
@@ -779,6 +774,21 @@
               <FileType>5</FileType>
               <FilePath>..\Include\WifiUser.h</FilePath>
             </File>
+            <File>
+              <FileName>uipopt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\uip\uipopt.h</FilePath>
+            </File>
+            <File>
+              <FileName>uip-conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\unix\uip-conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>uIP_App.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Net\uIP_1_0\unix\uIP_App.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -788,6 +798,16 @@
               <FileName>Main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\Main.c</FilePath>
+            </File>
+            <File>
+              <FileName>Group.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Group.c</FilePath>
+            </File>
+            <File>
+              <FileName>WriteFirmware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\WriteFirmware.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -830,14 +850,14 @@
               </FileOption>
             </File>
             <File>
-              <FileName>Group.c</FileName>
+              <FileName>AppTask.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\APP\Group.c</FilePath>
+              <FilePath>..\APP\AppTask.c</FilePath>
             </File>
             <File>
-              <FileName>WriteFirmware.c</FileName>
+              <FileName>uIP_TASK.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\APP\WriteFirmware.c</FilePath>
+              <FilePath>..\APP\uIP_TASK.c</FilePath>
             </File>
           </Files>
         </Group>
