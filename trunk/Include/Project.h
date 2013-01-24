@@ -26,6 +26,8 @@
 //
 #include "OS.h"
 
+#include "AppTask.h"
+#include "uIP_TASK.h"
 //
 // Base driver headers
 //
