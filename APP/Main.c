@@ -3,7 +3,7 @@
 * by lits @2013/01/22
 *******************************************************************************/
 
-#include "Project.h"
+#include "Prject.h"
 #include "uip.h"
 #include "uIP_TASK.h"
 #include "tapdev.h"
@@ -41,7 +41,6 @@ int main(void)
   Set_System();
   TraceInit();
   
-  Board_Init ();
   // Drivers init
   Flash_Init();
   EE_Init(); 	//Flash_Unlock already done in Flash_Init()

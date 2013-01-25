@@ -86,3 +86,4 @@ clock_time_t clock_time(void);
 #endif /* __CLOCK_H__ */
 
 /** @} */
+
