@@ -12,10 +12,6 @@ void Net_Task(void* p_arg);
 
 extern void (*p_appcall)(void);
 
-extern OS_EVENT  *uIP_MBOX;
-extern char MboxMsg;
-extern int WifiInitFinished;
-
 #define UIP_MBOX_RCV 		0x01
 #define UIP_MBOX_POLL		0x02
 
