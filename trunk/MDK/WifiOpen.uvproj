@@ -395,11 +395,6 @@
               <FilePath>..\Bsp\UartTrace.c</FilePath>
             </File>
             <File>
-              <FileName>board_init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Bsp\board_init.c</FilePath>
-            </File>
-            <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\core_cm3.c</FilePath>
@@ -408,11 +403,6 @@
               <FileName>hw_config.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\hw_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\Bsp\startup_stm32f10x_hd.s</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_it.c</FileName>
@@ -815,9 +805,19 @@
               <FilePath>..\APP\Group.c</FilePath>
             </File>
             <File>
-              <FileName>WriteFirmware.c</FileName>
+              <FileName>AppTask.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\APP\WriteFirmware.c</FilePath>
+              <FilePath>..\APP\AppTask.c</FilePath>
+            </File>
+            <File>
+              <FileName>uIP_TASK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\uIP_TASK.c</FilePath>
+            </File>
+            <File>
+              <FileName>module_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\module_test.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -859,15 +859,15 @@
                 </FileArmAds>
               </FileOption>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>MDK</GroupName>
+          <Files>
             <File>
-              <FileName>AppTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\AppTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>uIP_TASK.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\uIP_TASK.c</FilePath>
+              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_stm32f10x_hd.s</FilePath>
             </File>
           </Files>
         </Group>

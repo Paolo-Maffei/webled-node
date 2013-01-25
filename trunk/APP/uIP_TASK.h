@@ -5,9 +5,8 @@
 
 #include  "ucos_ii.h"
 
-void eth_poll(void);
-void UipPro(void);
-void uIP_Net_Init(void);
+static void Set_uIP(void);
+
 void Net_Task(void* p_arg);
 
 extern void (*p_appcall)(void);

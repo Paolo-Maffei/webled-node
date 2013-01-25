@@ -74,7 +74,6 @@ void Console_IRQHandler(UCHAR ucIntType, UCHAR ucCharRx)
 
 void Console_Print(const char *fmt, ...)
 {
-#ifndef NO_PRINTF
 	char szBuffer[256];
 	va_list args;
 
@@ -83,7 +82,6 @@ void Console_Print(const char *fmt, ...)
 	va_end(args);
 
 	Uart_SendString(pUart, szBuffer);
-#endif// NO_PRINTF
 }
 
 BOOL Console_IsReceived()
