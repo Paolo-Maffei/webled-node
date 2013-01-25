@@ -33,12 +33,14 @@ void Net_Task(void* p_arg)
 	// Wifi start!
 	//
 	bStatus = Wlan_Init(g_pWlanAdapter);
-	if (!bStatus) {
+	if (!bStatus) 
+        {
 		TRACE("Wlan init failed!!\r\n");
 		return;
 	}
 
-	if (!Get_KEY1()) { // 启动时KEY1按下进入模块的设置模式
+	if (!Get_KEY1()) 
+        { // 启动时KEY1按下进入模块的设置模式
 		
 		// uIP Init
 		uip_ipaddr_t ipaddr;
@@ -46,7 +48,7 @@ void Net_Task(void* p_arg)
 		WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
 		uip_init();
 		
-		uip_ipaddr(ipaddr, 192, 168, 1, 1);
+		uip_ipaddr(ipaddr, 192, 168, 1, 2);
 		uip_sethostaddr(ipaddr);
 		uip_ipaddr(ipaddr, 192, 168, 1, 1);
 		uip_setdraddr(ipaddr);
@@ -61,7 +63,7 @@ void Net_Task(void* p_arg)
 		WiFiCmd_RunCommand ("set authmode open");
 		WiFiCmd_RunCommand ("set encrymode disable");
 		WiFiCmd_RunCommand ("set keyascii 12345");
-	}
+        }
 	else{ //work mode,use UDP
 		// uIP Init
 		uip_ipaddr_t ipaddr;
@@ -69,7 +71,7 @@ void Net_Task(void* p_arg)
 		WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
 		uip_init();
 		
-    UDP_App_Init();
+                UDP_App_Init();
 
 		uip_ipaddr(ipaddr, 192, 168, 1, 2);
 		uip_sethostaddr(ipaddr);

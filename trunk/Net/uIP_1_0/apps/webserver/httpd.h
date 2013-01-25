@@ -60,3 +60,4 @@ void httpd_log(char *msg);
 void httpd_log_file(u16_t *requester, char *file);
 
 #endif /* __HTTPD_H__ */
+

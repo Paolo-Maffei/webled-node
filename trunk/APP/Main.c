@@ -20,47 +20,43 @@
 static OS_STK  Startup_Task_STK[STARTUP_TASK_STK_SIZE];
 static OS_STK  Net_Task_STK[NET_TASK_STK_SIZE];
 
-
-
 static void Startup_Task(void* p_arg)
 {
-	// Bsp Init
-	Set_System();
-	TraceInit();
-
-	Board_Init ();
-	// Drivers init
-	Flash_Init();
-        EE_Init(); 	//Flash_Unlock already done in Flash_Init()
-	KEY_Init();
-	LED_Init ();
-	Console_Init ();
-	
-	Console_Print("WiFi Hello world!!\r\n");
-	
-
 #if(OS_TASK_STAT_EN>0)
-	OSStatInit(); 
+  OSStatInit(); 
 #endif
-
-	/*TODO:Create Application Tasks Here*/
-	OSTaskCreate(Net_Task,(void*)0,
-				&Net_Task_STK[NET_TASK_STK_SIZE-1],
-				NET_TASK_PRIO);	
-	 
-	OSTaskDel(OS_PRIO_SELF);  //删除启动任务
+  
+  /*TODO:Create Application Tasks Here*/
+  OSTaskCreate(Net_Task,(void*)0,
+               &Net_Task_STK[NET_TASK_STK_SIZE-1],
+               NET_TASK_PRIO);	
+  
+  OSTaskDel(OS_PRIO_SELF);  //删除启动任务
 }
 
 int main(void) 
 {
-        SystemInit();
-	OSInit();//系统初始化	
-   	
-	OSTaskCreate(Startup_Task,(void*)0,
-				&Startup_Task_STK[STARTUP_TASK_STK_SIZE-1],
-				STARTUP_TASK_PRIO);
-
-	OSStart(); //任务开始运行  
-
-	while(1);
+  SystemInit();
+  // Bsp Init
+  Set_System();
+  TraceInit();
+  
+  Board_Init ();
+  // Drivers init
+  Flash_Init();
+  EE_Init(); 	//Flash_Unlock already done in Flash_Init()
+  KEY_Init();
+  LED_Init ();
+  Console_Init ();	
+  Console_Print("WiFi Hello world!!\r\n");
+  
+  OSInit();//系统初始化	
+  
+  OSTaskCreate(Startup_Task,(void*)0,
+               &Startup_Task_STK[STARTUP_TASK_STK_SIZE-1],
+               STARTUP_TASK_PRIO);
+  
+  OSStart(); //任务开始运行  
+  
+  while(1);
 }
