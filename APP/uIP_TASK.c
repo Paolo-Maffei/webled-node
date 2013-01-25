@@ -126,7 +126,7 @@ static void Set_uIP()
     WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
     uip_init();
     
-    UDP_App_Init();
+    UDP_App_Init(); //初始化UDP应用
     
     uip_ipaddr(ipaddr, 192, 168, 1, 2);
     uip_sethostaddr(ipaddr);
