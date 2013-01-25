@@ -683,11 +683,11 @@
         </option>
         <option>
           <name>IlinkIcfOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\generic_cortex.icf</state>
+          <state>$PROJ_DIR$\lnkarm_flash_stm32f103vet6.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -1788,9 +1788,6 @@
       <name>$PROJ_DIR$\..\Bsp\hw_config.h</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\Bsp\startup_stm32f10x_hd.s</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\..\Bsp\stm32f10x.h</name>
     </file>
     <file>
@@ -2141,6 +2138,12 @@
         </file>
       </group>
     </group>
+  </group>
+  <group>
+    <name>EWARM</name>
+    <file>
+      <name>$PROJ_DIR$\startup_stm32f10x_hd.s</name>
+    </file>
   </group>
   <group>
     <name>Include</name>

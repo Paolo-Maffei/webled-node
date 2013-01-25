@@ -53,10 +53,7 @@ static void Startup_Task(void* p_arg)
 
 int main(void) 
 {
-#ifdef BUILD_FOR_WRITEFIRMWARE
-	If_WriteFirmware ();
-	while (1);
-#else
+        SystemInit();
 	OSInit();//系统初始化	
    	
 	OSTaskCreate(Startup_Task,(void*)0,
@@ -64,9 +61,6 @@ int main(void)
 				STARTUP_TASK_PRIO);
 
 	OSStart(); //任务开始运行  
-#endif
 
 	while(1);
-	
-  return 0;
 }
