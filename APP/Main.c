@@ -29,17 +29,15 @@ static void Startup_Task(void* p_arg)
 	TraceInit();
 
 	Board_Init ();
-
 	// Drivers init
 	Flash_Init();
-  EE_Init(); 	//Flash_Unlock already done in Flash_Init()
+        EE_Init(); 	//Flash_Unlock already done in Flash_Init()
 	KEY_Init();
-	Buzzer_Init ();
-	Relay_Init ();
 	LED_Init ();
 	Console_Init ();
-
+	
 	Console_Print("WiFi Hello world!!\r\n");
+	
 
 #if(OS_TASK_STAT_EN>0)
 	OSStatInit(); 
@@ -70,5 +68,5 @@ int main(void)
 
 	while(1);
 	
-  	return 0;
+  return 0;
 }

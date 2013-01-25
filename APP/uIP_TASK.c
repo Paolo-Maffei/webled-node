@@ -15,6 +15,8 @@
 volatile int32_t uIP_RunTime = 0;//__IO == volatile //待处理，添加定时器支持
 
 OS_EVENT  *uIP_MBOX;
+char MboxMsg;
+int WifiInitFinished = 0;  //用于同步idle和wifi初始化操作，由于wifi初始化中使用了OS的延时，不可关中断
 
 /*uIP  stack*/
 #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
@@ -85,7 +87,8 @@ void Net_Task(void* p_arg)
 	WiFiCmd_RunCommand ("ctrl connect");
 	
 	uIP_MBOX = OSMboxCreate (NULL);
-		
+	WifiInitFinished = 1; //inform idle task
+	
 	while(1) {
 			if (WIFI_GET_FLAG(g_pWlanAdapter, FLAG_PKTRCVED)) {
 				WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
@@ -107,12 +110,14 @@ void Net_Task(void* p_arg)
 ********************************************************************/
 void UipPro(void)
 {
-	
-	if (1) {
-		uip_len = tapdev_read();    //从网络设备读取一个IP包,返回数据长度
-		if (uip_len > 0) {          //收到数据时长度会变化
+	char *err;
+	char *message = (char *)OSMboxPend(uIP_MBOX,0,err);
+	switch(*message)
+	{
+		case UIP_MBOX_RCV:
 			/* 处理IP数据包(只有校验通过的IP包才会被接收) */
-			if (BUF->type == htons(UIP_ETHTYPE_IP)) { //收到IP包
+			if (BUF->type == htons(UIP_ETHTYPE_IP)) 
+			{ //收到IP包
 				uip_arp_ipin();        //去除以太网头结构，更新ARP表
 				uip_input();           //IP包处理
 				/*
@@ -120,24 +125,32 @@ void UipPro(void)
 				    当上面的函数执行后，如果回调函数需要发送数据，则全局变量 uip_len > 0
 				    需要发送的数据在uip_buf, 长度是uip_len  (这是2个全局变量)
 				*/
-				if (uip_len > 0) {      //有带外回应数据
+				if (uip_len > 0) 
+				{      //有带外回应数据
 					uip_arp_out();      //加以太网头结构，在主动连接时可能要构造ARP请求
 					tapdev_send();      //发送数据到以太网（设备驱动程序）
 				}
 			}
 			/* 处理arp报文 */
-			else if (BUF->type == htons(UIP_ETHTYPE_ARP)) { //是ARP请求包
+			else if (BUF->type == htons(UIP_ETHTYPE_ARP)) 
+			{ //是ARP请求包
 				uip_arp_arpin();        //如是是ARP回应，更新ARP表；如果是请求，构造回应数据包
 				/*
 				    当上面的函数执行后，如果需要发送数据，则全局变量 uip_len > 0
 				    需要发送的数据在uip_buf, 长度是uip_len  (这是2个全局变量)
 				*/
-				if (uip_len > 0) {      //是ARP请求，要发送回应
+				if (uip_len > 0) 
+				{      //是ARP请求，要发送回应
 					tapdev_send();      //发ARP回应到以太网上
 				}
-			}
+			 }
+			break;
+			
+			case UIP_MBOX_POLL:
+				
+			default:
 		}
-	}
+
 }
 
 /*******************************************************************************
