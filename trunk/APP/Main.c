@@ -12,13 +12,16 @@
 /* task priority */ 
 #define STARTUP_TASK_PRIO     4
 #define NET_TASK_PRIO         6
+#define Wifi_RX_TASK_PRIO      7
 
 /* task stack size */ 
 #define STARTUP_TASK_STK_SIZE 80  
 #define NET_TASK_STK_SIZE     1024
+#define Wifi_RX_TASK_STK_SIZE  256
 
 static OS_STK  Startup_Task_STK[STARTUP_TASK_STK_SIZE];
 static OS_STK  Net_Task_STK[NET_TASK_STK_SIZE];
+static OS_STK  Wifi_RX_Task_STK[Wifi_RX_TASK_STK_SIZE];
 
 static void Startup_Task(void* p_arg)
 {
@@ -26,10 +29,15 @@ static void Startup_Task(void* p_arg)
   OSStatInit(); 
 #endif
   
+  uip_mbox = OSMboxCreate((void *)0);
+  
   /*TODO:Create Application Tasks Here*/
   OSTaskCreate(Net_Task,(void*)0,
                &Net_Task_STK[NET_TASK_STK_SIZE-1],
                NET_TASK_PRIO);	
+  OSTaskCreate(Wifi_RX_Task,(void*)0,
+               &Wifi_RX_Task_STK[Wifi_RX_TASK_STK_SIZE-1],
+               Wifi_RX_TASK_PRIO);	
   
   OSTaskDel(OS_PRIO_SELF);  //É¾³ýÆô¶¯ÈÎÎñ
 }
