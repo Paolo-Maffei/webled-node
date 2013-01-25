@@ -1755,16 +1755,16 @@
       <name>$PROJ_DIR$\..\APP\Main.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\module_test.c</name>
+      <excluded>
+        <configuration>Debug</configuration>
+      </excluded>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\uIP_TASK.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\APP\uIP_TASK.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\APP\WriteFirmware.c</name>
-      <excluded>
-        <configuration>Debug</configuration>
-      </excluded>
     </file>
   </group>
   <group>
