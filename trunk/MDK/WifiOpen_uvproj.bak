@@ -349,7 +349,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;..\APP</IncludePath>
+              <IncludePath>..\Bsp;..\Drivers\FWLib\Inc;..\Drivers\KEY;..\Drivers\Wifi\IF;..\Drivers\Wifi\IO;..\Drivers\Wifi\WLAN;..\Drivers\Wifi\Inc;..\Drivers\Wifi\API;..\Drivers\Wifi\WpaSupplicant;..\Drivers\Wifi\WpaSupplicant\coWPAtty;..\APP;..\Drivers\Wifi\WpaSupplicant\Openssl;..\Include;..\Init;..\Net;..\System;..\Drivers\GSPI;..\Drivers\Buzzer;..\Drivers\Relay;..\Drivers\IntFlash;..\Drivers\LED;..\Drivers\Console;..\Drivers\Uart;..\uCOS\core;..\uCOS\mdk_port;..\Net\uip_1_0\uip;..\Net\uip_1_0\apps\webserver;..\Net\uip_1_0\lib;..\Net\uip_1_0\unix;..\Net\uip_1_0\apps\dhcps;..\Net\uip_1_0\apps\webled_udp;..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -637,17 +637,22 @@
             <File>
               <FileName>os_cpu_c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\uCOS\port\os_cpu_c.c</FilePath>
+              <FilePath>..\uCOS\mdk_port\os_cpu_c.c</FilePath>
             </File>
             <File>
               <FileName>os_dbg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\uCOS\port\os_dbg.c</FilePath>
+              <FilePath>..\uCOS\mdk_port\os_dbg.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_cpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\uCOS\mdk_port\os_cpu.h</FilePath>
             </File>
             <File>
               <FileName>os_cpu_a.asm</FileName>
               <FileType>2</FileType>
-              <FilePath>..\uCOS\port\os_cpu_a.asm</FilePath>
+              <FilePath>..\uCOS\mdk_port\os_cpu_a.asm</FilePath>
             </File>
           </Files>
         </Group>
