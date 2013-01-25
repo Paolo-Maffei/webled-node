@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3611738580</fileChecksum>
+  <fileChecksum>2866450150</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -368,7 +368,10 @@
       <file>$PROJ_DIR$\..\APP\uIP_TASK.h</file>
       <file>$PROJ_DIR$\..\APP\WriteFirmware.c</file>
       <file>$PROJ_DIR$\..\Bsp\board_init.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\module_test.o</file>
       <file>$PROJ_DIR$\lnkarm_flash_stm32f103vet6.icf</file>
+      <file>$PROJ_DIR$\..\APP\module_test.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\module_test.pbi</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\..\APP\Main.c</name>
@@ -466,7 +469,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 362 150 183 30 31 118 92 53 80 148 157 75 67 63 68 139 160 99 103 18 131 17 86 3 60 20 104 37 165 172 129 64 178 176 101 39 72 73 29 83 158 130 70 71 166 116 98 88 89 87 169 167 156 155 124 19 93 21 94 179 41 137 26 47 100 74 28 115 135 107 50 32 120 110 97 184 102 185 168 56 52 141 55 58</file>
+          <file> 363 150 183 30 31 118 92 53 80 148 157 75 67 63 68 139 160 99 103 18 131 17 86 3 60 20 104 37 165 172 129 64 178 176 101 39 72 73 29 83 158 130 70 71 166 116 98 88 89 87 169 167 156 155 124 19 93 21 94 179 41 137 26 47 100 74 28 115 135 107 50 32 120 110 97 184 102 185 168 56 52 141 55 58</file>
         </tool>
       </inputs>
     </file>
@@ -2238,6 +2241,25 @@
         <tool>
           <name>BICOMP</name>
           <file> 283 336 278 282 337 193 190 198 194 349 350 351 352 353 354 356 355 357 199 200 201 202 203 204 205 206 207 208 209 210 211 348 192 280 279 281 342 359 237 241 239 245 247 347 343 259 284 265 266 262 264 263 268 261 257 258 270 272 276 274 249 252 345</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\module_test.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 362</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 365</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 283 336 278 282 337 193 190 198 194 349 350 351 352 353 354 356 355 357 199 200 201 202 203 204 205 206 207 208 209 210 211 348 192 280 279 281 342 359 237 241 239 243 245 247 347 343 259 284 265 266 262 264 263 268 261 257 258 270 272 276 274 249 252 345</file>
         </tool>
       </inputs>
     </file>
