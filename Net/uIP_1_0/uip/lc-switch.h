@@ -74,3 +74,4 @@ typedef unsigned short lc_t;
 #endif /* __LC_SWITCH_H__ */
 
 /** @} */
+

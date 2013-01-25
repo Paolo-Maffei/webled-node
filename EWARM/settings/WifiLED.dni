@@ -18,7 +18,7 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=-1788259742
+Checksum=-267414058
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -42,8 +42,10 @@ ByteLimit=50
 [Disassemble mode]
 mode=0
 [Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.35.2@1" 1 0 0 0 "" 0 "" 0
-Count=1
+Bp0=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.92.2@1" 1 0 0 0 "" 0 "" 0
+Bp1=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.89.2@1" 1 0 0 0 "" 0 "" 0
+Bp2=_ "STD_CODE" "{E:\WifiLED\APP\AppTask.c}.24.5@1" 1 0 0 0 "" 0 "" 0
+Count=3
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -58,6 +60,6 @@ SuppressDialog=0
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=120575136
+Mode=136962784
 Graph=0
 Symbiont=0
