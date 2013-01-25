@@ -1770,12 +1770,6 @@
   <group>
     <name>Bsp</name>
     <file>
-      <name>$PROJ_DIR$\..\Bsp\board_init.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\Bsp\board_init.h</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\..\Bsp\core_cm3.c</name>
     </file>
     <file>

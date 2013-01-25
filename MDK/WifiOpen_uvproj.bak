@@ -645,11 +645,6 @@
               <FilePath>..\uCOS\mdk_port\os_dbg.c</FilePath>
             </File>
             <File>
-              <FileName>os_cpu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\uCOS\mdk_port\os_cpu.h</FilePath>
-            </File>
-            <File>
               <FileName>os_cpu_a.asm</FileName>
               <FileType>2</FileType>
               <FilePath>..\uCOS\mdk_port\os_cpu_a.asm</FilePath>
