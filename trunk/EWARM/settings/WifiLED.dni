@@ -39,14 +39,6 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.29.5@1" 1 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{E:\WifiLED\APP\Main.c}.32.3@1" 1 0 0 0 "" 0 "" 0
-Bp2=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.79.9@1" 1 0 0 0 "" 0 "" 0
-Bp3=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.30.5@1" 1 0 0 0 "" 0 "" 0
-Count=4
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -54,9 +46,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Aliases]
-Count=0
-SuppressDialog=0
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
@@ -64,3 +53,12 @@ Enabled=0
 Mode=89700904
 Graph=0
 Symbiont=0
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Bp0=_ "STD_CODE" "{E:\WifiLED\APP\Main.c}.32.3@1" 1 0 0 0 "" 0 "" 0
+Bp1=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.79.9@1" 1 0 0 0 "" 0 "" 0
+Count=2
+[Aliases]
+Count=0
+SuppressDialog=0

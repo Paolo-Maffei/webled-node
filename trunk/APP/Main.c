@@ -12,11 +12,11 @@
 /* task priority */ 
 #define STARTUP_TASK_PRIO     4
 #define NET_TASK_PRIO         6
-#define Wifi_RX_TASK_PRIO      7
+#define Wifi_RX_TASK_PRIO     7
 
 /* task stack size */ 
-#define STARTUP_TASK_STK_SIZE 80  
-#define NET_TASK_STK_SIZE     1024
+#define STARTUP_TASK_STK_SIZE  80  
+#define NET_TASK_STK_SIZE      1024
 #define Wifi_RX_TASK_STK_SIZE  256
 
 static OS_STK  Startup_Task_STK[STARTUP_TASK_STK_SIZE];
