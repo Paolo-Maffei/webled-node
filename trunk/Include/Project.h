@@ -32,8 +32,6 @@
 // Base driver headers
 //
 #include "GSPI.h"
-#include "Buzzer.h"
-#include "Relay.h"
 #include "Flash.h"
 #include "EEPROM.h"
 #include "KEY.h"
