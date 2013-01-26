@@ -53,8 +53,6 @@ void Net_Task(void* p_arg)
             tapdev_send();      //发ARP回应到以太网上
           }
         }
-        break;
-    case UIP_MBOX_POLL:
 #if UIP_UDP
       for(int i = 0; i < UIP_UDP_CONNS; i++) 
       {
@@ -68,6 +66,9 @@ void Net_Task(void* p_arg)
 	}
       }
 #endif /* UIP_UDP */
+        break;
+    case UIP_MBOX_POLL:
+
       break;
       
     default:
