@@ -40,6 +40,7 @@
 #include "Console.h"
 
 #include "Group.h"
+#include "NodeAttr.h"
 
 //
 // Wifi reference headers

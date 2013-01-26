@@ -55,7 +55,20 @@ void Net_Task(void* p_arg)
         }
         break;
     case UIP_MBOX_POLL:
-        break;
+#if UIP_UDP
+      for(int i = 0; i < UIP_UDP_CONNS; i++) 
+      {
+	uip_udp_periodic(i);
+	/* If the above function invocation resulted in data that
+	   should be sent out on the network, the global variable
+	   uip_len is set to a value > 0. */
+	if(uip_len > 0) {
+	  uip_arp_out();
+	  tapdev_send();
+	}
+      }
+#endif /* UIP_UDP */
+      break;
       
     default:
     }

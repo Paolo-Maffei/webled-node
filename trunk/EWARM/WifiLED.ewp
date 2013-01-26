@@ -1761,6 +1761,12 @@
       </excluded>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\NodeAttr.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\NodeAttr.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\uIP_TASK.c</name>
     </file>
     <file>
