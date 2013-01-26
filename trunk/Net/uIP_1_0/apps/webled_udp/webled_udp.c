@@ -26,7 +26,11 @@ void WebLED_UDP_APPCALL(void)
         case WEBLED_UDP_RCV_PORT:
           if (uip_newdata())
           {
-            uip_send("hello udp\n",20);
+            u16_t len = uip_datalen();
+            char *dataptr = (char *)uip_appdata;
+          }
+          if(uip_poll())
+          {
           }
           break;
           
