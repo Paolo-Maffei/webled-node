@@ -49,13 +49,17 @@ int main(void)
   Set_System();
   TraceInit();
   
-  // Drivers init
-  Flash_Init();
-  EE_Init(); 	//Flash_Unlock already done in Flash_Init()
+  //Driver init
   KEY_Init();
   LED_Init ();
   Console_Init ();	
-  Console_Print("WiFi Hello world!!\r\n");
+//  Console_Print("WiFi LED node!!\r\n");
+   
+  // Flash Storage init
+  Flash_Init();
+  //  EE_Init(); //Flash_Unlock already done in Flash_Init()
+  GroupTable_Init();
+  Init_NodeAttr();
   
   OSInit();//系统初始化	
   

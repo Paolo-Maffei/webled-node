@@ -6,7 +6,7 @@
 #ifndef _GROUP_H_
 #define _GROUP_H_
 
-#define  GROUP_TABLE_ADDR  	(WIFI_PROFILE_ADDR+KBytes(1))
+#define  GROUP_TABLE_ADDR  	(NODEATTR_FLASH_ADDR+KBytes(1))
 //#define  MAX_GROUP_NUM	20
 
 typedef struct{
