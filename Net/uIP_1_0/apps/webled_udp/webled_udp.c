@@ -7,31 +7,33 @@
 #include "uip.h"
 #include "webled_udp.h"
 
-void UDP_App_Init()
+void UDP_App_Init(void)
 {
+        uip_ipaddr_t addr;
 	struct uip_udp_conn *conn = NULL;
+        uip_ipaddr(addr,255,255,255,255);
 
-	conn = uip_udp_new(&uip_hostaddr, HTONS(0));
+	conn = uip_udp_new(&addr, HTONS(WEBLED_UDP_RCV_PORT));
 	if(conn != NULL) {
-		uip_udp_bind(conn, HTONS(3132));
-	}
+		uip_udp_bind(conn, HTONS( WEBLED_UDP_RCV_PORT));
+	}//收发采用同一个端口
 }
 
 void WebLED_UDP_APPCALL(void)
 {
-		if (uip_newdata())
-		{
-				switch (HTONS(uip_udp_conn->lport))
-				{
-//					case DHCPS_SERVER_PORT:
-//						Dhcp_PktHandler(uip_appdata, uip_len);
-					  break;
-//					case LINGTONE_UDPAPP_SERVER_PORT:
-	//					LT_UdpApp_PktHandler(uip_appdata, uip_len);
-  					break;
-				}
-		}
-}
+        switch(HTONS(uip_udp_conn->lport))
+        {
+        case WEBLED_UDP_RCV_PORT:
+          if (uip_newdata())
+          {
+            uip_send("hello udp\n",20);
+          }
+          break;
+          
+        default:
+          break;
+        }
+  }
 
 void GetInfo_Server()
 {

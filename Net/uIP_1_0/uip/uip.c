@@ -116,6 +116,14 @@ static const uip_ipaddr_t all_ones_addr =
 #else /* UIP_CONF_IPV6 */
   {0xffff,0xffff};
 #endif /* UIP_CONF_IPV6 */
+  
+static const uip_ipaddr_t local_broadcast_addr =
+#if UIP_CONF_IPV6
+  {0xffff,0xffff,0xffff,0xffff,0xffff,0xffff,0xffff,0xffff};
+#else /* UIP_CONF_IPV6 */
+  {0x0000,0x00ff};
+#endif /* UIP_CONF_IPV6 */
+  
 static const uip_ipaddr_t all_zeroes_addr =
 #if UIP_CONF_IPV6
   {0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000};
@@ -908,7 +916,7 @@ uip_process(u8_t flag)
 #if UIP_BROADCAST
     DEBUG_PRINTF("UDP IP checksum 0x%04x\n", uip_ipchksum());
     if(BUF->proto == UIP_PROTO_UDP &&
-       uip_ipaddr_cmp(BUF->destipaddr, all_ones_addr)
+       (uip_ipaddr_cmp(BUF->destipaddr, all_ones_addr) || uip_ipaddr_maskcmp(BUF->destipaddr,uip_hostaddr,uip_netmask) ) //增加本地广播地址
        /*&&
 	 uip_ipchksum() == 0xffff*/) {
       goto udp_input;
@@ -1114,6 +1122,7 @@ uip_process(u8_t flag)
         UDPBUF->srcport == uip_udp_conn->rport) &&
        (uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_zeroes_addr) ||
 	uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_ones_addr) ||
+        uip_ipaddr_cmp(BUF->destipaddr,local_broadcast_addr) || //增加本地广播地址
 	uip_ipaddr_cmp(BUF->srcipaddr, uip_udp_conn->ripaddr))) {
       goto udp_found;
     }
