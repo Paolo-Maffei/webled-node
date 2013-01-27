@@ -10,6 +10,8 @@
 #define WEBLED_UDP_SEND_PORT        3131
 #define WEBLED_UDP_RCV_PORT         3132
 
+#define UDP_SBUF_SIZE   500   //发送缓冲区的大小
+
 void UDP_App_Init();
 void WebLED_UDP_APPCALL(void);
 

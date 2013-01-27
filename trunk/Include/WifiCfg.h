@@ -21,7 +21,7 @@ STM32 WIFI ¿ª·¢°å
 // Firmware in flash
 //------------------------------------------------------------------------------
 #define SYSTEM_FLASH_ADDR			   0x08000000UL
-#define WIFI_PROFILE_ADDR				(SYSTEM_FLASH_ADDR + KBytes(500))	// 500KB+
+#define WIFI_PROFILE_ADDR			  (SYSTEM_FLASH_ADDR + KBytes(400))	//400KB+
 
 //now the firmware is located in data array
 //#define FIRMWARE_IN_FLASH		1
