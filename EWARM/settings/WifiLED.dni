@@ -18,7 +18,7 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=1942294255
+Checksum=-1605554631
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -39,6 +39,10 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -46,19 +50,13 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Aliases]
+Count=0
+SuppressDialog=0
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=195908408
+Mode=118993832
 Graph=0
 Symbiont=0
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\APP\Main.c}.32.3@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{E:\WifiLED\APP\uIP_TASK.c}.79.9@1" 0 0 0 0 "" 0 "" 0
-Count=2
-[Aliases]
-Count=0
-SuppressDialog=0
