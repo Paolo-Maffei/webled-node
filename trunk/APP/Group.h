@@ -6,7 +6,7 @@
 #ifndef _GROUP_H_
 #define _GROUP_H_
 
-#define  GROUP_TABLE_ADDR  	(NODEATTR_FLASH_ADDR+KBytes(2))
+#define  GROUP_TABLE_ADDR  	(NODEATTR_FLASH_ADDR+KBytes(8))
 //#define  MAX_GROUP_NUM	20
 
 typedef struct{
@@ -24,7 +24,9 @@ void GroupTable_Init(void);
 
 void GroupTable_Add(int GroupID);
 void GroupTable_Del(int GroupID);
+void GroupTable_DelAll(void);
 int GroupTable_Exist(int GroupID);
+int GroupTable_IDasm(char *g); //组装计算网络传来的ID
 
 
 #endif

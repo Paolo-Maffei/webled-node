@@ -32,8 +32,9 @@ void WebLED_UDP_APPCALL(void)
             udp_send_len = 0;
  //           u16_t len = uip_datalen();
             char *dataptr = (char *)uip_appdata;
-            if((*(int *)(dataptr+1) != NodeAttr_GetID()) && (0xff != *(int *)(dataptr+1)))  
-              break;        //目的ID和本节点ID不同,且不为广播ID
+            if((*(int *)(dataptr+1) != NodeAttr_GetID()) && 
+               (0xff != *(int *)(dataptr+1)) && (0x30!=(dataptr[0]&0xf0)))  
+              break;        //目的ID和本节点ID不同,且不为广播ID,且不为场景命令
             switch(*dataptr){
             case 0x10:
               break;
@@ -89,7 +90,7 @@ void WebLED_UDP_APPCALL(void)
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
-              NodeAttr_SetID(*(int*)(dataptr+9));
+              NodeAttr_SetID(GroupTable_IDasm(&dataptr[9]));
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);              
@@ -103,45 +104,83 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);     
               break;
-            case 0x23:
+            case 0x23:  //set groupIDs
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
+              GroupTable_DelAll();   //删除所有已有场景
               for(int i=0;i<dataptr[9];i++)  //循环依次添加场景
               {
-                GroupTable_Add(*(int *)dataptr[10+4*i]);
+                GroupTable_Add(GroupTable_IDasm(&dataptr[10+4*i]));
               }
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
-            case 0x24:
+            case 0x24:    //add groupID
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
-              GroupTable_Add(*(int *)dataptr[9]);
+              GroupTable_Add(GroupTable_IDasm(&dataptr[9]));
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
-            case 0x25:
+            case 0x25:      //delete groupID
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
-              GroupTable_Del(*(int *)dataptr[9]);
+              GroupTable_Del(GroupTable_IDasm(&dataptr[9]));
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
-            case 0x26:
+            case 0x26:    //set mode
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
-              NodeAttr_SetMode(*(int *)dataptr[9]);
+              NodeAttr_SetMode(GroupTable_IDasm(&dataptr[9]));
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
+            case 0x31:    //trigger groupID
+              //此处添加响应函数
+              if(0x01 == GroupTable_IDasm(&dataptr[1]))
+                LED_TurnOn(LED1);
+              if(0x02 == GroupTable_IDasm(&dataptr[1]))
+                LED_TurnOn(LED2);
+              //
+              udp_send_buf[0] = dataptr[0];
+              CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              udp_send_len = 9;
+              uip_send(udp_send_buf,udp_send_len);   
+              break;
+            case 0x32:    //close GroupID
+               //此处添加响应函数
+              if(0x01 == GroupTable_IDasm(&dataptr[1]))
+                LED_TurnOff(LED1);
+              if(0x02 == GroupTable_IDasm(&dataptr[1]))
+                LED_TurnOff(LED2);
+              //
+              udp_send_buf[0] = dataptr[0];
+              CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              udp_send_len = 9;
+              uip_send(udp_send_buf,udp_send_len);   
+              break;
+            case 0x33:    //close all GroupIDs
+               //此处添加响应函数
+              LED_TurnOff(LED1);
+              LED_TurnOff(LED2);
+              //              
+              udp_send_buf[0] = dataptr[0];
+              CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              udp_send_len = 9;
+              uip_send(udp_send_buf,udp_send_len);  
+              break;              
             
             default:
               break;

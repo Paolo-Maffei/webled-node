@@ -18,14 +18,14 @@ void main(void)
 	GroupTable_Add(0x87654321);
 	GroupTable_Init();
         
-        Init_NodeAttr();
-        NodeAttr_SetID(255);
-        NodeAttr_SetName(name1,sizeof(name1));
-        NodeAttr_SetMode(12);
-        NodeAttr_SetStatus(22);
-         NodeAttr_SetName(name2,sizeof(name2));
-        int tmp = NodeAttr_GetID();
-        
+//        Init_NodeAttr();
+//        NodeAttr_SetID(255);
+//        NodeAttr_SetName(name1,sizeof(name1));
+//        NodeAttr_SetMode(12);
+//        NodeAttr_SetStatus(22);
+//         NodeAttr_SetName(name2,sizeof(name2));
+//        int tmp = NodeAttr_GetID();
+//        
         
         
 	if(0 != GroupTable_Exist(0xFFFFFFFF))

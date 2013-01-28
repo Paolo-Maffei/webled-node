@@ -149,7 +149,7 @@ BOOL Flash_Write(UINT32 param_flashbase, PBYTE pRomData, UINT32 NumByteToWrite)
 	}
 	else {
 		if ((NumByteToWrite % FLASH_PAGE_SIZE) != 0) {
-			Flash_Read((UINT16)(tempaddress + NumByteToWrite - (NumByteToWrite % FLASH_PAGE_SIZE)), pBuffer1, FLASH_PAGE_SIZE);
+			Flash_Read((tempaddress + NumByteToWrite - (NumByteToWrite % FLASH_PAGE_SIZE)), pBuffer1, FLASH_PAGE_SIZE);
 			CopyMemory(pBuffer1, pRomData + NumByteToWrite - (NumByteToWrite % FLASH_PAGE_SIZE), (NumByteToWrite % FLASH_PAGE_SIZE));
 		}
 		if ((NumByteToWrite % FLASH_PAGE_SIZE) == 0)

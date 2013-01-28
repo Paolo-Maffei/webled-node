@@ -66,6 +66,12 @@ void GroupTable_Del(int GroupID)
 	//Console_Print("GroupTable_Del,GroupID not found!:%d\n",Group_Match_Table.size);
 }
 
+void GroupTable_DelAll(void)
+{
+  Group_Match_Table.size = 0;
+  GroupTable_Save();
+}
+
 static int GroupTable_Find(int GroupID)
 {
 	int i;
@@ -76,8 +82,14 @@ static int GroupTable_Find(int GroupID)
 	}
 	return 0;  //not found 
 }
+
 int GroupTable_Exist(int GroupID)
 {
 	return (!!GroupTable_Find(GroupID));  //0:not found;
 }
 
+int GroupTable_IDasm(char *g) //组装计算网络传来的ID
+{
+  int ret = (int)g[0] + ((int)g[1]<<8) + ((int)g[2]<<16) + ((int)g[3]<<24);
+  return ret;
+}
