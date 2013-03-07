@@ -39,7 +39,7 @@ void WebLED_UDP_APPCALL(void)
             case 0x10:
               break;
             case 0x11:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               CopyMemory(&udp_send_buf[9],&node_info.id,4);
@@ -47,7 +47,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);
               break;
             case 0x12:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               udp_send_buf[9] = node_info.name_length;
@@ -56,7 +56,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);
               break;
             case 0x13:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               udp_send_buf[9] = Group_Match_Table.size;
@@ -66,7 +66,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);
               break;
             case 0x14:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               CopyMemory(&udp_send_buf[9],&node_info.mode,sizeof(node_info.mode));
@@ -74,7 +74,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);
               break;
             case 0x15:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               CopyMemory(&udp_send_buf[9],&node_info.status,sizeof(node_info.status));
@@ -87,7 +87,7 @@ void WebLED_UDP_APPCALL(void)
             case 0x20:       
               break;
             case 0x21:
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               NodeAttr_SetID(GroupTable_IDasm(&dataptr[9]));
@@ -96,7 +96,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);              
               break;
             case 0x22:       
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               NodeAttr_SetName(&dataptr[10],dataptr[9]);
@@ -105,7 +105,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);     
               break;
             case 0x23:  //set groupIDs
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               GroupTable_DelAll();   //删除所有已有场景
@@ -118,7 +118,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x24:    //add groupID
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               GroupTable_Add(GroupTable_IDasm(&dataptr[9]));
@@ -127,7 +127,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x25:      //delete groupID
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               GroupTable_Del(GroupTable_IDasm(&dataptr[9]));
@@ -136,7 +136,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x26:    //set mode
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
               NodeAttr_SetMode(GroupTable_IDasm(&dataptr[9]));
@@ -152,7 +152,7 @@ void WebLED_UDP_APPCALL(void)
                 LED_TurnOn(LED2);
               }
               //
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               udp_send_len = 9;
@@ -166,7 +166,7 @@ void WebLED_UDP_APPCALL(void)
                 LED_TurnOff(LED2);
               }
               //
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               udp_send_len = 9;
@@ -177,7 +177,7 @@ void WebLED_UDP_APPCALL(void)
               LED_TurnOff(LED1);
               LED_TurnOff(LED2);
               //              
-              udp_send_buf[0] = dataptr[0];
+              udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               udp_send_len = 9;

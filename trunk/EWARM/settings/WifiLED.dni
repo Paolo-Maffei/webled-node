@@ -18,7 +18,11 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
+<<<<<<< .mine
+Checksum=468333181
+=======
 Checksum=1910183783
+>>>>>>> .r34
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -50,13 +54,14 @@ LogFile=_ ""
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=85430456
+Mode=192982136
 Graph=0
 Symbiont=0
 [Disassemble mode]
 mode=0
 [Breakpoints]
-Count=0
+Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
+Count=1
 [Aliases]
 Count=0
 SuppressDialog=0
