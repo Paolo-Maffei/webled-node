@@ -146,10 +146,11 @@ void WebLED_UDP_APPCALL(void)
               break;
             case 0x31:    //trigger groupID
               //此处添加响应函数
-              if(0x01 == GroupTable_IDasm(&dataptr[1]))
+              if(GroupTable_Exist(GroupTable_IDasm(&dataptr[1])))
+              {
                 LED_TurnOn(LED1);
-              if(0x02 == GroupTable_IDasm(&dataptr[1]))
                 LED_TurnOn(LED2);
+              }
               //
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
@@ -159,10 +160,11 @@ void WebLED_UDP_APPCALL(void)
               break;
             case 0x32:    //close GroupID
                //此处添加响应函数
-              if(0x01 == GroupTable_IDasm(&dataptr[1]))
+              if(GroupTable_Exist(GroupTable_IDasm(&dataptr[1])))
+              {
                 LED_TurnOff(LED1);
-              if(0x02 == GroupTable_IDasm(&dataptr[1]))
                 LED_TurnOff(LED2);
+              }
               //
               udp_send_buf[0] = dataptr[0];
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
