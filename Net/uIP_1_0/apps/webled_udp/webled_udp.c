@@ -16,7 +16,7 @@ void UDP_App_Init(void)
 	struct uip_udp_conn *conn = NULL;
         uip_ipaddr(addr,255,255,255,255);
 
-	conn = uip_udp_new(&addr, HTONS(WEBLED_UDP_RCV_PORT));
+	conn = uip_udp_new(&addr, HTONS(WEBLED_UDP_SEND_PORT));
 	if(conn != NULL) {
 		uip_udp_bind(conn, HTONS( WEBLED_UDP_RCV_PORT));
 	}//收发采用同一个端口
@@ -164,7 +164,8 @@ void WebLED_UDP_APPCALL(void)
               {
                 LED_TurnOff(LED1);
                 LED_TurnOff(LED2);
-              }
+              }else
+                break;
               //
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID
@@ -174,8 +175,12 @@ void WebLED_UDP_APPCALL(void)
               break;
             case 0x33:    //close all GroupIDs
                //此处添加响应函数
-              LED_TurnOff(LED1);
-              LED_TurnOff(LED2);
+              if(GroupTable_Exist(GroupTable_IDasm(&dataptr[1])))
+              {
+                LED_TurnOff(LED1);
+                LED_TurnOff(LED2);
+              }else 
+                break;
               //              
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[1],4);  //copy groupID

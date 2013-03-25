@@ -10,7 +10,7 @@ BOOL KEY_Init()
 							ENABLE
 	                      );
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -20,7 +20,7 @@ BOOL KEY_Init()
 
 BOOL Get_KEY1()
 {
-	return GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8);
+	return GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1);
 }
 BOOL Get_KEY2()
 {
