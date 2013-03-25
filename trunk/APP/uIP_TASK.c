@@ -142,7 +142,7 @@ static void Set_uIP()
     
     UDP_App_Init(); //初始化UDP应用
     
-    uip_ipaddr(ipaddr, 192, 168, 1, 5);
+    uip_ipaddr(ipaddr, 192, 168, 1, 4);
     uip_sethostaddr(ipaddr);
     uip_ipaddr(ipaddr, 192, 168, 1, 1);
     uip_setdraddr(ipaddr);

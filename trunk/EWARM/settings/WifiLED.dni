@@ -19,7 +19,7 @@ Enabled=0
 ShowSource=1
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=468333181
+Checksum=1272451646
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -54,7 +54,7 @@ LogFile=_ ""
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=192982136
+Mode=143962920
 Graph=0
 Symbiont=0
 [Disassemble mode]
