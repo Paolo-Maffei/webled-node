@@ -1119,7 +1119,7 @@ uip_process(u8_t flag)
     if(uip_udp_conn->lport != 0 &&
        UDPBUF->destport == uip_udp_conn->lport &&
        (uip_udp_conn->rport == 0 ||
-        UDPBUF->srcport == uip_udp_conn->rport) &&
+        UDPBUF->srcport == uip_udp_conn->rport) && 
        (uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_zeroes_addr) ||
 	uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_ones_addr) ||
         uip_ipaddr_cmp(BUF->destipaddr,local_broadcast_addr) || //增加本地广播地址
