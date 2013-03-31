@@ -1116,10 +1116,14 @@ uip_process(u8_t flag)
        connection is bound to a remote port. Finally, if the
        connection is bound to a remote IP address, the source IP
        address of the packet is checked. */
+//    u16_t destport = UDPBUF->destport;
+//    u16_t srcport = UDPBUF->srcport;
+//    u16_t *srcipaddr = BUF->srcipaddr;
+//     u16_t *destipaddr = BUF->destipaddr;
     if(uip_udp_conn->lport != 0 &&
        UDPBUF->destport == uip_udp_conn->lport &&
-       (uip_udp_conn->rport == 0 ||
-        UDPBUF->srcport == uip_udp_conn->rport) && 
+     //  (uip_udp_conn->rport == 0 ||
+    //    UDPBUF->srcport == uip_udp_conn->rport) && 
        (uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_zeroes_addr) ||
 	uip_ipaddr_cmp(uip_udp_conn->ripaddr, all_ones_addr) ||
         uip_ipaddr_cmp(BUF->destipaddr,local_broadcast_addr) || //增加本地广播地址
