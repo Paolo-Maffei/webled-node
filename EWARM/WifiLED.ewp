@@ -294,6 +294,7 @@
           <state>$PROJ_DIR$\..\Net</state>
           <state>$PROJ_DIR$\..\Net\uIP_1_0\uip</state>
           <state>$PROJ_DIR$\..\Net\uIP_1_0\apps\webserver</state>
+          <state>$PROJ_DIR$\..\Net\uIP_1_0\apps\dhcpc</state>
           <state>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp</state>
           <state>$PROJ_DIR$\..\Net\uIP_1_0\lib</state>
           <state>$PROJ_DIR$\..\Net\uIP_1_0\unix</state>
@@ -2179,6 +2180,15 @@
       <group>
         <name>apps</name>
         <group>
+          <name>dhcpc</name>
+          <file>
+            <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\dhcpc\dhcpc.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\dhcpc\dhcpc.h</name>
+          </file>
+        </group>
+        <group>
           <name>webled_udp</name>
           <file>
             <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp\webled_udp.c</name>
@@ -2189,6 +2199,9 @@
         </group>
         <group>
           <name>webserver</name>
+          <excluded>
+            <configuration>Debug</configuration>
+          </excluded>
           <file>
             <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webserver\http-strings.c</name>
           </file>

@@ -242,7 +242,7 @@
  * \hideinitializer
  */
 #ifndef UIP_CONF_MAX_CONNECTIONS
-#define UIP_CONNS       10
+#define UIP_CONNS       2
 #else /* UIP_CONF_MAX_CONNECTIONS */
 #define UIP_CONNS UIP_CONF_MAX_CONNECTIONS
 #endif /* UIP_CONF_MAX_CONNECTIONS */
@@ -499,6 +499,9 @@ void uip_log(char *msg);
 */
 extern void (*p_appcall)(void);
 #define UIP_APPCALL     p_appcall
+
+extern void (*p_udp_appcall)(void);
+#define UIP_UDP_APPCALL  p_udp_appcall
 
 /**
  * \var typedef uip_tcp_appstate_t

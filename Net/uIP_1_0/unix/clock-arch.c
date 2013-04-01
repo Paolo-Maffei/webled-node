@@ -38,12 +38,13 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include "clock-arch.h"
 
-extern volatile unsigned int uIP_RunTime;//__IO == volatile
+#include "clock-arch.h"
+#include "Project.h"
+
 /*---------------------------------------------------------------------------*/
 clock_time_t clock_time(void)
 {
-	return uIP_RunTime;
+	return OSTimeGet();
 }
 /*---------------------------------------------------------------------------*/
