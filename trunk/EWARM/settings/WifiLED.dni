@@ -1,25 +1,6 @@
-[InterruptLog]
-LogEnabled=0
-SumEnabled=0
-GraphEnabled=0
-ShowTimeLog=1
-ShowTimeSum=1
-SumSortOrder=0
-[Interrupts]
-Enabled=1
-[MemoryMap]
-Enabled=0
-Base=0
-UseAuto=0
-TypeViolation=1
-UnspecRange=1
-ActionState=1
-[TraceHelper]
-Enabled=0
-ShowSource=1
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=292470267
+Checksum=1190531467
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -43,6 +24,40 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[TraceHelper]
+Enabled=0
+ShowSource=1
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=240656784
+Graph=0
+Symbiont=0
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
+Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.151.1@1" 1 0 0 0 "" 0 "" 0
+Bp2=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.307.3@1" 1 0 0 0 "" 0 "" 0
+Bp3=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.271.3@1" 1 0 0 0 "" 0 "" 0
+Count=4
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -50,18 +65,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[CallStackLog]
-Enabled=0
-[DriverProfiling]
-Enabled=0
-Mode=774790180
-Graph=0
-Symbiont=0
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Count=1
 [Aliases]
 Count=0
 SuppressDialog=0

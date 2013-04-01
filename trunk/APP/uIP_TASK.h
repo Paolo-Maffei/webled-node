@@ -10,6 +10,7 @@ void Net_Task(void* p_arg);
 void Wifi_RX_Task(void *pdata);
 
 extern void (*p_appcall)(void);
+extern void (*p_udp_appcall)(void);
 
 extern OS_EVENT *uip_mbox;
 

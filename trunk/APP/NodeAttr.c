@@ -10,8 +10,8 @@ void Init_NodeAttr(void)  //call GroupTable_Init() before
 {
   Flash_Read(NODEATTR_FLASH_ADDR,(PBYTE)&node_info,sizeof(NodeAttr));
   node_info.group_table = &Group_Match_Table;
-  if(0xFFFFFFFF == node_info.id)
-    NodeAttr_SetID(255);             //ÈôÎ´ÅäÖÃ£¬Ä¬ÈÏIDÎª255
+//  if(0xFFFFFFFF == node_info.id)
+//    NodeAttr_SetID(255);             //ÈôÎ´ÅäÖÃ£¬Ä¬ÈÏIDÎª255
   if(0xFF == node_info.name_length)
     NodeAttr_SetName("Î´ÉèÖÃ",sizeof("Î´ÉèÖÃ"));
 }

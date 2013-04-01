@@ -10,7 +10,7 @@
 char udp_send_buf[UDP_SBUF_SIZE];
 char udp_send_len;
 
-void UDP_App_Init(void)
+void WebLED_App_Init(void)
 {
         uip_ipaddr_t addr;
 	struct uip_udp_conn *conn = NULL;
@@ -90,7 +90,7 @@ void WebLED_UDP_APPCALL(void)
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&dataptr[1],4);
-              NodeAttr_SetID(GroupTable_IDasm(&dataptr[9]));
+              //NodeAttr_SetID(GroupTable_IDasm(&dataptr[9]));
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);              

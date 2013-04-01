@@ -16,8 +16,8 @@
 #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
 /*uIP的应用程序，设成函数指针，以便实现在开机时根据设置进入不同应用*/
 void (*p_appcall)(void);
+void (*p_udp_appcall)(void);
 
-volatile int32_t uIP_RunTime = 0;//__IO == volatile //待处理，添加定时器支持
 OS_EVENT *uip_mbox;
 
 void Net_Task(void* p_arg)
@@ -53,19 +53,19 @@ void Net_Task(void* p_arg)
             tapdev_send();      //发ARP回应到以太网上
           }
         }
-#if UIP_UDP
-      for(int i = 0; i < UIP_UDP_CONNS; i++) 
-      {
-	uip_udp_periodic(i);
-	/* If the above function invocation resulted in data that
-	   should be sent out on the network, the global variable
-	   uip_len is set to a value > 0. */
-	if(uip_len > 0) {
-	  uip_arp_out();
-	  tapdev_send();
-	}
-      }
-#endif /* UIP_UDP */
+//#if UIP_UDP    //超时时主动发数据
+//      for(int i = 0; i < UIP_UDP_CONNS; i++) 
+//      {
+//	uip_udp_periodic(i);
+//	/* If the above function invocation resulted in data that
+//	   should be sent out on the network, the global variable
+//	   uip_len is set to a value > 0. */
+//	if(uip_len > 0) {
+//	  uip_arp_out();
+//	  tapdev_send();
+//	}
+//      }
+//#endif /* UIP_UDP */
         break;
     case UIP_MBOX_POLL:
 
@@ -98,9 +98,7 @@ void Wifi_RX_Task(void *pdata)
 static void Set_uIP()
 {
   BOOL bStatus = FALSE;
-  //
   // Wifi start!
-  //
   bStatus = Wlan_Init(g_pWlanAdapter);
   if (!bStatus) 
   {
@@ -108,39 +106,33 @@ static void Set_uIP()
     return;
   }
   
-  if (!Get_KEY1()) 
-  { // 启动时KEY1按下进入模块的设置模式
-    
-    // uIP Init
-    uip_ipaddr_t ipaddr;
-    
-    WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
-    uip_init();
-    
-    uip_ipaddr(ipaddr, 192, 168, 1, 2);
-    uip_sethostaddr(ipaddr);
-    uip_ipaddr(ipaddr, 192, 168, 1, 1);
-    uip_setdraddr(ipaddr);
-    uip_ipaddr(ipaddr, 255, 255, 255, 0);
-    uip_setnetmask(ipaddr);
-    
-    p_appcall = httpd_appcall;
-    httpd_init();
-    
-    WiFiCmd_RunCommand ("set ssid CDDC");
-    WiFiCmd_RunCommand ("set networktype infra");
-    WiFiCmd_RunCommand ("set authmode open");
-    WiFiCmd_RunCommand ("set encrymode wep");
-    WiFiCmd_RunCommand ("set keyascii 12345");
+  uip_ipaddr_t ipaddr;
+  
+  WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
+  if(0xFFFFFFFF == node_info.id)      //根据MAC地址生成节点ID，只在节点第一次上电时执行
+  {
+    int id = (int)uip_ethaddr.addr[5] + ((int)uip_ethaddr.addr[4]<<8) + ((int)uip_ethaddr.addr[3]<<16) + ((int)uip_ethaddr.addr[2]<<24);
+    NodeAttr_SetID(id);
   }
-  else{ //work mode,use UDP
-    // uIP Init
-    uip_ipaddr_t ipaddr;
-    
-    WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
-    uip_init();
-    
-    UDP_App_Init(); //初始化UDP应用
+  
+  WiFiCmd_RunCommand ("set ssid CDDC");
+  WiFiCmd_RunCommand ("set networktype infra");
+  WiFiCmd_RunCommand ("set authmode open");
+  WiFiCmd_RunCommand ("set encrymode wep");
+  WiFiCmd_RunCommand ("set keyascii 12345");
+  WiFiCmd_RunCommand ("ctrl connect");
+  
+  uip_init();
+  
+  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
+  {
+    p_udp_appcall = dhcpc_appcall;
+    dhcpc_init(uip_ethaddr.addr,6);
+  }
+  else
+  {
+    p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
+    WebLED_App_Init();                  //初始化WEBLED UDP应用
     
     uip_ipaddr(ipaddr, 192, 168, 1, 5);
     uip_sethostaddr(ipaddr);
@@ -149,11 +141,11 @@ static void Set_uIP()
     uip_ipaddr(ipaddr, 255, 255, 255, 0);
     uip_setnetmask(ipaddr);
     
-    WiFiCmd_RunCommand ("set ssid CDDC");
-    WiFiCmd_RunCommand ("set networktype infra");
-    WiFiCmd_RunCommand ("set authmode open");
-    WiFiCmd_RunCommand ("set encrymode wep");
-    WiFiCmd_RunCommand ("set keyascii 12345");
   }
-  WiFiCmd_RunCommand ("ctrl connect");
+}
+
+void dhcpc_configured(const struct dhcpc_state *s)
+{
+  
+  
 }

@@ -7,9 +7,12 @@
 #define NODE_NAME_MAX_LENGTH  50
 
 typedef struct{
-  int id;      //标识节点的唯一ID，现在的实现和IP地址的子网ID字段相同。
+  int id;      //标识节点的唯一ID，现在的实现和MAC地址的低32位相同。
   int mode;    //灯 or 开关
   int status;   //工作状态
+  char ipaddr[4];
+  char gateway[4];
+  char netmask[4];
   char name_length;   //名称的长度
   char name[NODE_NAME_MAX_LENGTH];//节点的名称
 
