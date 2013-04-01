@@ -1,0 +1,59 @@
+
+To use DHCP client, check that you have done the following:
+1) Enable UDP in "uip-config.h"
+#define UIP_CONF_UDP 1
+
+2) Make sure your uip buffer size is large enough (dhcp messages from some 
+server can be more than 500 bytes). In my setting, I use 1536 in "uip-config.h"
+#define UIP_CONF_BUFFER_SIZE 1536
+
+2) Change PT_WAIT_UNTIL(...) to PT_YIELD_UNTIL(...) in line 259 and 276 in 
+dhcpc.c
+
+3) Make sure you implement your local clock appropriately in clock-arch.h and 
+clock-arch.c
+
+4) In your main loop, initialize your mac address and dhcpc if UIP_FIXEDADDR is 
+0 in "uip-opt.h", like this:
+
+int
+main(void)
+{
+int i;
+uip_ipaddr_t ipaddr;
+struct timer periodic_timer, arp_timer;
+struct uip_eth_addr mac = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+
+timer_set(&periodic_timer, CLOCK_SECOND / 2);
+timer_set(&arp_timer, CLOCK_SECOND * 10);
+
+tapdev_init();
+uip_init();
+
+uip_setethaddr(mac);
+dhcpc_init(&mac, 6);
+
+while(1){
+//normal codes goes here
+}
+}
+
+5) Implement dhcpc_configured() yourselves (this function will be called after 
+dchp has obtained an ip for you. Basically, you have to at least set your ip, 
+subnet mask and default gateway, e.g.
+
+void
+dhcpc_configured(const struct dhcpc_state *s)
+{
+uip_sethostaddr(s->ipaddr);
+uip_setnetmask(s->netmask);
+uip_setdraddr(s->default_router);
+
+//you can print your ip addr to your console/lcd to see if you get a valid ip 
+address
+}
+
+The above setting should be enough to get you through using dhcp client, 
+assuming your driver and clock is implemented correctly.
+
+Dennis
