@@ -22,6 +22,10 @@ OS_EVENT *uip_mbox;
 
 void Net_Task(void* p_arg)
 {
+//  struct timer periodic_timer, arp_timer;
+//  timer_set(&periodic_timer, CLOCK_SECOND / 2);
+//  timer_set(&arp_timer, CLOCK_SECOND * 10);
+  
   Set_uIP();
   char err, msg;
   while(1) 
@@ -68,6 +72,17 @@ void Net_Task(void* p_arg)
 //#endif /* UIP_UDP */
         break;
     case UIP_MBOX_POLL:
+      for(int i = 0; i < UIP_UDP_CONNS; i++) 
+      {
+	udp_senddata(i);
+	/* If the above function invocation resulted in data that
+        should be sent out on the network, the global variable
+        uip_len is set to a value > 0. */
+	if(uip_len > 0) {
+	  uip_arp_out();
+	  tapdev_send();
+	}
+      }
 
       break;
       
@@ -147,24 +162,24 @@ static void Set_uIP()
   
   uip_init();
   
-//  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
-//  {
+  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
+  {
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
-//  }
-//  else
-//  {
-//    p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
-//    WebLED_App_Init();                  //初始化WEBLED UDP应用
-//    
-//    uip_ipaddr(ipaddr, 192, 168, 1, 5);
-//    uip_sethostaddr(ipaddr);
-//    uip_ipaddr(ipaddr, 192, 168, 1, 1);
-//    uip_setdraddr(ipaddr);
-//    uip_ipaddr(ipaddr, 255, 255, 255, 0);
-//    uip_setnetmask(ipaddr);
-//    
-//  }
+  }
+  else
+  {
+    p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
+    WebLED_App_Init();                  //初始化WEBLED UDP应用
+    
+    uip_ipaddr(ipaddr, 192, 168, 1, 4);
+    uip_sethostaddr(ipaddr);
+    uip_ipaddr(ipaddr, 192, 168, 1, 1);
+    uip_setdraddr(ipaddr);
+    uip_ipaddr(ipaddr, 255, 255, 255, 0);
+    uip_setnetmask(ipaddr);
+    
+  }
 }
 
 void dhcpc_configured(const struct dhcpc_state *s)
