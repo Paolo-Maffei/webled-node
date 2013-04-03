@@ -390,6 +390,9 @@ void uip_setipid(u16_t id);
                                          uip_process(UIP_UDP_TIMER); } while (0)
 
 
+#define udp_senddata(conn)    do { uip_udp_conn = &uip_udp_conns[conn]; \
+                                   uip_process(UIP_UDP_SEND_CONN); } while (0)   //对要发送的UDP数据打包发送
+
 #endif /* UIP_UDP */
 
 /**

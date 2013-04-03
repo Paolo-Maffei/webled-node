@@ -87,11 +87,34 @@ void Wifi_RX_Task(void *pdata)
   {
     if(WIFI_GET_FLAG(g_pWlanAdapter, FLAG_PKTRCVED)) 
     {
+      OS_CPU_SR cpu_sr;
+      OS_ENTER_CRITICAL();      
       WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
       uip_len = tapdev_read();    //从网络设备读取一个IP包,返回数据长度
+      OS_EXIT_CRITICAL();
+      
       if (uip_len > 0)          //收到数据时长度会变化
         OSMboxPost(uip_mbox,(void *)UIP_MBOX_RX);
     }
+  }
+}
+
+void Poll_Task(void *pdata)  //定时poll任务
+{
+  while(1)
+  {
+    for(int i = 0; i < UIP_UDP_CONNS; i++) 
+    {
+	udp_senddata(i);
+	/* If the above function invocation resulted in data that
+	   should be sent out on the network, the global variable
+	   uip_len is set to a value > 0. */
+	if(uip_len > 0) {
+	  uip_arp_out();
+	  tapdev_send();
+	}
+     }
+    OSTimeDlyHMSM(0,0,1,0);  
   }
 }
 
@@ -124,24 +147,24 @@ static void Set_uIP()
   
   uip_init();
   
-  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
-  {
+//  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
+//  {
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
-  }
-  else
-  {
-    p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
-    WebLED_App_Init();                  //初始化WEBLED UDP应用
-    
-    uip_ipaddr(ipaddr, 192, 168, 1, 5);
-    uip_sethostaddr(ipaddr);
-    uip_ipaddr(ipaddr, 192, 168, 1, 1);
-    uip_setdraddr(ipaddr);
-    uip_ipaddr(ipaddr, 255, 255, 255, 0);
-    uip_setnetmask(ipaddr);
-    
-  }
+//  }
+//  else
+//  {
+//    p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
+//    WebLED_App_Init();                  //初始化WEBLED UDP应用
+//    
+//    uip_ipaddr(ipaddr, 192, 168, 1, 5);
+//    uip_sethostaddr(ipaddr);
+//    uip_ipaddr(ipaddr, 192, 168, 1, 1);
+//    uip_setdraddr(ipaddr);
+//    uip_ipaddr(ipaddr, 255, 255, 255, 0);
+//    uip_setnetmask(ipaddr);
+//    
+//  }
 }
 
 void dhcpc_configured(const struct dhcpc_state *s)
