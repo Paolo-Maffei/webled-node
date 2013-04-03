@@ -12,8 +12,8 @@
 /* task priority */ 
 #define STARTUP_TASK_PRIO     4
 #define NET_TASK_PRIO         6
-#define Wifi_RX_TASK_PRIO     10
-#define Poll_TASK_PRIO        5
+#define Wifi_RX_TASK_PRIO     7
+#define Poll_TASK_PRIO        10
 
 /* task stack size */ 
 #define STARTUP_TASK_STK_SIZE  80  
