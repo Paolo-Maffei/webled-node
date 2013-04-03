@@ -8,6 +8,7 @@
 static void Set_uIP(void);
 void Net_Task(void* p_arg);
 void Wifi_RX_Task(void *pdata);
+void Poll_Task(void *pdata);
 
 extern void (*p_appcall)(void);
 extern void (*p_udp_appcall)(void);

@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=1190531467
+Checksum=170111200
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -43,21 +43,19 @@ ActionState=1
 [TraceHelper]
 Enabled=0
 ShowSource=1
-[CallStackLog]
-Enabled=0
-[DriverProfiling]
-Enabled=0
-Mode=240656784
-Graph=0
-Symbiont=0
 [Disassemble mode]
 mode=0
 [Breakpoints]
 Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.151.1@1" 1 0 0 0 "" 0 "" 0
-Bp2=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.307.3@1" 1 0 0 0 "" 0 "" 0
-Bp3=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.271.3@1" 1 0 0 0 "" 0 "" 0
-Count=4
+Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.174.1@1" 1 0 0 0 "" 0 "" 0
+Bp2=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.33.9@1" 1 0 0 0 "" 0 "" 0
+Bp3=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\unix\tapdev.c}.56.2@1" 1 0 0 0 "" 0 "" 0
+Bp4=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.30.5@1" 1 0 0 0 "" 0 "" 0
+Bp5=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.113.4@1" 1 0 0 0 "" 0 "" 0
+Bp6=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.261.5@1" 1 0 0 0 "" 0 "" 0
+Bp7=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.259.5@1" 1 0 0 0 "" 0 "" 0
+Bp8=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\dhcpc\dhcpc.c}.257.5@1" 1 0 0 0 "" 0 "" 0
+Count=9
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -68,3 +66,10 @@ LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=212824568
+Graph=0
+Symbiont=0
