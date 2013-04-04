@@ -9,7 +9,8 @@
 typedef struct{
   int id;      //标识节点的唯一ID，现在的实现和MAC地址的低32位相同。
   int mode;    //灯 or 开关
-  int status;   //工作状态
+  int status;   //节点状态
+  char ip_status; //0xEE已经配置，其它值未配置
   char ipaddr[4];
   char gateway[4];
   char netmask[4];
