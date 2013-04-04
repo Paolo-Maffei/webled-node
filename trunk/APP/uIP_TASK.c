@@ -57,24 +57,12 @@ void Net_Task(void* p_arg)
             tapdev_send();      //发ARP回应到以太网上
           }
         }
-//#if UIP_UDP    //超时时主动发数据
-//      for(int i = 0; i < UIP_UDP_CONNS; i++) 
-//      {
-//	uip_udp_periodic(i);
-//	/* If the above function invocation resulted in data that
-//	   should be sent out on the network, the global variable
-//	   uip_len is set to a value > 0. */
-//	if(uip_len > 0) {
-//	  uip_arp_out();
-//	  tapdev_send();
-//	}
-//      }
-//#endif /* UIP_UDP */
+
         break;
     case UIP_MBOX_POLL:
       for(int i = 0; i < UIP_UDP_CONNS; i++) 
       {
-	udp_senddata(i);
+	udp_packdata(i);
 	/* If the above function invocation resulted in data that
         should be sent out on the network, the global variable
         uip_len is set to a value > 0. */
@@ -118,18 +106,17 @@ void Poll_Task(void *pdata)  //定时poll任务
 {
   while(1)
   {
-    for(int i = 0; i < UIP_UDP_CONNS; i++) 
-    {
-	udp_senddata(i);
-	/* If the above function invocation resulted in data that
-	   should be sent out on the network, the global variable
-	   uip_len is set to a value > 0. */
+#if UIP_UDP    //超时时主动发数据
+      for(int i = 0; i < UIP_UDP_CONNS; i++) 
+      {
+	uip_udp_periodic(i);
 	if(uip_len > 0) {
 	  uip_arp_out();
 	  tapdev_send();
 	}
-     }
-    OSTimeDlyHMSM(0,0,1,0);  
+      }
+       OSTimeDlyHMSM(0,0,1,0);  
+#endif /* UIP_UDP */
   }
 }
 
@@ -146,7 +133,7 @@ static void Set_uIP()
   
   uip_ipaddr_t ipaddr;
   
-  WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);
+  WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);//获取MAC地址
   if(0xFFFFFFFF == node_info.id)      //根据MAC地址生成节点ID，只在节点第一次上电时执行
   {
     int id = (int)uip_ethaddr.addr[5] + ((int)uip_ethaddr.addr[4]<<8) + ((int)uip_ethaddr.addr[3]<<16) + ((int)uip_ethaddr.addr[2]<<24);
@@ -162,7 +149,7 @@ static void Set_uIP()
   
   uip_init();
   
-  if(0xFF == node_info.ipaddr[0] && 0xFF == node_info.ipaddr[1] && 0xFF == node_info.ipaddr[2] && 0xFF == node_info.ipaddr[3])
+  if(0xEE != node_info.ip_status)  //地址未配置
   {
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
@@ -172,18 +159,30 @@ static void Set_uIP()
     p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
     WebLED_App_Init();                  //初始化WEBLED UDP应用
     
-    uip_ipaddr(ipaddr, 192, 168, 1, 4);
+    uip_ipaddr(ipaddr, node_info.ipaddr[0],node_info.ipaddr[1],node_info.ipaddr[2],node_info.ipaddr[3]);
     uip_sethostaddr(ipaddr);
-    uip_ipaddr(ipaddr, 192, 168, 1, 1);
+    uip_ipaddr(ipaddr, node_info.gateway[0],node_info.gateway[1],node_info.gateway[2],node_info.gateway[3]);
     uip_setdraddr(ipaddr);
-    uip_ipaddr(ipaddr, 255, 255, 255, 0);
+    uip_ipaddr(ipaddr, node_info.netmask[0],node_info.netmask[1],node_info.netmask[2],node_info.netmask[3]);
     uip_setnetmask(ipaddr);
-    
   }
 }
-
 void dhcpc_configured(const struct dhcpc_state *s)
 {
   
-  
+ printf("Got IP address %d.%d.%d.%d\n",
+ uip_ipaddr1(s.ipaddr), uip_ipaddr2(s.ipaddr),
+ uip_ipaddr3(s.ipaddr), uip_ipaddr4(s.ipaddr));
+ printf("Got netmask %d.%d.%d.%d\n",
+ uip_ipaddr1(s.netmask), uip_ipaddr2(s.netmask),
+ uip_ipaddr3(s.netmask), uip_ipaddr4(s.netmask));
+ printf("Got DNS server %d.%d.%d.%d\n",
+ uip_ipaddr1(s.dnsaddr), uip_ipaddr2(s.dnsaddr),
+ uip_ipaddr3(s.dnsaddr), uip_ipaddr4(s.dnsaddr));
+ printf("Got default router %d.%d.%d.%d\n",
+ uip_ipaddr1(s.default_router), uip_ipaddr2(s.default_router),
+ uip_ipaddr3(s.default_router), uip_ipaddr4(s.default_router));
+ printf("Lease expires in %ld seconds\n",
+ ntohs(s.lease_time[0])*65536ul + ntohs(s.lease_time[1]));
+ 
 }
