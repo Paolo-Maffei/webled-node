@@ -234,7 +234,7 @@ int _DoCtrlCmd (char *pszCmd, char* pszParam)
 	if (!strcmp (pszCmd, "scan")) {
 	}
 	else if (!strcmp (pszCmd, "connect")) {
-		WiFiApi_ProcessAssoc ();
+          WiFiApi_ProcessAssoc ();
 	}
 	else if (!strcmp (pszCmd, "disconnect")) {
 	}

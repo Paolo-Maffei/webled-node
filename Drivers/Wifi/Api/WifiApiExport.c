@@ -152,7 +152,7 @@ int WiFiApi_ProcessAssoc()
 
 	// Read user profile into adapter
 	Flash_Read(WIFI_PROFILE_ADDR, (PBYTE)&g_pWlanAdapter->m_CurProfile, sizeof(WiFiProfile));
-  Console_Print("wifi_profile read:%d \n",sizeof(WiFiProfile));
+        Console_Print("wifi_profile read:%d \n",sizeof(WiFiProfile));
 	
 	nRet = WiFiApi_CardSetEncryMode (g_pWlanAdapter->m_CurProfile.EncMode);
 	if (nRet != WIFICMD_RESULT_SUCCESS)

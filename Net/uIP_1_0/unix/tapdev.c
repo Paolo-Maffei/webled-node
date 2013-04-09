@@ -53,6 +53,11 @@ uint16_t tapdev_read(void)
 
 void tapdev_send(void)
 {
-	WlanAdapter_SendPkt(g_pWlanAdapter, uip_buf, uip_len);
+  OS_CPU_SR cpu_sr;
+  OS_ENTER_CRITICAL();   
+  
+  WlanAdapter_SendPkt(g_pWlanAdapter, uip_buf, uip_len);
+  
+  OS_EXIT_CRITICAL();
 }
 
