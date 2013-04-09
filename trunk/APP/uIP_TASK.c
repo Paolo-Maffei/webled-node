@@ -39,7 +39,8 @@ void Net_Task(void* p_arg)
           uip_arp_ipin();        //去除以太网头结构，更新ARP表
           uip_input();           //IP包处理
           if (uip_len > 0) 
-          {      //有带外回应数据
+          {
+            Random_Delay(10); 
             uip_arp_out();      //加以太网头结构，在主动连接时可能要构造ARP请求
             tapdev_send();      //发送数据到以太网（设备驱动程序）
           }
@@ -54,6 +55,7 @@ void Net_Task(void* p_arg)
           */
           if (uip_len > 0) 
           {      //是ARP请求，要发送回应
+            Random_Delay(10); 
             tapdev_send();      //发ARP回应到以太网上
           }
         }
@@ -67,6 +69,7 @@ void Net_Task(void* p_arg)
         should be sent out on the network, the global variable
         uip_len is set to a value > 0. */
 	if(uip_len > 0) {
+          Random_Delay(10); 
 	  uip_arp_out();
 	  tapdev_send();
 	}
@@ -75,12 +78,8 @@ void Net_Task(void* p_arg)
       break;
       
     default:
+      break;
     }
-//    if(g_Console.ucState & CONSOLE_STATE_RECEIVED) 
-//    {
-//      WiFiCmd_RunCommand ((char*)g_Console.ucConsoleRxBuffer);
-//      Console_ResetRx();
-//    }
   }		
 }
 
@@ -111,6 +110,7 @@ void Poll_Task(void *pdata)  //定时poll任务
       {
 	uip_udp_periodic(i);
 	if(uip_len > 0) {
+          Random_Delay(10); 
 	  uip_arp_out();
 	  tapdev_send();
 	}
@@ -130,27 +130,31 @@ static void Set_uIP()
     TRACE("Wlan init failed!!\r\n");
     return;
   }
-  
-  uip_ipaddr_t ipaddr;
-  
-  WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);//获取MAC地址
-  if(0xFFFFFFFF == node_info.id)      //根据MAC地址生成节点ID，只在节点第一次上电时执行
-  {
-    int id = (int)uip_ethaddr.addr[5] + ((int)uip_ethaddr.addr[4]<<8) + ((int)uip_ethaddr.addr[3]<<16) + ((int)uip_ethaddr.addr[2]<<24);
-    NodeAttr_SetID(id);
-  }
-  
+  do{
+    WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);//获取MAC地址
+  }while( 0 == (uip_ethaddr.addr[5] | uip_ethaddr.addr[4] | uip_ethaddr.addr[3] | uip_ethaddr.addr[2]) );
+    
   WiFiCmd_RunCommand ("set ssid CDDC");
   WiFiCmd_RunCommand ("set networktype infra");
   WiFiCmd_RunCommand ("set authmode open");
   WiFiCmd_RunCommand ("set encrymode wep");
   WiFiCmd_RunCommand ("set keyascii 12345");
-  WiFiCmd_RunCommand ("ctrl connect");
+  do{
+      //随机延时
+    Random_Delay(10); 
+    WiFiCmd_RunCommand ("ctrl connect");
+  }while( FLAG_MEDIA_CONNECTED != WIFI_GET_FLAG(g_pWlanAdapter, FLAG_MEDIA_CONNECTED) );
   
+  //开始初始化uip
+  uip_ipaddr_t ipaddr;
   uip_init();
   
-  if(0xEE != node_info.ip_status)  //地址未配置
+  if(!NodeAttr_Is_Configed())  //ID、IP地址信息未配置
   {
+    //根据MAC地址生成并配置ID
+    int id = ((int)uip_ethaddr.addr[2]<<24) + ((int)uip_ethaddr.addr[3]<<16) + ((int)uip_ethaddr.addr[4]<<8) + ((int)uip_ethaddr.addr[5]);
+    NodeAttr_SetID(id);
+    //配置IP地址信息
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
   }
@@ -169,20 +173,33 @@ static void Set_uIP()
 }
 void dhcpc_configured(const struct dhcpc_state *s)
 {
+  char ip[4],gateway[4],netmask[4];
   
- printf("Got IP address %d.%d.%d.%d\n",
- uip_ipaddr1(s.ipaddr), uip_ipaddr2(s.ipaddr),
- uip_ipaddr3(s.ipaddr), uip_ipaddr4(s.ipaddr));
- printf("Got netmask %d.%d.%d.%d\n",
- uip_ipaddr1(s.netmask), uip_ipaddr2(s.netmask),
- uip_ipaddr3(s.netmask), uip_ipaddr4(s.netmask));
- printf("Got DNS server %d.%d.%d.%d\n",
- uip_ipaddr1(s.dnsaddr), uip_ipaddr2(s.dnsaddr),
- uip_ipaddr3(s.dnsaddr), uip_ipaddr4(s.dnsaddr));
- printf("Got default router %d.%d.%d.%d\n",
- uip_ipaddr1(s.default_router), uip_ipaddr2(s.default_router),
- uip_ipaddr3(s.default_router), uip_ipaddr4(s.default_router));
- printf("Lease expires in %ld seconds\n",
- ntohs(s.lease_time[0])*65536ul + ntohs(s.lease_time[1]));
- 
+  ip[0] = uip_ipaddr1(s->ipaddr);
+  ip[1] = uip_ipaddr2(s->ipaddr);
+  ip[2] = uip_ipaddr3(s->ipaddr);
+  ip[3] = uip_ipaddr4(s->ipaddr);
+  gateway[0] = uip_ipaddr1(s->default_router);
+  gateway[1] = uip_ipaddr2(s->default_router);
+  gateway[2] = uip_ipaddr3(s->default_router);
+  gateway[3] = uip_ipaddr4(s->default_router);  
+  netmask[0] = uip_ipaddr1(s->netmask);
+  netmask[1] = uip_ipaddr2(s->netmask);
+  netmask[2] = uip_ipaddr3(s->netmask);
+  netmask[3] = uip_ipaddr4(s->netmask);
+  NodeAttr_SetIP(ip,gateway,netmask);
+  
+  NodeAttr_Set_Config_Status();  //标记地址已经配置
+  
+  //地址配置完毕，启动LED应用
+  uip_ipaddr_t ipaddr;
+  p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
+  WebLED_App_Init();                  //初始化WEBLED UDP应用
+    
+  uip_ipaddr(ipaddr, node_info.ipaddr[0],node_info.ipaddr[1],node_info.ipaddr[2],node_info.ipaddr[3]);
+  uip_sethostaddr(ipaddr);
+  uip_ipaddr(ipaddr, node_info.gateway[0],node_info.gateway[1],node_info.gateway[2],node_info.gateway[3]);
+  uip_setdraddr(ipaddr);
+  uip_ipaddr(ipaddr, node_info.netmask[0],node_info.netmask[1],node_info.netmask[2],node_info.netmask[3]);
+  uip_setnetmask(ipaddr);
 }

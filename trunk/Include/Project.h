@@ -41,6 +41,7 @@
 
 #include "Group.h"
 #include "NodeAttr.h"
+#include "myMisc.h"
 
 //
 // Wifi reference headers

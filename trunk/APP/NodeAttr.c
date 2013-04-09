@@ -32,6 +32,36 @@ int NodeAttr_GetID(void)
   return node_info.id;
 }
 
+void NodeAttr_Set_Config_Status(void)
+{
+  node_info.config_status = STATUS_CONFIGURED;
+  NodeAttr_Save();
+}
+
+void NodeAttr_Clr_Config_Status(void)
+{
+  node_info.config_status = 0xFF;
+  NodeAttr_Save();
+}
+
+char NodeAttr_Get_Config_Status(void)
+{
+  return node_info.config_status;
+}
+
+char NodeAttr_Is_Configed(void)
+{
+  return (STATUS_CONFIGURED == node_info.config_status);
+}
+
+void NodeAttr_SetIP(char *ip,char *gwip,char *netmask)
+{
+  CopyMemory(node_info.ipaddr,ip,4);
+  CopyMemory(node_info.gateway,gwip,4);
+  CopyMemory(node_info.netmask,netmask,4);
+  NodeAttr_Save();
+}
+
 void NodeAttr_SetName(char *name,int length)
 {
   CopyMemory(node_info.name,name,length);

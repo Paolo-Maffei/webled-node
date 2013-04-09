@@ -562,7 +562,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>2</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -570,7 +570,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>WifiLED.srec</state>
+          <state>WifiLED.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -578,7 +578,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1760,6 +1760,12 @@
       <excluded>
         <configuration>Debug</configuration>
       </excluded>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\myMisc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\myMisc.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\APP\NodeAttr.c</name>

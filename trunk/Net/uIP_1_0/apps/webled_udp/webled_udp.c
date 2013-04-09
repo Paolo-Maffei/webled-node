@@ -143,7 +143,17 @@ void WebLED_UDP_APPCALL(void)
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
+              break;        
+            case 0x27:    //clear ip and id's config
+              udp_send_buf[0] = dataptr[0]+0x80;
+              CopyMemory(&udp_send_buf[1],&dataptr[5],4);
+              CopyMemory(&udp_send_buf[5],&dataptr[1],4);
+              NodeAttr_Clr_Config_Status();
+              udp_send_buf[9] = 0;
+              udp_send_len = 10;
+              uip_send(udp_send_buf,udp_send_len);   
               break;
+              
             case 0x31:    //trigger groupID
               //此处添加响应函数
               if(GroupTable_Exist(GroupTable_IDasm(&dataptr[1])))

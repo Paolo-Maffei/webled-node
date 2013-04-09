@@ -74,14 +74,16 @@ void Console_IRQHandler(UCHAR ucIntType, UCHAR ucCharRx)
 
 void Console_Print(const char *fmt, ...)
 {
-	char szBuffer[256];
-	va_list args;
-
-	va_start(args, fmt);
-	vsprintf(szBuffer, fmt, args);
-	va_end(args);
-
-	Uart_SendString(pUart, szBuffer);
+#ifdef NO_DEBUG
+//	char szBuffer[256];
+//	va_list args;
+//
+//	va_start(args, fmt);
+//	vsprintf(szBuffer, fmt, args);
+//	va_end(args);
+//
+//	Uart_SendString(pUart, szBuffer);
+#endif //NO_DEBUG
 }
 
 BOOL Console_IsReceived()
