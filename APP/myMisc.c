@@ -14,3 +14,10 @@ void Random_Delay(char seed)//Ëæ»úÑÓÊ±
     t = 72*seed*uip_ethaddr.addr[5];
   while(t--);
 }
+
+int Is_Wifi_Ready(void)
+{
+  	WORD reg_val;
+	If_ReadRegister(HOST_INT_CTRL_REG, &reg_val);
+        return reg_val;
+}
