@@ -24,8 +24,8 @@ void WebLED_App_Init(void)
 
 void WebLED_UDP_APPCALL(void)
 {
-        switch(HTONS(uip_udp_conn->lport))
-        {
+       switch(HTONS(uip_udp_conn->lport))
+       {
         case WEBLED_UDP_RCV_PORT:
           if (uip_newdata())
           {
@@ -33,7 +33,7 @@ void WebLED_UDP_APPCALL(void)
  //           u16_t len = uip_datalen();
             char *dataptr = (char *)uip_appdata;
             if((*(int *)(dataptr+1) != NodeAttr_GetID()) && 
-               (0xff != *(int *)(dataptr+1)) && (0x30!=(dataptr[0]&0xf0)))  
+               (0xffffffff != *(int *)(dataptr+1)) && (0x30!=(dataptr[0]&0xf0)))  
               break;        //目的ID和本节点ID不同,且不为广播ID,且不为场景命令
             switch(*dataptr){
             case 0x10:

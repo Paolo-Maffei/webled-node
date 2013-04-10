@@ -115,7 +115,7 @@ void Poll_Task(void *pdata)  //定时poll任务
 	  tapdev_send();
 	}
       }
-       OSTimeDlyHMSM(0,0,1,0);  
+       OSTimeDlyHMSM(0,0,1,0);
 #endif /* UIP_UDP */
   }
 }
@@ -157,6 +157,10 @@ static void Set_uIP()
     //配置IP地址信息
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
+    
+    OSTaskCreate(Poll_Task,(void*)0,      //创建Poll_Task主动轮询发送任务
+               &Poll_Task_STK[Poll_TASK_STK_SIZE-1],
+               Poll_TASK_PRIO);	
   }
   else
   {
@@ -202,4 +206,6 @@ void dhcpc_configured(const struct dhcpc_state *s)
   uip_setdraddr(ipaddr);
   uip_ipaddr(ipaddr, node_info.netmask[0],node_info.netmask[1],node_info.netmask[2],node_info.netmask[3]);
   uip_setnetmask(ipaddr);
+  
+  OSTaskDel(Poll_TASK_PRIO);  //删除Poll_Task任务
 }
