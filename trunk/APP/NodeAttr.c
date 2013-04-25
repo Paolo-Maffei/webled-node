@@ -18,7 +18,9 @@ void Init_NodeAttr(void)  //call GroupTable_Init() before
   {
     char status[5] ={0,0,0,0,0};
     NodeAttr_SetStatus(status); 
-  }    
+  }
+  if(0xff == node_info.type)
+    NodeAttr_SetType(0x24); //默认为灯具节点
 }
 
 static void NodeAttr_Save(void)
@@ -119,8 +121,11 @@ char NodeAttr_GetType(void)
 
 void NodeAttr_SetStatus(char *status)
 {
-  CopyMemory(node_info.status,status,5);
-  NodeAttr_Save();
+  if(0 != CompareMemory(node_info.status,status,5))
+  {
+    CopyMemory(node_info.status,status,5);
+    NodeAttr_Save();
+  }
 }
 
 int NodeAttr_GetStatus(char *status)

@@ -20,13 +20,14 @@ STM32 WIFI ¿ª·¢°å
 #define LED3			GPIO_Pin_14
 #define LED4			GPIO_Pin_13
 
-uint16_t TimerPeriod = 0;
+extern uint16_t TimerPeriod;
 //
 // Exported functions declare
 //
 BOOL LED_Init (void);
 BOOL LED_TurnOn (UINT16 usLed);
 BOOL LED_TurnOff (UINT16 usLed);
+BOOL LED_Update(char *status);
 BOOL LED_Flash (UINT16 usLed);
 
 #endif // __LED_H__
