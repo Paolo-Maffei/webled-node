@@ -71,4 +71,25 @@ void NodeAttr_SetKey(char *key,int length);
 
 int NodeAttr_GetKey(char *key);
 
+
+void NodeAttr_SetIO(char io);
+
+void NodeAttr_SetPWM1(char pwm1);
+
+void NodeAttr_SetPWM2(char pwm2);
+
+void NodeAttr_SetPWM3(char pwm3);
+
+void NodeAttr_SetPWM4(char pwm4);
+
+char NodeAttr_GetIO(void);
+
+char NodeAttr_GetPWM1(void);
+
+char NodeAttr_GetPWM2(void);
+
+char NodeAttr_GetPWM3(void);
+
+char NodeAttr_GetPWM4(void);
+
 #endif//_NODEATTR_H_

@@ -102,7 +102,7 @@ void WebLED_UDP_APPCALL(void)
               char ssid_length = dataptr[9];
               NodeAttr_SetSSID(&dataptr[10],ssid_length);              
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10;
+              udp_send_len = 10 + ssid_length;
               uip_send(udp_send_buf,udp_send_len);              
               break;
             case 0x22:   //set name    
@@ -112,10 +112,10 @@ void WebLED_UDP_APPCALL(void)
               char name_length = dataptr[9];
               NodeAttr_SetName(&dataptr[10],name_length);
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10;
+              udp_send_len = 10 + name_length;
               uip_send(udp_send_buf,udp_send_len);     
               break;
-            case 0x23:  //set groupIDs
+            case 0x23:  //set group entries
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
@@ -123,21 +123,19 @@ void WebLED_UDP_APPCALL(void)
               char group_length = dataptr[9];
               for(int i=0;i<group_length;i++)  //循环依次添加场景
               {
-                GroupTable_Add(GroupTable_IDasm(&dataptr[10+4*i]));
+                GroupTable_Add(GroupTable_IDasm(&dataptr[10+9*i]),&dataptr[14+9*i]);
               }
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10;
+              udp_send_len = 10 + 9*group_length;
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x24:    //add groupID
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
-              GroupTable_Add(GroupTable_IDasm(&dataptr[9]));
-              NodeAttr_SetStatus();
-              
+              GroupTable_Add(GroupTable_IDasm(&dataptr[9]),&dataptr[13]);         
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10;
+              udp_send_len = 18;
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x25:      //delete groupID
@@ -166,6 +164,22 @@ void WebLED_UDP_APPCALL(void)
               udp_send_buf[9] = 0;
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
+              break;
+            case 0x28:
+              udp_send_buf[0] = dataptr[0]+0x80;
+              CopyMemory(&udp_send_buf[1],&dataptr[5],4);
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              
+              break;
+            case 0x29:   //set key 
+              udp_send_buf[0] = dataptr[0]+0x80;
+              CopyMemory(&udp_send_buf[1],&dataptr[5],4);
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              char key_length = dataptr[9];
+              NodeAttr_SetKey(&dataptr[10],key_length);              
+              udp_send_buf[9] = RESULT_SUCCESS;
+              udp_send_len = 10;
+              uip_send(udp_send_buf,udp_send_len);              
               break;
               
               

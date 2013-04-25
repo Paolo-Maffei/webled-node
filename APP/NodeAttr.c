@@ -14,6 +14,11 @@ void Init_NodeAttr(void)  //call GroupTable_Init() before
 //    NodeAttr_SetID(255);             //»ÙŒ¥≈‰÷√£¨ƒ¨»œIDŒ™255
   if(0xFF == node_info.name_length)
     NodeAttr_SetName("Œ¥…Ë÷√",sizeof("Œ¥…Ë÷√"));
+  if(0xFF == node_info.status[0] && 0xFF == node_info.status[1])
+  {
+    char status[5] ={0,0,0,0,0};
+    NodeAttr_SetStatus(status); 
+  }    
 }
 
 static void NodeAttr_Save(void)
@@ -122,4 +127,59 @@ int NodeAttr_GetStatus(char *status)
 {
   CopyMemory(status,node_info.status,5);
   return 5;
+}
+
+void NodeAttr_SetIO(char io)
+{
+  node_info.status[0] = io;
+  NodeAttr_Save();
+}
+
+void NodeAttr_SetPWM1(char pwm1)
+{
+  node_info.status[1] = pwm1;
+  NodeAttr_Save();
+}
+
+void NodeAttr_SetPWM2(char pwm2)
+{
+  node_info.status[2] = pwm2;
+  NodeAttr_Save();
+}
+
+void NodeAttr_SetPWM3(char pwm3)
+{
+  node_info.status[3] = pwm3;
+  NodeAttr_Save();
+}
+
+void NodeAttr_SetPWM4(char pwm4)
+{
+  node_info.status[4] = pwm4;
+  NodeAttr_Save();
+}
+
+char NodeAttr_GetIO(void)
+{
+  return node_info.status[0];
+}
+
+char NodeAttr_GetPWM1(void)
+{
+  return node_info.status[1];
+}
+
+char NodeAttr_GetPWM2(void)
+{
+  return node_info.status[2];
+}
+
+char NodeAttr_GetPWM3(void)
+{
+  return node_info.status[3];
+}
+
+char NodeAttr_GetPWM4(void)
+{
+  return node_info.status[4];
 }

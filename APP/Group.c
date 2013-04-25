@@ -38,10 +38,13 @@ static void GroupTable_Save(void)
 
 void GroupTable_Add(int GroupID,char *status)
 {
-	if(0 != GroupTable_Exist(GroupID))
+        if(0 != GroupTable_Exist(GroupID))
 		return;
+        Table_Entry te;
+        te.id = GroupID;
+        CopyMemory(te.status,status,5);
 	Flash_Write((GROUP_TABLE_ADDR+sizeof(Group_Match_Table.size)+sizeof(*Group_Match_Table.table)*Group_Match_Table.size),
-	(PBYTE)&GroupID,sizeof(GroupID));
+	(PBYTE)&te,sizeof(Table_Entry));
 	Group_Match_Table.size++;
 	Flash_Write(GROUP_TABLE_ADDR,(PBYTE)&Group_Match_Table.size,sizeof(Group_Match_Table.size));
 	GroupTable_Init();
@@ -56,7 +59,7 @@ void GroupTable_Del(int GroupID)
 		index--;  //recovery real index
 		for(i=index;i<Group_Match_Table.size;i++)
 		{
-			Group_Match_Table.table[i] = Group_Match_Table.table[i+1];
+			CopyMemory(&Group_Match_Table.table[i],&Group_Match_Table.table[i+1],sizeof(Table_Entry));
 		}
 		Group_Match_Table.size--;
 		GroupTable_Save();
@@ -77,8 +80,22 @@ static int GroupTable_Find(int GroupID)
 	int i;
 	for(i=0;i<Group_Match_Table.size;i++)
 	{
-		if(GroupID == Group_Match_Table.table[i])
+		if(GroupID == Group_Match_Table.table[i].id)
 			return (i+1);   //return index+1;
+	}
+	return 0;  //not found 
+}
+
+int GroupTable_GetStatus(int GroupID,char *status)
+{
+  	int i;
+	for(i=0;i<Group_Match_Table.size;i++)
+	{
+		if(GroupID == Group_Match_Table.table[i].id)
+                {
+                  CopyMemory(status,Group_Match_Table.table[i].status,5);
+                  return (i+1);   //return index+1;
+                }
 	}
 	return 0;  //not found 
 }
