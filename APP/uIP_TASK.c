@@ -59,7 +59,6 @@ void Net_Task(void* p_arg)
             tapdev_send();      //发ARP回应到以太网上
           }
         }
-
         break;
     case UIP_MBOX_POLL:
       for(int i = 0; i < UIP_UDP_CONNS; i++) 

@@ -3,6 +3,8 @@
 
 #include "Project.h"
 
+uint16_t TimerPeriod = 0;
+
 BOOL LED_Init (void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -127,12 +129,13 @@ BOOL LED_SetLumin(char n,char pwm)
     break;
   default:
     break;  
+  }
 }
 
-static void LED_Delay(void)
+static void LED_Delay(t)
 {
   __IO uint32_t i = 0;
-  for(i = 0xFF; i != 0; i--)
+  for(i ; i < t; t++)
   {
   }
 }
@@ -183,8 +186,11 @@ BOOL LED_Update(char *status)
   for(unsigned char i=1;i<5;i++)
   {
     if(status[i] != node_info.status[i])
-      LED_Transit(i,node_info.status[i],status[i]);
-  }  
+    {
+      LED_Transit(i,node_info.status[i],status[i]);      
+    }
+  }
+  NodeAttr_SetStatus(status);  
 }
 
 BOOL LED_Flash (UINT16 usLed)
