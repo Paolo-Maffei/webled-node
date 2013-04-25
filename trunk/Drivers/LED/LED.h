@@ -16,10 +16,11 @@ STM32 WIFI ¿ª·¢°å
 
 // Alias name
 #define LED1			GPIO_Pin_6
-#define LED2			GPIO_Pin_7
-#define LED3			GPIO_Pin_8
-#define LED4			GPIO_Pin_9
+#define LED2			GPIO_Pin_15
+#define LED3			GPIO_Pin_14
+#define LED4			GPIO_Pin_13
 
+uint16_t TimerPeriod = 0;
 //
 // Exported functions declare
 //

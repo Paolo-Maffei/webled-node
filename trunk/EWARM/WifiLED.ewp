@@ -1753,6 +1753,12 @@
       <name>$PROJ_DIR$\..\APP\Group.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\LedCtr.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\LedCtr.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\Main.c</name>
     </file>
     <file>
