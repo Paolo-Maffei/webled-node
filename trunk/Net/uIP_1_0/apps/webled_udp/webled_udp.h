@@ -6,6 +6,9 @@
 #ifndef _WEBLED_UDP_H_
 #define _WEBLED_UDP_H_
 
+#define RESULT_SUCCESS  0
+#define RESULT_FAILED   1
+
 //#define UIP_UDP_APPCALL  WebLED_App_Init
 #define WEBLED_UDP_SEND_PORT        3133
 #define WEBLED_UDP_RCV_PORT         3132

@@ -36,7 +36,7 @@ static void GroupTable_Save(void)
 	//Console_Print("GroupTable Saved,table size:%d\n",Group_Match_Table.size);
 }
 
-void GroupTable_Add(int GroupID)
+void GroupTable_Add(int GroupID,char *status)
 {
 	if(0 != GroupTable_Exist(GroupID))
 		return;
