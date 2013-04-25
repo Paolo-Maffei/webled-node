@@ -75,24 +75,51 @@ int NodeAttr_GetName(char *name)
   return node_info.name_length;
 }
 
-void NodeAttr_SetMode(int mode)
+void NodeAttr_SetSSID(char *ssid,int length)
 {
-  node_info.mode = mode;
+  CopyMemory(node_info.ssid,ssid,length);
+  node_info.ssid_length = length;
   NodeAttr_Save();
 }
 
-char NodeAttr_GetMode(void)
+int NodeAttr_GetSSID(char *ssid)
 {
-  return node_info.mode;
+  CopyMemory(ssid,node_info.ssid,node_info.ssid_length);
+  return node_info.ssid_length;
 }
 
-void NodeAttr_SetStatus(int status)
+void NodeAttr_SetKey(char *key,int length)
 {
-  node_info.status = status;
+  CopyMemory(node_info.key,key,length);
+  node_info.key_length = length;
   NodeAttr_Save();
 }
 
-int NodeAttr_GetStatus(void)
+int NodeAttr_GetKey(char *key)
 {
-  return node_info.status;
+  CopyMemory(key,node_info.key,node_info.key_length);
+  return node_info.key_length;
+}
+
+void NodeAttr_SetType(char type)
+{
+  node_info.type = type;
+  NodeAttr_Save();
+}
+
+char NodeAttr_GetType(void)
+{
+  return node_info.type;
+}
+
+void NodeAttr_SetStatus(char *status)
+{
+  CopyMemory(node_info.status,status,5);
+  NodeAttr_Save();
+}
+
+int NodeAttr_GetStatus(char *status)
+{
+  CopyMemory(status,node_info.status,5);
+  return 5;
 }
