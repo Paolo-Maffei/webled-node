@@ -4,6 +4,9 @@
   <project>
     <path>$WS_DIR$\WifiLED.ewp</path>
   </project>
+  <project>
+    <path>$WS_DIR$\WifiSwitch.ewp</path>
+  </project>
   <batchBuild/>
 </workspace>
 
