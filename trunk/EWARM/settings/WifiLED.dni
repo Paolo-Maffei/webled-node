@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=-866606793
+Checksum=-194266451
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -24,13 +24,6 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
-[InterruptLog]
-LogEnabled=0
-SumEnabled=0
-GraphEnabled=0
-ShowTimeLog=1
-ShowTimeSum=1
-SumSortOrder=0
 [Interrupts]
 Enabled=1
 [MemoryMap]
@@ -43,6 +36,53 @@ ActionState=1
 [TraceHelper]
 Enabled=0
 ShowSource=1
+[SWOTraceHWSettings]
+CpuClock=72000000
+ClockAutoDetect=0
+ClockWanted=2000000
+JtagSpeed=2250000
+Prescaler=32
+TimeStampPrescIndex=0
+TimeStampPrescData=0
+PcSampCYCTAP=1
+PcSampPOSTCNT=15
+PcSampIndex=0
+DataLogMode=0
+ITMportsEnable=0
+ITMportsTermIO=0
+ITMportsLogFile=0
+ITMlogFile=$PROJ_DIR$\ITM.log
+[DataLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[PowerLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=0
+Title0=Power [mA]
+Setup0=0 1 0 500 2 0 4 1 0
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
+Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.209.3@1" 1 0 0 0 "" 0 "" 0
+Bp2=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\WLAN\WlanPkt.c}.93.3@1" 1 0 0 0 "" 0 "" 0
+Bp3=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.191.15@1" 1 0 0 0 "" 0 "" 0
+Bp4=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.140.3@1" 1 0 0 0 "" 0 "" 0
+Bp5=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.126.3@1" 1 0 0 0 "" 0 "" 0
+Bp6=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.136.3@1" 1 0 0 0 "" 0 "" 0
+Count=7
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -50,24 +90,25 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Aliases]
+Count=0
+SuppressDialog=0
+[SWOTraceWindow]
+PcSampling=0
+InterruptLogs=0
+ForcedTimeStamps=0
+EventCPI=0
+EventEXC=0
+EventFOLD=0
+EventLSU=0
+EventSLEEP=0
+[TraceHelperExtra]
+Enabled=0
+ShowSource=1
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=284587992
+Mode=3
 Graph=0
 Symbiont=0
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.157.5@1" 1 0 0 0 "" 0 "" 0
-Bp2=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.66.2@1" 1 0 0 0 "" 0 "" 0
-Bp3=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.209.3@1" 1 0 0 0 "" 0 "" 0
-Bp4=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.108.15@1" 1 0 0 0 "" 0 "" 0
-Bp5=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\WLAN\WlanPkt.c}.93.3@1" 1 0 0 0 "" 0 "" 0
-Bp6=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.205.15@1" 1 0 0 0 "" 0 "" 0
-Count=7
-[Aliases]
-Count=0
-SuppressDialog=0

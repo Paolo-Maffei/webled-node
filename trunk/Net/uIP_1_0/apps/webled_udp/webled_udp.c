@@ -102,7 +102,7 @@ void WebLED_UDP_APPCALL(void)
               char ssid_length = dataptr[9];
               NodeAttr_SetSSID(&dataptr[10],ssid_length);              
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10 + ssid_length;
+              udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);              
               break;
             case 0x22:   //set name    
@@ -112,7 +112,7 @@ void WebLED_UDP_APPCALL(void)
               char name_length = dataptr[9];
               NodeAttr_SetName(&dataptr[10],name_length);
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10 + name_length;
+              udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);     
               break;
             case 0x23:  //set group entries
@@ -126,7 +126,7 @@ void WebLED_UDP_APPCALL(void)
                 GroupTable_Add(GroupTable_IDasm(&dataptr[10+9*i]),&dataptr[14+9*i]);
               }
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 10 + 9*group_length;
+              udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x24:    //add groupID
@@ -135,7 +135,7 @@ void WebLED_UDP_APPCALL(void)
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               GroupTable_Add(GroupTable_IDasm(&dataptr[9]),&dataptr[13]);         
               udp_send_buf[9] = RESULT_SUCCESS;
-              udp_send_len = 18;
+              udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x25:      //delete groupID

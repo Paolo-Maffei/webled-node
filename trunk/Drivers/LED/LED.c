@@ -135,7 +135,7 @@ BOOL LED_SetLumin(char n,char pwm)
 static void LED_Delay(t)
 {
   __IO uint32_t i = 0;
-  for(i ; i < t; t++)
+  for(i ; i < t; i++)
   {
   }
 }
