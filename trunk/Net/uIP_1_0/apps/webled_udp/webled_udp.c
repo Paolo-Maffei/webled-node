@@ -6,7 +6,6 @@
 #include "Project.h"
 #include "uip.h"
 #include "webled_udp.h"
-#include "data_pack.h"
 
 char udp_send_buf[UDP_SBUF_SIZE];
 char udp_send_len;
@@ -14,13 +13,19 @@ char udp_send_len;
 void WebLED_App_Init(void)
 {
         uip_ipaddr_t addr;
-	struct uip_udp_conn *conn = NULL;
+	struct uip_udp_conn *conn1 = NULL;        
         uip_ipaddr(addr,255,255,255,255);
 
-	conn = uip_udp_new(&addr, HTONS(WEBLED_UDP_SEND_PORT));
-	if(conn != NULL) {
-		uip_udp_bind(conn, HTONS( WEBLED_UDP_RCV_PORT));
+	conn1 = uip_udp_new(&addr, HTONS(WEBLED_UDP_SEND_PORT));
+	if(conn1 != NULL) {
+		uip_udp_bind(conn1, HTONS(WEBLED_UDP_RCV_PORT));
 	}//收发采用同一个端口
+        
+#ifdef NODE_TYPE_PANEL
+        struct uip_udp_conn *conn2 = NULL;
+        uip_ipaddr(addr,255,255,255,255);
+        conn2 = uip_udp_new(&addr, HTONS(PANEL_UDP_SEND_PORT));
+#endif //NODE_TYPE_PANEL
 }
 
 void WebLED_UDP_APPCALL(void)
@@ -174,7 +179,18 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);     
               break;
-            case 0x29:   //set key 
+#ifdef NODE_TYPE_PANEL          
+            case 0x29:
+              udp_send_buf[0] = dataptr[0]+0x80;
+              CopyMemory(&udp_send_buf[1],&dataptr[5],4);
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              NodeAttr_SetPanelKeyID(dataptr[9],GroupTable_IDasm(&dataptr[10]));
+              udp_send_buf[9] = RESULT_SUCCESS;
+              udp_send_len = 10;
+              uip_send(udp_send_buf,udp_send_len);     
+              break;
+#endif  //NODE_TYPE_PANEL
+            case 0x30:   //set key 
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
@@ -232,6 +248,49 @@ void WebLED_UDP_APPCALL(void)
             }
           }
         }
+#ifdef  NODE_TYPE_PANEL       
+       switch(HTONS(uip_udp_conn->rport))
+       {
+       case PANEL_UDP_SEND_PORT:
+         if(uip_poll())
+         {
+           for(char i=0;i<4;i++) //遍历所有按键
+           {
+             if( ((panel_status&(0x01<<i)) != (node_info.status[0]&(0x01<<i))) && (0xFFFFFFFF != node_info.panel_key[i]) )
+             {
+               if(0 != (panel_status>>i)&0x01 )   //turn on 
+               {
+                 //发送开启命令
+                 udp_send_buf[0] = 0x41;
+                 GroupTable_IDdeasm(node_info.panel_key[i],&udp_send_buf[1]);
+                 CopyMemory(&udp_send_buf[5],&node_info.id,4);
+                 udp_send_len = 9;
+                 uip_send(udp_send_buf,udp_send_len); 
+                 //更新并保存状态 
+                 node_info.status[0] &= ~(0x01<<i);
+                 node_info.status[0] |= (panel_status&(0x01<<i));
+                 NodeAttr_SetStatus(node_info.status);
+                 break;
+               }
+               else                      //turn off
+               {
+                 //发送关闭命令
+                 udp_send_buf[0] = 0x42;
+                 GroupTable_IDdeasm(node_info.panel_key[i],&udp_send_buf[1]);
+                 CopyMemory(&udp_send_buf[5],&node_info.id,4);
+                 udp_send_len = 9;
+                 uip_send(udp_send_buf,udp_send_len); 
+                 //更新并保存状态 
+                 node_info.status[0] &= ~(0x01<<i);
+                 node_info.status[0] |= (panel_status&(0x01<<i));
+                 NodeAttr_SetStatus(node_info.status);
+                 break;
+               }
+             }
+           }
+         }
+       }
+#endif //NODE_TYPE_PANEL
 }
 
 void GetInfo_Server()

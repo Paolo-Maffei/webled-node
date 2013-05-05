@@ -13,6 +13,10 @@
 #define WEBLED_UDP_SEND_PORT        3133
 #define WEBLED_UDP_RCV_PORT         3132
 
+#ifdef NODE_TYPE_PANEL
+#define PANEL_UDP_SEND_PORT         3333
+#endif //NODE_TYPE_PANEL
+
 #define UDP_SBUF_SIZE   500   //发送缓冲区的大小
 
 void WebLED_App_Init();

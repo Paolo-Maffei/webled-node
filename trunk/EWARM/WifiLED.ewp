@@ -3085,16 +3085,16 @@
         <group>
           <name>webled_udp</name>
           <file>
-            <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp\data_pack.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp\data_pack.h</name>
-          </file>
-          <file>
             <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp\webled_udp.c</name>
+            <excluded>
+              <configuration>Switch</configuration>
+            </excluded>
           </file>
           <file>
             <name>$PROJ_DIR$\..\Net\uIP_1_0\apps\webled_udp\webled_udp.h</name>
+            <excluded>
+              <configuration>Switch</configuration>
+            </excluded>
           </file>
         </group>
         <group>

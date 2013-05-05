@@ -1,6 +1,14 @@
-
 #ifndef _NODEATTR_H_
 #define _NODEATTR_H_
+
+#define NODE_TYPE_LED
+//#define NODE_TYPE_PANEL 
+
+#ifdef  NODE_TYPE_LED
+#define NODE_DEFAULT_TYPE 0x24  //led
+#elif   defined(NODE_TYPE_PANEL)
+#define NODE_DEFAULT_TYPE 0x04  //panel
+#endif
 
 #define NODEATTR_FLASH_ADDR   (WIFI_PROFILE_ADDR+KBytes(4))
 
@@ -10,8 +18,15 @@
 #define SSID_MAX_LENGTH       20
 #define KEY_MAX_LENGTH        20
 
+#ifdef  NODE_TYPE_PANEL
+extern char panel_status;
+#endif
+
 typedef struct{
-  int id;      //标识节点的唯一ID，现在的实现和MAC地址的低32位相同。
+  int  id;      //标识节点的唯一ID，现在的实现和MAC地址的低32位相同。
+#ifdef NODE_TYPE_PANEL  
+  int  panel_key[4]; //面板开关场景绑定信息
+#endif
   char type;    //灯 or 开关
   char status[5];   //节点状态
   char config_status; //IP地址，ID是否已经配置:0xEE已经配置，其它值未配置
@@ -27,7 +42,7 @@ typedef struct{
   
   char name_length;   //名称的长度
   char name[NODE_NAME_MAX_LENGTH];//节点的名称
-
+  
   Group_Table *group_table;  //所属的场景列表
 }NodeAttr,*pNodeAttr;
 
@@ -91,5 +106,10 @@ char NodeAttr_GetPWM2(void);
 char NodeAttr_GetPWM3(void);
 
 char NodeAttr_GetPWM4(void);
+
+#ifdef NODE_TYPE_PANEL 
+int NodeAttr_GetPanelKeyID(char i);
+char NodeAttr_SetPanelKeyID(char i,int id);
+#endif //NODE_TYPE_PANEL
 
 #endif//_NODEATTR_H_

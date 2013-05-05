@@ -200,11 +200,11 @@
  *
  * \hideinitializer
  */
-#ifdef UIP_CONF_UDP_CONNS
-#define UIP_UDP_CONNS UIP_CONF_UDP_CONNS
-#else /* UIP_CONF_UDP_CONNS */
+#ifdef  NODE_TYPE_LED  
 #define UIP_UDP_CONNS    1
-#endif /* UIP_CONF_UDP_CONNS */
+#else
+#define UIP_UDP_CONNS    2
+#endif //NODE_TYPE_LED
 
 /**
  * The name of the function that should be called when UDP datagrams arrive.

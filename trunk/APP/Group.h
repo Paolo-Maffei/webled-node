@@ -32,6 +32,6 @@ void GroupTable_DelAll(void);
 int GroupTable_GetStatus(int GroupID,char *status);
 int GroupTable_Exist(int GroupID);
 int GroupTable_IDasm(char *g); //组装计算网络传来的ID
-
+char GroupTable_IDdeasm(int id,char *ret);
 
 #endif

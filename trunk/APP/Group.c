@@ -110,3 +110,12 @@ int GroupTable_IDasm(char *g) //组装计算网络传来的ID
   int ret = (int)g[0] + ((int)g[1]<<8) + ((int)g[2]<<16) + ((int)g[3]<<24);
   return ret;
 }
+
+char GroupTable_IDdeasm(int id,char *ret)
+{
+  ret[0] = (char)(0xff&id);  
+  ret[1] = (char)(0xff&(id>>8));
+  ret[2] = (char)(0xff&(id>>16));
+  ret[3] = (char)(0xff&(id>>24));
+  return 0;
+}

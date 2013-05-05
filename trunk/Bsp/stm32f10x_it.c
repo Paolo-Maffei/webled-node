@@ -182,6 +182,68 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 {
 }
 
+#ifdef  NODE_TYPE_PANEL
+
+static void Key_Delay(t)    //5000 per ms
+{
+  __IO uint32_t i = 0;
+  for(i ; i < t; i++)
+  {
+  }
+}
+void EXTI0_IRQHandler(void)
+{
+  if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+  {
+    Key_Delay(25000);
+    
+    panel_status ^= 0x01;    //对应状态位取反    
+    OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);
+    /* Clear the  EXTI line 0 pending bit */
+    EXTI_ClearITPendingBit(EXTI_Line0);
+  }
+}
+
+void EXTI1_IRQHandler(void)
+{
+  if(EXTI_GetITStatus(EXTI_Line1) != RESET)
+  {
+    Key_Delay(25000);
+    
+    panel_status ^= 0x02;    //对应状态位取反    
+    OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);
+    /* Clear the  EXTI line 1 pending bit */
+    EXTI_ClearITPendingBit(EXTI_Line1);
+  }
+}
+
+void EXTI2_IRQHandler(void)
+{
+  if(EXTI_GetITStatus(EXTI_Line2) != RESET)
+  {
+    Key_Delay(25000);
+    
+    panel_status ^= 0x04;    //对应状态位取反    
+    OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);    
+    /* Clear the  EXTI line 2 pending bit */
+    EXTI_ClearITPendingBit(EXTI_Line2);
+  }
+}
+
+void EXTI3_IRQHandler(void)
+{
+  if(EXTI_GetITStatus(EXTI_Line3) != RESET)
+  {
+    Key_Delay(25000);
+    
+    panel_status ^= 0x08;    //对应状态位取反    
+    OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);   
+    /* Clear the  EXTI line 3 pending bit */
+    EXTI_ClearITPendingBit(EXTI_Line3);
+  }
+}
+#endif //NODE_TYPE_PANEL
+
 /*******************************************************************************
 * Function Name  : EXTI4_IRQHandler
 * Description    : This function handles External interrupt Line 4 request.
@@ -189,8 +251,8 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-extern OS_EVENT *WIFI_INT_Mbox;
-FlagStatus WIFI_INT = RESET;
+//extern OS_EVENT *WIFI_INT_Mbox;
+//FlagStatus WIFI_INT = RESET;
 void EXTI4_IRQHandler(void)
 {
 	OS_CPU_SR cpu_sr;
