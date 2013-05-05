@@ -89,5 +89,4 @@
 //
 extern WLAN_ADAPTER g_Adapter;
 
-
 #endif // __PROJECT_H__

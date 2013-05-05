@@ -89,7 +89,7 @@ void Set_System(void)
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
 #else
     /* PLLCLK = 8MHz * 9 = 72 MHz */
-    RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
+    RCC_PLLConfig(RCC_PLLSource_HSE_Div2, RCC_PLLMul_9);
 #endif
 
     /* Enable PLL */ 

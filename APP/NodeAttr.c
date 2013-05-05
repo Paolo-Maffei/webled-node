@@ -6,6 +6,10 @@
 
 NodeAttr node_info;
 
+#ifdef  NODE_TYPE_PANEL
+char panel_status;  //当前按键的最新状态
+#endif
+
 void Init_NodeAttr(void)  //call GroupTable_Init() before
 {
   Flash_Read(NODEATTR_FLASH_ADDR,(PBYTE)&node_info,sizeof(NodeAttr));
@@ -16,11 +20,15 @@ void Init_NodeAttr(void)  //call GroupTable_Init() before
     NodeAttr_SetName("未设置",sizeof("未设置"));
   if(0xFF == node_info.status[0] && 0xFF == node_info.status[1])
   {
-    char status[5] ={0,0,0,0,0};
+    char status[5] ={0,50,50,50,50};
     NodeAttr_SetStatus(status); 
   }
   if(0xff == node_info.type)
-    NodeAttr_SetType(0x24); //默认为灯具节点
+    NodeAttr_SetType(NODE_DEFAULT_TYPE); //设置节点类型
+  
+#ifdef  NODE_TYPE_PANEL
+  panel_status = node_info.status[0];
+#endif //NODE_TYPE_PANEL
 }
 
 static void NodeAttr_Save(void)
@@ -188,3 +196,17 @@ char NodeAttr_GetPWM4(void)
 {
   return node_info.status[4];
 }
+
+#ifdef NODE_TYPE_PANEL 
+int NodeAttr_GetPanelKeyID(char i)
+{
+  return node_info.panel_key[i];
+}
+
+char NodeAttr_SetPanelKeyID(char i,int id)
+{
+  node_info.panel_key[i] = id;
+  NodeAttr_Save();
+  return 0;
+}
+#endif //NODE_TYPE_PANEL

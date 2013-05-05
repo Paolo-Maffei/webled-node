@@ -63,17 +63,13 @@ void Net_Task(void* p_arg)
     case UIP_MBOX_POLL:
       for(int i = 0; i < UIP_UDP_CONNS; i++) 
       {
-	udp_packdata(i);
-	/* If the above function invocation resulted in data that
-        should be sent out on the network, the global variable
-        uip_len is set to a value > 0. */
-	if(uip_len > 0) {
-          Random_Delay(10); 
-	  uip_arp_out();
+	uip_udp_periodic(i);
+	if(uip_len > 0)
+        {
+	  uip_arp_out();              
 	  tapdev_send();
 	}
       }
-
       break;
       
     default:
@@ -163,6 +159,7 @@ static void Set_uIP()
   }
   else
   {
+
     p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
     WebLED_App_Init();                  //初始化WEBLED UDP应用
     
@@ -198,7 +195,7 @@ void dhcpc_configured(const struct dhcpc_state *s)
   uip_ipaddr_t ipaddr;
   p_udp_appcall = WebLED_UDP_APPCALL; //启动WebLED应用
   WebLED_App_Init();                  //初始化WEBLED UDP应用
-    
+
   uip_ipaddr(ipaddr, node_info.ipaddr[0],node_info.ipaddr[1],node_info.ipaddr[2],node_info.ipaddr[3]);
   uip_sethostaddr(ipaddr);
   uip_ipaddr(ipaddr, node_info.gateway[0],node_info.gateway[1],node_info.gateway[2],node_info.gateway[3]);

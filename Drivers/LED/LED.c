@@ -9,9 +9,9 @@ BOOL LED_Init (void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
         TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-        TIM_OCInitTypeDef  TIM_OCInitStructure;
+        TIM_OCInitTypeDef  TIM_OCInitStructure; 
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
 
         /* GPIO Configuration: LED1 */
 	GPIO_InitStructure.GPIO_Pin = LED1;
@@ -45,6 +45,12 @@ BOOL LED_Init (void)
         else
           LED_TurnOff(LED4);
 
+        //Init PWM 
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOC, ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE);
+        
         /* GPIOA Configuration: PWM Channel 1 */
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -65,6 +71,7 @@ BOOL LED_Init (void)
         TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
         
         TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
+        TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
         
         /* Channel 1, 2,3 and 4 Configuration in PWM mode */
         TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
@@ -74,22 +81,30 @@ BOOL LED_Init (void)
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM1() * (TimerPeriod - 1)) / 100);        
         TIM_OC1Init(TIM1, &TIM_OCInitStructure);
+        TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable);
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM2() * (TimerPeriod - 1)) / 100);
         TIM_OC4Init(TIM8, &TIM_OCInitStructure);
+        TIM_OC4PreloadConfig(TIM8, TIM_OCPreload_Enable);
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM3() * (TimerPeriod - 1)) / 100);
         TIM_OC3Init(TIM8, &TIM_OCInitStructure);
+        TIM_OC3PreloadConfig(TIM8, TIM_OCPreload_Enable);
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM4() * (TimerPeriod - 1)) / 100);
         TIM_OC2Init(TIM8, &TIM_OCInitStructure);
+        TIM_OC2PreloadConfig(TIM8, TIM_OCPreload_Enable);
+        
+        TIM_ARRPreloadConfig(TIM1, ENABLE);
+        TIM_ARRPreloadConfig(TIM8, ENABLE);
         
         /* TIM1 counter enable */
         TIM_Cmd(TIM1, ENABLE);
         TIM_Cmd(TIM8, ENABLE);
         
         /* TIM1 Main Output Enable */
-        TIM_CtrlPWMOutputs(TIM1, ENABLE);
+//        TIM_CtrlPWMOutputs(TIM1, ENABLE);
+//        TIM_CtrlPWMOutputs(TIM8, ENABLE);
 
 	return TRUE;
 }
@@ -147,7 +162,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val < new_val)
     {
        LED_SetLumin(n,++old_val);
-       LED_Delay(1000);
+       LED_Delay(100000);  //5000 per ms
      }
   }
   else  //turn bright
@@ -155,7 +170,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val > new_val)
     {
       LED_SetLumin(n,--old_val);
-      LED_Delay(1000);
+      LED_Delay(100000);
     }
   }
 }

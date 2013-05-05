@@ -37,7 +37,9 @@ int main(void)
   TraceInit();
   
   //Driver init
+//#ifdef  NODE_TYPE_PANEL    
   KEY_Init();
+//#endif  //NODE_TYPE_PANEL 
   LED_Init ();
   Console_Init ();	
 //  Console_Print("WiFi LED node!!\r\n");
