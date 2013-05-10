@@ -19,6 +19,7 @@ void (*p_appcall)(void);
 void (*p_udp_appcall)(void);
 
 OS_EVENT *uip_mbox;
+OS_EVENT *led_mbox;
 
 void Net_Task(void* p_arg)
 {
@@ -112,6 +113,17 @@ void Periodic_Task(void *pdata)  //定时poll任务
       }
        OSTimeDlyHMSM(0,0,1,0);
 #endif /* UIP_UDP */
+  }
+}
+
+void LED_Task(void *pdata)
+{
+  char *p,err;
+  while(1)
+  {
+    p = (char *)OSMboxPend(led_mbox,0,&err);  //get pwm info
+    LED_Transit(*p,node_info.status[*p],*(p+1));
+    FreeMemory(p);
   }
 }
 

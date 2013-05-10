@@ -197,15 +197,18 @@ BOOL LED_Update(char *status)
     LED_TurnOn(LED4);
   else
     LED_TurnOff(LED4);
-  
+      
   for(unsigned char i=1;i<5;i++)
   {
     if(status[i] != node_info.status[i])
     {
-      LED_Transit(i,node_info.status[i],status[i]);      
+      char *p = AllocMemory(2);  //¶¯Ì¬·ÖÅäÓÊÏä»º³åÇø
+      *p = i;
+      *(p+1) = status[i];
+      OSMboxPost(led_mbox,(void *)p);      
     }
   }
-  NodeAttr_SetStatus(status);  
+  NodeAttr_SetStatus(status);
 }
 
 BOOL LED_Flash (UINT16 usLed)
