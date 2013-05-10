@@ -16,6 +16,7 @@ static void Startup_Task(void* p_arg)
 #endif
   
   uip_mbox = OSMboxCreate((void *)0);
+  led_mbox = OSMboxCreate((void *)0);
   
   /*TODO:Create Application Tasks Here*/
   OSTaskCreate(Net_Task,(void*)0,
@@ -24,6 +25,9 @@ static void Startup_Task(void* p_arg)
   OSTaskCreate(Wifi_RX_Task,(void*)0,
                &Wifi_RX_Task_STK[Wifi_RX_TASK_STK_SIZE-1],
                Wifi_RX_TASK_PRIO);
+  OSTaskCreate(LED_Task,(void*)0,
+               &LED_Task_STK[LED_TASK_STK_SIZE-1],
+               LED_TASK_PRIO);
   
   OSTaskDel(OS_PRIO_SELF);  //É¾³ýÆô¶¯ÈÎÎñ
 }
