@@ -147,7 +147,7 @@ BOOL LED_SetLumin(char n,char pwm)
   }
 }
 
-static void LED_Delay(t)
+static void LED_Delay(t) //5000 per ms
 {
   __IO uint32_t i = 0;
   for(i ; i < t; i++)
@@ -162,7 +162,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val < new_val)
     {
        LED_SetLumin(n,++old_val);
-       LED_Delay(100000);  //5000 per ms
+       LED_Delay(10000);  //5000 per ms
      }
   }
   else  //turn bright
@@ -170,7 +170,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val > new_val)
     {
       LED_SetLumin(n,--old_val);
-      LED_Delay(100000);
+      LED_Delay(10000);
     }
   }
 }

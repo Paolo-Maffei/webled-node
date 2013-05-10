@@ -185,12 +185,12 @@ void WebLED_UDP_APPCALL(void)
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               NodeAttr_SetPanelKeyID(dataptr[9],GroupTable_IDasm(&dataptr[10]));
-              udp_send_buf[9] = RESULT_SUCCESS;
+              udp_send_buf[9] = dataptr[9];
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);     
               break;
 #endif  //NODE_TYPE_PANEL
-            case 0x30:   //set key 
+            case 0x30:   //set ssid key 
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
@@ -202,7 +202,7 @@ void WebLED_UDP_APPCALL(void)
               break;        
               
             case 0x31:    //trigger groupID
-              //此处添加响应函数
+              //
               char status[5];
               if( GroupTable_GetStatus(GroupTable_IDasm(&dataptr[1]),status) )
               {
@@ -217,7 +217,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x32:    //close GroupID
-               //此处添加响应函数
+               //
               if(GroupTable_Exist(GroupTable_IDasm(&dataptr[1])))
               {
                 char zero_status[5]={0,0,0,0,0};
@@ -232,7 +232,7 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);   
               break;
             case 0x33:    //close all GroupIDs
-               //此处添加响应函数
+               //
               char zero_status[5]={0,0,0,0,0};
               LED_Update(zero_status);
               //              
