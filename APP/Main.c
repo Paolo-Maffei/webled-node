@@ -9,7 +9,6 @@
 #include "tapdev.h"
 #include "clock-arch.h"
 
-
 static void Startup_Task(void* p_arg)
 {
 #if(OS_TASK_STAT_EN>0)

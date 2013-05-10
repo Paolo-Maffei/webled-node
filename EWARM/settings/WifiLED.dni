@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=1044028712
+Checksum=-1287037117
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -102,8 +102,14 @@ Symbiont=0
 mode=0
 [Breakpoints]
 Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.194.15@1" 0 0 0 0 "" 0 "" 0
-Count=2
+Bp1=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\WLAN\WlanCmd.c}.551.2@1" 1 0 0 0 "" 0 "" 0
+Bp2=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\WLAN\WlanInit.c}.35.2@1" 1 0 0 0 "" 0 "" 0
+Bp3=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\WLAN\WlanInit.c}.39.2@1" 1 0 0 0 "" 0 "" 0
+Bp4=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\IF\Wifi_If.c}.48.3@1" 1 0 0 0 "" 0 "" 0
+Bp5=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\IF\Wifi_If.c}.54.3@1" 1 0 0 0 "" 0 "" 0
+Bp6=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\IF\Wifi_If.c}.233.2@1" 1 0 0 0 "" 0 "" 0
+Bp7=_ "STD_CODE" "{D:\webled-node\Drivers\Wifi\IF\Wifi_If.c}.240.2@1" 1 0 0 0 "" 0 "" 0
+Count=8
 [Aliases]
 Count=0
 SuppressDialog=0

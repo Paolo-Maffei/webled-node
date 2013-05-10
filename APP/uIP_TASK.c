@@ -96,7 +96,7 @@ void Wifi_RX_Task(void *pdata)
   }
 }
 
-void Poll_Task(void *pdata)  //定时poll任务
+void Periodic_Task(void *pdata)  //定时poll任务
 {
   while(1)
   {
@@ -119,12 +119,10 @@ static void Set_uIP()
 {
   BOOL bStatus = FALSE;
   // Wifi start!
-  bStatus = Wlan_Init(g_pWlanAdapter);
-  if (!bStatus) 
-  {
-    TRACE("Wlan init failed!!\r\n");
-    return;
-  }
+  do{
+    bStatus = Wlan_Init(g_pWlanAdapter);
+  }while(!bStatus); 
+  
   do{
     WlanAdapter_MacAddr(g_pWlanAdapter, uip_ethaddr.addr, FALSE);//获取MAC地址
   }while( 0 == (uip_ethaddr.addr[5] | uip_ethaddr.addr[4] | uip_ethaddr.addr[3] | uip_ethaddr.addr[2]) );
@@ -153,9 +151,9 @@ static void Set_uIP()
     p_udp_appcall = dhcpc_appcall;
     dhcpc_init(uip_ethaddr.addr,6);
     
-    OSTaskCreate(Poll_Task,(void*)0,      //创建Poll_Task主动轮询发送任务
-               &Poll_Task_STK[Poll_TASK_STK_SIZE-1],
-               Poll_TASK_PRIO);	
+    OSTaskCreate(Periodic_Task,(void*)0,      //创建Periodic_Task主动轮询发送任务
+               &Periodic_Task_STK[Periodic_TASK_STK_SIZE-1],
+               Periodic_TASK_PRIO);	
   }
   else
   {
@@ -203,5 +201,5 @@ void dhcpc_configured(const struct dhcpc_state *s)
   uip_ipaddr(ipaddr, node_info.netmask[0],node_info.netmask[1],node_info.netmask[2],node_info.netmask[3]);
   uip_setnetmask(ipaddr);
   
-  OSTaskDel(Poll_TASK_PRIO);  //删除Poll_Task任务
+  OSTaskDel(Periodic_TASK_PRIO);  //删除Poll_Task任务
 }
