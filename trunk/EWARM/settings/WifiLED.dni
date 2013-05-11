@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=1059353653
+Checksum=-990105258
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -72,6 +72,11 @@ ShowTimeLog=1
 ShowTimeSum=0
 Title0=Power [mA]
 Setup0=0 1 0 500 2 0 4 1 0
+[Disassemble mode]
+mode=0
+[Breakpoints]
+Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
+Count=1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -79,6 +84,9 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Aliases]
+Count=0
+SuppressDialog=0
 [SWOTraceWindow]
 PcSampling=0
 InterruptLogs=0
@@ -98,13 +106,3 @@ Enabled=0
 Mode=3
 Graph=0
 Symbiont=0
-[Disassemble mode]
-mode=0
-[Breakpoints]
-Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.124.5@1" 1 0 0 0 "" 0 "" 0
-Bp2=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.207.15@1" 1 0 0 0 "" 0 "" 0
-Count=3
-[Aliases]
-Count=0
-SuppressDialog=0

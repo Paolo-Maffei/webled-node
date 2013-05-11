@@ -118,12 +118,18 @@ void Periodic_Task(void *pdata)  //定时poll任务
 
 void LED_Task(void *pdata)
 {
-  char *p,err;
+  char *status,err;
   while(1)
   {
-    p = (char *)OSMboxPend(led_mbox,0,&err);  //get pwm info
-    LED_Transit(*p,node_info.status[*p],*(p+1));
-    FreeMemory(p);
+    status = (char *)OSMboxPend(led_mbox,0,&err);  //get pwm info
+    for(unsigned char i=1;i<5;i++)
+    {
+      if(status[i] != node_info.status[i])
+      {
+        LED_Transit(i,node_info.status[i],status[i]);
+      }
+    }
+    FreeMemory(status);
   }
 }
 
