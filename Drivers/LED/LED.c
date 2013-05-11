@@ -202,10 +202,10 @@ BOOL LED_Update(char *status)
   {
     if(status[i] != node_info.status[i])
     {
-      char *p = AllocMemory(2);  //动态分配邮箱缓冲区
-      *p = i;
-      *(p+1) = status[i];
-      OSMboxPost(led_mbox,(void *)p);      
+      char *p = AllocMemory(4);  //动态分配邮箱缓冲区
+      CopyMemory(p,&status[1],4);
+      OSMboxPost(led_mbox,(void *)p);
+      break;                     //如果有变化，发送消息后不继续查找变化
     }
   }
   NodeAttr_SetStatus(status);
