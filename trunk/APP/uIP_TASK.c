@@ -129,7 +129,8 @@ void LED_Task(void *pdata)
         LED_Transit(i,node_info.status[i],status[i]);
       }
     }
-    FreeMemory(status);
+    NodeAttr_SetStatus(status); //灯光操作完毕，更新灯光和PWM状态
+    FreeMemory(status);         //释放消息邮箱的动态内存
   }
 }
 

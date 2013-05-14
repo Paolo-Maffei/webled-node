@@ -76,7 +76,7 @@ BOOL LED_Init (void)
         /* Channel 1, 2,3 and 4 Configuration in PWM mode */
         TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
         TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
         TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM1() * (TimerPeriod - 1)) / 100);        
@@ -103,8 +103,8 @@ BOOL LED_Init (void)
         TIM_Cmd(TIM8, ENABLE);
         
         /* TIM1 Main Output Enable */
-//        TIM_CtrlPWMOutputs(TIM1, ENABLE);
-//        TIM_CtrlPWMOutputs(TIM8, ENABLE);
+        TIM_CtrlPWMOutputs(TIM1, ENABLE);
+        TIM_CtrlPWMOutputs(TIM8, ENABLE);
 
 	return TRUE;
 }
@@ -202,13 +202,12 @@ BOOL LED_Update(char *status)
   {
     if(status[i] != node_info.status[i])
     {
-      char *p = AllocMemory(4);  //动态分配邮箱缓冲区
-      CopyMemory(p,&status[1],4);
+      char *p = AllocMemory(5);  //动态分配邮箱缓冲区
+      CopyMemory(p,&status[0],5);
       OSMboxPost(led_mbox,(void *)p);
       break;                     //如果有变化，发送消息后不继续查找变化
     }
   }
-  NodeAttr_SetStatus(status);
 }
 
 BOOL LED_Flash (UINT16 usLed)

@@ -43,8 +43,8 @@ int main(void)
 //#ifdef  NODE_TYPE_PANEL    
   KEY_Init();
 //#endif  //NODE_TYPE_PANEL 
-  LED_Init ();
-  Console_Init ();	
+//  LED_Init ();
+  //Console_Init ();	
 //  Console_Print("WiFi LED node!!\r\n");
    
   // Flash Storage init
@@ -52,6 +52,8 @@ int main(void)
   //  EE_Init(); //Flash_Unlock already done in Flash_Init()
   GroupTable_Init();
   Init_NodeAttr();
+  //  LED_Init ();
+  LED_Init ();
   
   OSInit();//系统初始化	
   

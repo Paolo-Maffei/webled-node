@@ -56,67 +56,67 @@ BOOL TraceInit()
 
 void TRACE(const char *fmt, ...)
 {
-	int nLen, i;
-	va_list args;
-
-	va_start(args, fmt);
-	nLen = vsprintf(szBuffer, fmt, args);
-	va_end(args);
-
-	for (i = 0; i < nLen; i ++) {
-		USART_SendData(USART1, szBuffer[i]);
-		while ((USART1->SR & USART_FLAG_TXE) == RESET);
-	}
+//	int nLen, i;
+//	va_list args;
+//
+//	va_start(args, fmt);
+//	nLen = vsprintf(szBuffer, fmt, args);
+//	va_end(args);
+//
+//	for (i = 0; i < nLen; i ++) {
+//		USART_SendData(USART1, szBuffer[i]);
+//		while ((USART1->SR & USART_FLAG_TXE) == RESET);
+//	}
 }
 
 void TRACEDATA(const char* pszPrompt,PVOID pData,int nSize)
 {
-	PBYTE p;
-	int i;
-
-	TRACE("%s (%d B):\r\n",pszPrompt,nSize);
-	for(i=0,p=(PBYTE)(pData);i<nSize;i+=16,p+=16)
-	{
-		if(i+16<=nSize)
-		{
-			TRACE("\t%04d: 0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X\r\n",
-				i,p[0],p[1],p[2],p[3], p[4],p[5],p[6],p[7], p[8],p[9],p[10],p[11], p[12],p[13],p[14],p[15]);
-		}
-		else
-		{
-			int j;
-
-			TRACE("\t%04d: ",i);
-			for(j=0;j<nSize-i;j++)
-			{
-				TRACE("0x%02X,",p[j]);
-//				if(j%4==3)
-//					TrFmtText(" ");
-			}
-			TRACE("\r\n");
-		}
-	}
+//	PBYTE p;
+//	int i;
+//
+//	TRACE("%s (%d B):\r\n",pszPrompt,nSize);
+//	for(i=0,p=(PBYTE)(pData);i<nSize;i+=16,p+=16)
+//	{
+//		if(i+16<=nSize)
+//		{
+//			TRACE("\t%04d: 0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X,0x%02X\r\n",
+//				i,p[0],p[1],p[2],p[3], p[4],p[5],p[6],p[7], p[8],p[9],p[10],p[11], p[12],p[13],p[14],p[15]);
+//		}
+//		else
+//		{
+//			int j;
+//
+//			TRACE("\t%04d: ",i);
+//			for(j=0;j<nSize-i;j++)
+//			{
+//				TRACE("0x%02X,",p[j]);
+////				if(j%4==3)
+////					TrFmtText(" ");
+//			}
+//			TRACE("\r\n");
+//		}
+//	}
 }
 
 void CTRACE(UCHAR ucFore, UCHAR ucBack, const char *fmt, ...)
 {
-	int nLen, i;
-	va_list args;
-
-	// Trace color open
-	TRACE("\033[1;%d;%dm", ucFore, ucBack);
-
-	va_start(args, fmt);
-	nLen = vsprintf(szBuffer, fmt, args);
-	va_end(args);
-
-	for (i = 0; i < nLen; i ++) {
-		USART_SendData(USART1, szBuffer[i]);
-		while ((USART1->SR & USART_FLAG_TXE) == RESET);
-	}
-
-	// Trace color close
-	TRACE("\033[0m");
+//	int nLen, i;
+//	va_list args;
+//
+//	// Trace color open
+//	TRACE("\033[1;%d;%dm", ucFore, ucBack);
+//
+//	va_start(args, fmt);
+//	nLen = vsprintf(szBuffer, fmt, args);
+//	va_end(args);
+//
+//	for (i = 0; i < nLen; i ++) {
+//		USART_SendData(USART1, szBuffer[i]);
+//		while ((USART1->SR & USART_FLAG_TXE) == RESET);
+//	}
+//
+//	// Trace color close
+//	TRACE("\033[0m");
 }
 
 #endif // NO_TRACE
