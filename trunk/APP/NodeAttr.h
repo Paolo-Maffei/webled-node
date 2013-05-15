@@ -26,6 +26,7 @@ typedef struct{
   int  id;      //标识节点的唯一ID，现在的实现和MAC地址的低32位相同。
 #ifdef NODE_TYPE_PANEL  
   int  panel_key[4]; //面板开关场景绑定信息
+  char panel_status;//面板开关的当前状态
 #endif
   char type;    //灯 or 开关
   char status[5];   //节点状态
@@ -110,6 +111,8 @@ char NodeAttr_GetPWM4(void);
 #ifdef NODE_TYPE_PANEL 
 int NodeAttr_GetPanelKeyID(char i);
 char NodeAttr_SetPanelKeyID(char i,int id);
+char NodeAttr_SetPanelStatus(char status);
+char NodeAttr_GetPanelStatus(void);
 #endif //NODE_TYPE_PANEL
 
 #endif//_NODEATTR_H_

@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=495512326
+Checksum=-670717263
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -102,12 +102,7 @@ Symbiont=0
 mode=0
 [Breakpoints]
 Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
-Bp1=_ "STD_CODE" "{D:\webled-node\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.209.19@1" 1 0 0 0 "" 0 "" 0
-Bp2=_ "STD_CODE" "{D:\webled-node\Drivers\Console\Console.c}.21.1@1" 0 0 0 0 "" 0 "" 0
-Bp3=_ "STD_CODE" "{D:\webled-node\Drivers\LED\LED.c}.82.63@1" 1 0 0 0 "" 0 "" 0
-Bp4=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.139.8@1" 1 0 0 0 "" 0 "" 0
-Bp5=_ "STD_CODE" "{D:\webled-node\Drivers\LED\LED.c}.14.2@1" 1 0 0 0 "" 0 "" 0
-Count=6
+Count=1
 [Aliases]
 Count=0
 SuppressDialog=0

@@ -3,6 +3,8 @@
 
 #include "Project.h"
 
+#define PWM_PERIOD_COUNT  17570
+
 uint16_t TimerPeriod = 0;
 
 BOOL LED_Init (void)
@@ -46,8 +48,8 @@ BOOL LED_Init (void)
           LED_TurnOff(LED4);
 
         //Init PWM 
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOC, ENABLE);
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
         RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM8, ENABLE);
         
@@ -60,8 +62,10 @@ BOOL LED_Init (void)
         /* GPIOC Configuration: PWM Channel 2, 3 and 4 */
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_8 | GPIO_Pin_7;
         GPIO_Init(GPIOC, &GPIO_InitStructure);
+        
+//        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
   
-        TimerPeriod = (SystemCoreClock / 17570 ) - 1;
+        TimerPeriod = (SystemCoreClock / PWM_PERIOD_COUNT ) - 1;
         
           /* Time Base configuration */
         TIM_TimeBaseStructure.TIM_Prescaler = 0;
@@ -76,8 +80,12 @@ BOOL LED_Init (void)
         /* Channel 1, 2,3 and 4 Configuration in PWM mode */
         TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
         TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
         TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;
+        /*N is disable,resvered to init  here to TIM_OCInitStructure to avoid bug*/
+        TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Disable;
+        TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
+        TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCIdleState_Reset;
         
         TIM_OCInitStructure.TIM_Pulse = (uint16_t)(((uint32_t)NodeAttr_GetPWM1() * (TimerPeriod - 1)) / 100);        
         TIM_OC1Init(TIM1, &TIM_OCInitStructure);
@@ -145,9 +153,10 @@ BOOL LED_SetLumin(char n,char pwm)
   default:
     break;  
   }
+  return 0;
 }
 
-static void LED_Delay(t) //5000 per ms
+static void LED_Delay(unsigned int t) //5000 per ms
 {
   __IO uint32_t i = 0;
   for(i ; i < t; i++)
@@ -173,6 +182,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
       LED_Delay(10000);
     }
   }
+  return 0;
 }
 
 BOOL LED_Update(char *status)
@@ -208,6 +218,7 @@ BOOL LED_Update(char *status)
       break;                     //如果有变化，发送消息后不继续查找变化
     }
   }
+  return 0;
 }
 
 BOOL LED_Flash (UINT16 usLed)
