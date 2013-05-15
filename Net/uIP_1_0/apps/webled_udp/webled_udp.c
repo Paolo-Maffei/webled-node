@@ -256,10 +256,10 @@ void WebLED_UDP_APPCALL(void)
          {
            for(char i=0;i<4;i++) //遍历所有按键
            {
-             if( ((panel_status&(0x01<<i)) != (node_info.status[0]&(0x01<<i))) && (0xFFFFFFFF != node_info.panel_key[i]) )
+             if( ((panel_status&(0x01<<i)) != (node_info.panel_status&(0x01<<i))) && (0xFFFFFFFF != node_info.panel_key[i]) )
              {
-               if(0 != (panel_status>>i)&0x01 )   //turn on 
-               {
+//               if(0 != (panel_status>>i)&0x01 )   //turn on 
+//               {
                  //发送开启命令
                  udp_send_buf[0] = 0x41;
                  GroupTable_IDdeasm(node_info.panel_key[i],&udp_send_buf[1]);
@@ -267,25 +267,25 @@ void WebLED_UDP_APPCALL(void)
                  udp_send_len = 9;
                  uip_send(udp_send_buf,udp_send_len); 
                  //更新并保存状态 
-                 node_info.status[0] &= ~(0x01<<i);
-                 node_info.status[0] |= (panel_status&(0x01<<i));
-                 NodeAttr_SetStatus(node_info.status);
+                 node_info.panel_status &= ~(0x01<<i);
+                 node_info.panel_status |= (panel_status&(0x01<<i));
+                 NodeAttr_SetPanelStatus(node_info.panel_status);
                  break;
-               }
-               else                      //turn off
-               {
-                 //发送关闭命令
-                 udp_send_buf[0] = 0x42;
-                 GroupTable_IDdeasm(node_info.panel_key[i],&udp_send_buf[1]);
-                 CopyMemory(&udp_send_buf[5],&node_info.id,4);
-                 udp_send_len = 9;
-                 uip_send(udp_send_buf,udp_send_len); 
-                 //更新并保存状态 
-                 node_info.status[0] &= ~(0x01<<i);
-                 node_info.status[0] |= (panel_status&(0x01<<i));
-                 NodeAttr_SetStatus(node_info.status);
-                 break;
-               }
+//               }
+//               else                      //turn off
+//               {
+//                 //发送关闭命令
+//                 udp_send_buf[0] = 0x42;
+//                 GroupTable_IDdeasm(node_info.panel_key[i],&udp_send_buf[1]);
+//                 CopyMemory(&udp_send_buf[5],&node_info.id,4);
+//                 udp_send_len = 9;
+//                 uip_send(udp_send_buf,udp_send_len); 
+//                 //更新并保存状态 
+//                 node_info.panel_status &= ~(0x01<<i);
+//                 node_info.panel_status |= (panel_status&(0x01<<i));
+//                 NodeAttr_SetPanelStatus(node_info.panel_status);
+//                 break;
+//               }
              }
            }
          }

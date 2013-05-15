@@ -27,7 +27,11 @@ void Init_NodeAttr(void)  //call GroupTable_Init() before
     NodeAttr_SetType(NODE_DEFAULT_TYPE); //设置节点类型
   
 #ifdef  NODE_TYPE_PANEL
-  panel_status = node_info.status[0];
+  if(0xFF == node_info.panel_status)
+  {
+    NodeAttr_SetPanelStatus(0x00);
+  }
+  panel_status = node_info.panel_status;
 #endif //NODE_TYPE_PANEL
 }
 
@@ -208,5 +212,17 @@ char NodeAttr_SetPanelKeyID(char i,int id)
   node_info.panel_key[i] = id;
   NodeAttr_Save();
   return 0;
+}
+
+char NodeAttr_SetPanelStatus(char status)
+{
+  node_info.panel_status = status;
+  NodeAttr_Save();
+  return 0;
+}
+
+char NodeAttr_GetPanelStatus(void)
+{
+  return node_info.panel_status;
 }
 #endif //NODE_TYPE_PANEL

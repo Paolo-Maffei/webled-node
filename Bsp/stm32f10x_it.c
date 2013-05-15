@@ -195,7 +195,7 @@ void EXTI0_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXTI_Line0) != RESET)
   {
-    Key_Delay(25000);
+    Key_Delay(30000);
     
     panel_status ^= 0x01;    //对应状态位取反    
     OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);
@@ -208,7 +208,7 @@ void EXTI1_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXTI_Line1) != RESET)
   {
-    Key_Delay(25000);
+    Key_Delay(30000);
     
     panel_status ^= 0x02;    //对应状态位取反    
     OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);
@@ -221,7 +221,7 @@ void EXTI2_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXTI_Line2) != RESET)
   {
-    Key_Delay(25000);
+    Key_Delay(30000);
     
     panel_status ^= 0x04;    //对应状态位取反    
     OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);    
@@ -234,7 +234,7 @@ void EXTI3_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXTI_Line3) != RESET)
   {
-    Key_Delay(25000);
+    Key_Delay(30000);
     
     panel_status ^= 0x08;    //对应状态位取反    
     OSMboxPost(uip_mbox,(void *)UIP_MBOX_POLL);   
