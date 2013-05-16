@@ -171,7 +171,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val < new_val)
     {
        LED_SetLumin(n,++old_val);
-       LED_Delay(10000);  //5000 per ms
+       LED_Delay(20000);  //5000 per ms
      }
   }
   else  //turn bright
@@ -179,7 +179,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
     while(old_val > new_val)
     {
       LED_SetLumin(n,--old_val);
-      LED_Delay(10000);
+      LED_Delay(20000);
     }
   }
   return 0;
