@@ -37,22 +37,16 @@ int main(void)
   SystemInit();
   // Bsp Init
   Set_System();
-  //TraceInit();
   
   //Driver init
 #ifdef  NODE_TYPE_PANEL    
-  KEY_Init();   //not work with LED_Init()
+  KEY_Init();  
 #endif  //NODE_TYPE_PANEL 
-//  LED_Init ();
-  //Console_Init ();	
-  Console_Print("WiFi LED node!!\r\n");
-   
   // Flash Storage init
-  Flash_Init();
-  //  EE_Init(); //Flash_Unlock already done in Flash_Init()
+  Flash_Init(); //Flash_Unlock done in Flash_Init()
   GroupTable_Init();
   Init_NodeAttr();
-  //  LED_Init ();
+
 #ifndef  NODE_TYPE_PANEL   
   Init_ADC();
   LED_Init ();

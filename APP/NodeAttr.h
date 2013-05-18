@@ -1,8 +1,8 @@
 #ifndef _NODEATTR_H_
 #define _NODEATTR_H_
 
-#define NODE_TYPE_LED
-//#define NODE_TYPE_PANEL 
+//#define NODE_TYPE_LED
+#define NODE_TYPE_PANEL 
 
 #ifdef  NODE_TYPE_LED
 #define NODE_DEFAULT_TYPE 0x24  //led

@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=-1121860591
+Checksum=405794017
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -72,13 +72,6 @@ ShowTimeLog=1
 ShowTimeSum=0
 Title0=Power [mA]
 Setup0=0 1 0 500 2 0 4 1 0
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [SWOTraceWindow]
 PcSampling=0
 InterruptLogs=0
@@ -91,20 +84,28 @@ EventSLEEP=0
 [TraceHelperExtra]
 Enabled=0
 ShowSource=1
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
 Enabled=0
-Mode=3
+Mode=186491688
 Graph=0
 Symbiont=0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
 [Disassemble mode]
 mode=0
 [Breakpoints]
 Bp0=_ "STD_CODE" "{E:\WifiLED\Net\uIP_1_0\apps\webled_udp\webled_udp.c}.42.15@1" 0 0 0 0 "" 0 "" 0
 Bp1=_ "EMUL_DATA" "ADC_RegularChannelConfig" 1 0 0 116 0 "" 0 "" 0 0 0 4294967295
 Bp2=_ "STD_CODE" "{D:\webled-node\APP\module_test.c}.28.11@1" 0 0 0 0 "" 0 "" 0
-Count=3
+Bp3=_ "STD_CODE" "{D:\webled-node\APP\uIP_TASK.c}.149.3@1" 1 0 0 0 "" 0 "" 0
+Count=4
 [Aliases]
 Count=0
 SuppressDialog=0
