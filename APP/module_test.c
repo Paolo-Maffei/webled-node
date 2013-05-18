@@ -12,6 +12,7 @@ static void LED_Delay(t)
   }
 }
 
+char buf[8];
 void main(void)
 {
 		// Bsp Init
@@ -21,6 +22,11 @@ void main(void)
 	Console_Init ();
 	Flash_Init();
   
+        Init_ADC();
+        while(1)
+        {
+          ADC_GetValue(buf);
+        }
         
         GPIO_InitTypeDef GPIO_InitStructure;
         

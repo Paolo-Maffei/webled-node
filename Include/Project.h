@@ -36,6 +36,7 @@
 #include "EEPROM.h"
 #include "KEY.h"
 #include "Led.h"
+#include "adc.h"
 #include "Uart.h"
 #include "Console.h"
 

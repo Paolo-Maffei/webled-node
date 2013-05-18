@@ -283,6 +283,7 @@
           <state>$PROJ_DIR$\..\Drivers\IntFlash</state>
           <state>$PROJ_DIR$\..\Drivers\LED</state>
           <state>$PROJ_DIR$\..\Drivers\KEY</state>
+          <state>$PROJ_DIR$\..\Drivers\ADC</state>
           <state>$PROJ_DIR$\..\Drivers\Uart</state>
           <state>$PROJ_DIR$\..\Drivers\Wifi\IF</state>
           <state>$PROJ_DIR$\..\Drivers\Wifi\IO</state>
@@ -2714,6 +2715,15 @@
   </group>
   <group>
     <name>Drivers</name>
+    <group>
+      <name>ADC</name>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\ADC\adc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\ADC\adc.h</name>
+      </file>
+    </group>
     <group>
       <name>Console</name>
       <file>

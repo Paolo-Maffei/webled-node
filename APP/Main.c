@@ -53,8 +53,10 @@ int main(void)
   GroupTable_Init();
   Init_NodeAttr();
   //  LED_Init ();
+#ifndef  NODE_TYPE_PANEL   
+  Init_ADC();
   LED_Init ();
-  
+#endif 
   OSInit();//系统初始化	
   
   OSTaskCreate(Startup_Task,(void*)0,

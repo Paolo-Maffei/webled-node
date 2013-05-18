@@ -96,6 +96,12 @@ void WebLED_UDP_APPCALL(void)
               uip_send(udp_send_buf,udp_send_len);
               break;
             case 0x16:
+              udp_send_buf[0] = dataptr[0]+0x80;
+              CopyMemory(&udp_send_buf[1],&dataptr[5],4);
+              CopyMemory(&udp_send_buf[5],&node_info.id,4);
+              ADC_GetValue(&udp_send_buf[9]);
+              udp_send_len = 17;
+              uip_send(udp_send_buf,udp_send_len);
               break;
               
             case 0x20:   //none    
