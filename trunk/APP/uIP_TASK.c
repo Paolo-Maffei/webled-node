@@ -90,6 +90,25 @@ void Wifi_RX_Task(void *pdata)
       WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
       uip_len = tapdev_read();    //从网络设备读取一个IP包,返回数据长度
       OS_EXIT_CRITICAL();
+//      
+//        WORD TX_FRAME_STATUS,HOST_INT_CTRL,HOST_INT_CAUSE,HOST_INT_STATUS,HOST_INT_EVENT,HOST_INT_EVENT_MASK,HOST_INT_STATUS_MASK,HOST_INT_RESET_SELECT;
+//        If_ReadRegister(TX_FRAME_STATUS_REG,&TX_FRAME_STATUS);
+//        If_ReadRegister(HOST_INT_CTRL_REG,&HOST_INT_CTRL);
+//        
+//	If_ReadRegister(HOST_INT_CAUSE_REG, &HOST_INT_CAUSE);
+//        If_ReadRegister(HOST_INT_STATUS_REG, &HOST_INT_EVENT);
+//        If_ReadRegister(HOST_INT_EVENT_REG, &HOST_INT_STATUS);
+//        If_ReadRegister(HOST_INT_EVENT_MASK_REG, &HOST_INT_EVENT_MASK);
+//        If_ReadRegister(HOST_INT_STATUS_MASK_REG, &HOST_INT_STATUS_MASK);
+//        If_ReadRegister(HOST_INT_RESET_SELECT_REG, &HOST_INT_RESET_SELECT);
+//        
+//        WORD CARD_INT_CAUSE,CARD_INT_STATUS,CARD_INT_EVENT,CARD_INT_EVENT_MASK,CARD_INT_STATUS_MASK,CARD_INT_RESET_SELECT;
+//	If_ReadRegister(CARD_INT_CAUSE_REG, &CARD_INT_CAUSE);
+//        If_ReadRegister(CARD_INT_STATUS_REG, &CARD_INT_EVENT);
+//        If_ReadRegister(CARD_INT_EVENT_REG, &CARD_INT_STATUS);
+//        If_ReadRegister(CARD_INT_EVENT_MASK_REG, &CARD_INT_EVENT_MASK);
+//        If_ReadRegister(CARD_INT_STATUS_MASK_REG, &CARD_INT_STATUS_MASK);
+//        If_ReadRegister(CARD_INT_RESET_SELECT_REG, &CARD_INT_RESET_SELECT);
       
       if (uip_len > 0)          //收到数据时长度会变化
         OSMboxPost(uip_mbox,(void *)UIP_MBOX_RX);
