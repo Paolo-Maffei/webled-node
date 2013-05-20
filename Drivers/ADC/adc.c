@@ -70,10 +70,13 @@ void ADC_GetValue(char *ret)
   unsigned char i = 0;
   for(i=0;i<4;i++)
   {
+    uint16_t adc_tmp = 0;
     ADC_RegularChannelConfig(ADC1, ADC_Channel_10+i, 1, ADC_SampleTime_13Cycles5);
     ADC_ClearFlag(ADC1, ADC_FLAG_EOC);
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);    
     while(SET != ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC));
-    *(ret+2*i) = ADC_GetConversionValue(ADC1);
+    adc_tmp = ADC_GetConversionValue(ADC1);
+    *(ret+2*i) = (char)adc_tmp;
+    *(ret+2*i+1) = (char)(adc_tmp>>8);
   }
 }

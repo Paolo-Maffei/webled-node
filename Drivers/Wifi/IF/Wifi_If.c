@@ -256,7 +256,7 @@ BOOL If_FirmwareDownload(void)
 	return rc;
 }
 
-BOOL If_ExitDeepSleep(void)
+BOOL If_ExitDeepSleep(void) 
 {
 	if (If_WriteRegister(HOST_INT_CTRL_REG, HIC_DEFAULT_VALUE | HIC_WakeUp) == 2)
 		return TRUE;
@@ -267,6 +267,10 @@ BOOL If_ExitDeepSleep(void)
 BOOL If_ResetDeepSleep(void)
 {
 	return If_WriteRegister(HOST_INT_CTRL_REG, HIC_DEFAULT_VALUE & (~HIC_WakeUp));
+}
+void CeOnIntrCardEvent()
+{
+//  while(1);
 }
 
 void If_OnIoIntr(PWLAN_ADAPTER Adapter)
@@ -288,7 +292,7 @@ void If_OnIoIntr(PWLAN_ADAPTER Adapter)
 		if (nIntrStatus & HIS_CmdDnLdRdy)
 			;//CmdOnIntrCmdSent();
 		if (nIntrStatus & HIS_CardEvent)
-			;//CeOnIntrCardEvent();
+			CeOnIntrCardEvent();
 		if (nIntrStatus & HIS_CmdUpLdRdy)
 			CmdOnCmdUpLdRdy(Adapter);
 		WIFI_SET_FLAG(Adapter, FLAG_INTRETURN);

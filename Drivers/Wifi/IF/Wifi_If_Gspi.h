@@ -91,6 +91,8 @@
 #define SCRATCH_3_REG							0x30
 #define SCRATCH_4_REG							0x34
 
+#define TX_FRAME_STATUS_REG                                             0x3C
+
 #define HOST_INT_CTRL_REG						0x40
 
 #define CARD_INT_CAUSE_REG						0x44

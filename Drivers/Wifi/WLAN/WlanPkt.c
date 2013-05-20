@@ -124,7 +124,7 @@ BOOL WlanPkt_SendPkt(PWLAN_ADAPTER Adapter, PVOID pBuf, UINT nBufLen)
 		}
 	}
 #endif
-
+           
 	if (If_WriteRegister2(DATA_RDWRPORT_REG, (PVOID)pWcb, nBufLen) != nBufLen)
 		nStatus = FALSE;
 	If_WriteRegister(CARD_INT_CAUSE_REG, CIC_TxDnLdOvr);
