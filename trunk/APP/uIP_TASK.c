@@ -104,7 +104,7 @@ void Net_Tick_Task(void *pdata)
   char err;
   while(1)
   {
-     OSTimeDly(OS_TICKS_PER_SEC*10);
+     OSTimeDly(OS_TICKS_PER_SEC*20);
     //OSTimeDlyHMSM(0,0,20,0);
     for(int j =0; j <3; j++)  //重试3次
     {
@@ -122,7 +122,7 @@ void Net_Tick_Task(void *pdata)
       }
 #endif /* UIP_UDP */
       
-      NetTickStatus = (char)OSMboxPend(net_tick_mbox,OS_TICKS_PER_SEC*2,&err);
+      NetTickStatus = (char)OSMboxPend(net_tick_mbox,OS_TICKS_PER_SEC*j,&err);
       if( NET_TICK_STATUS_RECV == NetTickStatus )
         break; //收到回应的数据包
       else
