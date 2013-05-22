@@ -88,7 +88,7 @@ void Set_System(void)
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
 #else
-    /* PLLCLK = 8MHz * 9 = 72 MHz , RCC_PLLSource_HSE_Div1用来设置使用8M or 16M晶振*/
+    /* PLLCLK = 16MHz /2 * 9 = 72 MHz , RCC_PLLSource_HSE_Div1用来设置使用8M or 16M晶振*/  //by lits
     RCC_PLLConfig(RCC_PLLSource_HSE_Div2, RCC_PLLMul_9);
 #endif
 
@@ -117,7 +117,6 @@ void Set_System(void)
     {
     }
   }
-  
   systick_init ();
 }
 

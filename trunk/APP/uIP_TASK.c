@@ -20,6 +20,7 @@ void (*p_udp_appcall)(void);
 
 OS_EVENT *uip_mbox;
 OS_EVENT *led_mbox;
+OS_EVENT *net_tick_mbox;
 
 void Net_Task(void* p_arg)
 {
@@ -90,29 +91,59 @@ void Wifi_RX_Task(void *pdata)
       WIFI_CLR_FLAG(g_pWlanAdapter, FLAG_PKTRCVED);
       uip_len = tapdev_read();    //从网络设备读取一个IP包,返回数据长度
       OS_EXIT_CRITICAL();
-//      
-//        WORD TX_FRAME_STATUS,HOST_INT_CTRL,HOST_INT_CAUSE,HOST_INT_STATUS,HOST_INT_EVENT,HOST_INT_EVENT_MASK,HOST_INT_STATUS_MASK,HOST_INT_RESET_SELECT;
-//        If_ReadRegister(TX_FRAME_STATUS_REG,&TX_FRAME_STATUS);
-//        If_ReadRegister(HOST_INT_CTRL_REG,&HOST_INT_CTRL);
-//        
-//	If_ReadRegister(HOST_INT_CAUSE_REG, &HOST_INT_CAUSE);
-//        If_ReadRegister(HOST_INT_STATUS_REG, &HOST_INT_EVENT);
-//        If_ReadRegister(HOST_INT_EVENT_REG, &HOST_INT_STATUS);
-//        If_ReadRegister(HOST_INT_EVENT_MASK_REG, &HOST_INT_EVENT_MASK);
-//        If_ReadRegister(HOST_INT_STATUS_MASK_REG, &HOST_INT_STATUS_MASK);
-//        If_ReadRegister(HOST_INT_RESET_SELECT_REG, &HOST_INT_RESET_SELECT);
-//        
-//        WORD CARD_INT_CAUSE,CARD_INT_STATUS,CARD_INT_EVENT,CARD_INT_EVENT_MASK,CARD_INT_STATUS_MASK,CARD_INT_RESET_SELECT;
-//	If_ReadRegister(CARD_INT_CAUSE_REG, &CARD_INT_CAUSE);
-//        If_ReadRegister(CARD_INT_STATUS_REG, &CARD_INT_EVENT);
-//        If_ReadRegister(CARD_INT_EVENT_REG, &CARD_INT_STATUS);
-//        If_ReadRegister(CARD_INT_EVENT_MASK_REG, &CARD_INT_EVENT_MASK);
-//        If_ReadRegister(CARD_INT_STATUS_MASK_REG, &CARD_INT_STATUS_MASK);
-//        If_ReadRegister(CARD_INT_RESET_SELECT_REG, &CARD_INT_RESET_SELECT);
       
       if (uip_len > 0)          //收到数据时长度会变化
         OSMboxPost(uip_mbox,(void *)UIP_MBOX_RX);
     }
+  }
+}
+
+unsigned char NetTickStatus = NET_TICK_STATUS_INIT;
+void Net_Tick_Task(void *pdata)
+{
+  char err;
+  while(1)
+  {
+     OSTimeDly(OS_TICKS_PER_SEC*10);
+    //OSTimeDlyHMSM(0,0,20,0);
+    for(int j =0; j <3; j++)  //重试3次
+    {
+      NetTickStatus = NET_TICK_STATUS_SEND;
+      
+#if UIP_UDP    //主动轮询连接发心跳数据包
+      for(int i = 0; i < UIP_UDP_CONNS; i++) 
+      {
+        uip_udp_periodic(i);
+        if(uip_len > 0) {
+          Random_Delay(10); 
+          uip_arp_out();
+          tapdev_send();
+        }
+      }
+#endif /* UIP_UDP */
+      
+      NetTickStatus = (char)OSMboxPend(net_tick_mbox,OS_TICKS_PER_SEC*2,&err);
+      if( NET_TICK_STATUS_RECV == NetTickStatus )
+        break; //收到回应的数据包
+      else
+      {
+        if(2 <= j)//第3次仍未收到回复，认为网络已断，重启节点网络
+        {
+          BOOL bStatus = FALSE;
+          do{
+            bStatus = Wlan_Init(g_pWlanAdapter);
+          }while(!bStatus); 
+
+          do{
+            WiFiCmd_RunCommand ("ctrl connect");
+          }while( FLAG_MEDIA_CONNECTED != WIFI_GET_FLAG(g_pWlanAdapter, FLAG_MEDIA_CONNECTED) );
+          
+          break;
+        }
+        else   //小于两次则继续发包
+          continue;
+      }
+     }
   }
 }
 
@@ -130,8 +161,8 @@ void Periodic_Task(void *pdata)  //定时poll任务
 	  tapdev_send();
 	}
       }
-       OSTimeDlyHMSM(0,0,1,0);
 #endif /* UIP_UDP */
+      OSTimeDlyHMSM(0,0,1,0);
   }
 }
 
@@ -241,3 +272,24 @@ void dhcpc_configured(const struct dhcpc_state *s)
   
   OSTaskDel(Periodic_TASK_PRIO);  //删除Poll_Task任务
 }
+
+
+//      
+//        WORD TX_FRAME_STATUS,HOST_INT_CTRL,HOST_INT_CAUSE,HOST_INT_STATUS,HOST_INT_EVENT,HOST_INT_EVENT_MASK,HOST_INT_STATUS_MASK,HOST_INT_RESET_SELECT;
+//        If_ReadRegister(TX_FRAME_STATUS_REG,&TX_FRAME_STATUS);
+//        If_ReadRegister(HOST_INT_CTRL_REG,&HOST_INT_CTRL);
+//        
+//	If_ReadRegister(HOST_INT_CAUSE_REG, &HOST_INT_CAUSE);
+//        If_ReadRegister(HOST_INT_STATUS_REG, &HOST_INT_EVENT);
+//        If_ReadRegister(HOST_INT_EVENT_REG, &HOST_INT_STATUS);
+//        If_ReadRegister(HOST_INT_EVENT_MASK_REG, &HOST_INT_EVENT_MASK);
+//        If_ReadRegister(HOST_INT_STATUS_MASK_REG, &HOST_INT_STATUS_MASK);
+//        If_ReadRegister(HOST_INT_RESET_SELECT_REG, &HOST_INT_RESET_SELECT);
+//        
+//        WORD CARD_INT_CAUSE,CARD_INT_STATUS,CARD_INT_EVENT,CARD_INT_EVENT_MASK,CARD_INT_STATUS_MASK,CARD_INT_RESET_SELECT;
+//	If_ReadRegister(CARD_INT_CAUSE_REG, &CARD_INT_CAUSE);
+//        If_ReadRegister(CARD_INT_STATUS_REG, &CARD_INT_EVENT);
+//        If_ReadRegister(CARD_INT_EVENT_REG, &CARD_INT_STATUS);
+//        If_ReadRegister(CARD_INT_EVENT_MASK_REG, &CARD_INT_EVENT_MASK);
+//        If_ReadRegister(CARD_INT_STATUS_MASK_REG, &CARD_INT_STATUS_MASK);
+//        If_ReadRegister(CARD_INT_RESET_SELECT_REG, &CARD_INT_RESET_SELECT);

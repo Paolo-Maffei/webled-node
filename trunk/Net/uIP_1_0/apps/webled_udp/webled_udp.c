@@ -21,10 +21,14 @@ void WebLED_App_Init(void)
 		uip_udp_bind(conn1, HTONS(WEBLED_UDP_RCV_PORT));
 	}//收发采用同一个端口
         
-#ifdef NODE_TYPE_PANEL
         struct uip_udp_conn *conn2 = NULL;
         uip_ipaddr(addr,255,255,255,255);
-        conn2 = uip_udp_new(&addr, HTONS(PANEL_UDP_SEND_PORT));
+        conn2 = uip_udp_new(&addr, HTONS(NET_TICK_SEND_PORT));
+        
+#ifdef NODE_TYPE_PANEL
+        struct uip_udp_conn *conn3 = NULL;
+        uip_ipaddr(addr,255,255,255,255);
+        conn3 = uip_udp_new(&addr, HTONS(PANEL_UDP_SEND_PORT));
 #endif //NODE_TYPE_PANEL
 }
 
@@ -95,6 +99,7 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = sizeof(node_info.status) + 9;
               uip_send(udp_send_buf,udp_send_len);
               break;
+#ifndef NODE_TYPE_PANEL 
             case 0x16:
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
@@ -103,7 +108,7 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = 17;
               uip_send(udp_send_buf,udp_send_len);
               break;
-              
+#endif //NODE_TYPE_PANEL             
             case 0x20:   //none    
               break;
             case 0x21:   //set ssid 
@@ -176,6 +181,7 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);   
               break;
+#ifndef NODE_TYPE_PANEL 
             case 0x28:
               udp_send_buf[0] = dataptr[0]+0x80;
               CopyMemory(&udp_send_buf[1],&dataptr[5],4);
@@ -185,6 +191,8 @@ void WebLED_UDP_APPCALL(void)
               udp_send_len = 10;
               uip_send(udp_send_buf,udp_send_len);     
               break;
+#endif //NODE_TYPE_PANEL
+              
 #ifdef NODE_TYPE_PANEL          
             case 0x29:
               udp_send_buf[0] = dataptr[0]+0x80;
@@ -247,13 +255,34 @@ void WebLED_UDP_APPCALL(void)
               CopyMemory(&udp_send_buf[5],&node_info.id,4);
               udp_send_len = 9;
               uip_send(udp_send_buf,udp_send_len);  
-              break;              
+              break;
+            case 0x34:  //receive net tick reply packet
+                if(*(int *)(dataptr+1) == NodeAttr_GetID())
+                {
+                  OSMboxPost(net_tick_mbox,(void *)NET_TICK_STATUS_RECV);
+                }
             
             default:
               break;
             }
           }
         }
+       //主动发送心跳数据包
+       switch(HTONS(uip_udp_conn->rport))
+       {
+       case NET_TICK_SEND_PORT:
+         if(uip_poll())
+         {
+           if(NET_TICK_STATUS_SEND == NetTickStatus)
+           {
+             udp_send_buf[0] = 0x51;
+             CopyMemory(&udp_send_buf[1],&node_info.id,4);
+             udp_send_len = 5;
+             uip_send(udp_send_buf,udp_send_len); 
+           }             
+         }
+       }
+       
 #ifdef  NODE_TYPE_PANEL       
        switch(HTONS(uip_udp_conn->rport))
        {
