@@ -201,9 +201,9 @@
  * \hideinitializer
  */
 #ifdef  NODE_TYPE_LED  
-#define UIP_UDP_CONNS    1
-#else
 #define UIP_UDP_CONNS    2
+#else
+#define UIP_UDP_CONNS    3
 #endif //NODE_TYPE_LED
 
 /**

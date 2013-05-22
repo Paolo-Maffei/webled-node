@@ -32,6 +32,6 @@ static void _Delay(t) //5000 per ms
 
 void DelayMS(unsigned int t)
 {
-  _Delay(5000*t);
+  _Delay(2500*t);
 }
 

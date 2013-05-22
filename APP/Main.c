@@ -17,6 +17,7 @@ static void Startup_Task(void* p_arg)
   
   uip_mbox = OSMboxCreate((void *)0);
   led_mbox = OSMboxCreate((void *)0);
+  net_tick_mbox = OSMboxCreate((void *)0);
   
   /*TODO:Create Application Tasks Here*/
   OSTaskCreate(Net_Task,(void*)0,
@@ -28,6 +29,9 @@ static void Startup_Task(void* p_arg)
   OSTaskCreate(LED_Task,(void*)0,
                &LED_Task_STK[LED_TASK_STK_SIZE-1],
                LED_TASK_PRIO);
+   OSTaskCreate(Net_Tick_Task,(void*)0,
+               &Net_Tick_Task_STK[NET_TICK_TASK_STK_SIZE-1],
+               NET_TICK_TASK_PRO);
   
   OSTaskDel(OS_PRIO_SELF);  //É¾³ýÆô¶¯ÈÎÎñ
 }

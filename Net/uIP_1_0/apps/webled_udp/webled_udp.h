@@ -12,6 +12,7 @@
 //#define UIP_UDP_APPCALL  WebLED_App_Init
 #define WEBLED_UDP_SEND_PORT        3133
 #define WEBLED_UDP_RCV_PORT         3132
+#define NET_TICK_SEND_PORT          3136
 
 #ifdef NODE_TYPE_PANEL
 #define PANEL_UDP_SEND_PORT         3134
