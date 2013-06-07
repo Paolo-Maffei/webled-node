@@ -22,7 +22,7 @@ int Is_Wifi_Ready(void)
         return reg_val;
 }
 
-static void _Delay(t) //5000 per ms
+static void _Delay(uint32_t t) //5000 per ms
 {
   __IO uint32_t i = 0;
   for(i ; i < t; i++)
@@ -35,3 +35,8 @@ void DelayMS(unsigned int t)
   _Delay(2500*t);
 }
 
+void SoftReset(void) 
+{  
+  __set_FAULTMASK(1);      // 关闭所有中端
+  NVIC_SystemReset();// 复位
+}

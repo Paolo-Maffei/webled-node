@@ -3,6 +3,6 @@
 
 void Random_Delay(char seed);
 void DelayMS(unsigned int t);
-
+void SoftReset(void);
 
 #endif
