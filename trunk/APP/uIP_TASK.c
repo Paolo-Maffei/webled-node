@@ -111,7 +111,10 @@ void Net_Tick_Task(void *pdata)
     {
       NetTickStatus = NET_TICK_STATUS_SEND;
       
+     
 #if UIP_UDP    //主动轮询连接发心跳数据包
+      OS_CPU_SR cpu_sr;
+      OS_ENTER_CRITICAL(); 
       for(int i = 0; i < UIP_UDP_CONNS; i++) 
       {
         uip_udp_periodic(i);
@@ -121,6 +124,7 @@ void Net_Tick_Task(void *pdata)
           tapdev_send();
         }
       }
+      OS_EXIT_CRITICAL();
 #endif /* UIP_UDP */
       
       NetTickStatus = (char)OSMboxPend(net_tick_mbox,OS_TICKS_PER_SEC*(j+1),&err);
