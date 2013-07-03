@@ -1,6 +1,6 @@
 [DebugChecksum]
 <<<<<<< .mine
-Checksum=-2038999466
+Checksum=-274256403
 =======
 Checksum=1910183783
 >>>>>>> .r34
@@ -94,7 +94,7 @@ ShowSource=1
 [CallStackLog]
 Enabled=0
 [DriverProfiling]
-Enabled=0
+Enabled=1
 Mode=3
 Graph=0
 Symbiont=0
