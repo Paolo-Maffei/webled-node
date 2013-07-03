@@ -16,10 +16,10 @@
 /* task stack size */ 
 #define STARTUP_TASK_STK_SIZE   80  
 #define NET_TASK_STK_SIZE       1024
-#define Wifi_RX_TASK_STK_SIZE   256
-#define Periodic_TASK_STK_SIZE  100
-#define NET_TICK_TASK_STK_SIZE  100
-#define LED_TASK_STK_SIZE       100
+#define Wifi_RX_TASK_STK_SIZE   512
+#define Periodic_TASK_STK_SIZE  256
+#define NET_TICK_TASK_STK_SIZE  512
+#define LED_TASK_STK_SIZE       512
 
 static OS_STK  Startup_Task_STK[STARTUP_TASK_STK_SIZE];
 static OS_STK  Net_Task_STK[NET_TASK_STK_SIZE];

@@ -185,6 +185,7 @@ BOOL LED_Transit(char n,char old_val,char new_val)
   return 0;
 }
 
+char led_status[5];
 BOOL LED_Update(char *status)
 {
         
@@ -212,9 +213,9 @@ BOOL LED_Update(char *status)
   {
     if(status[i] != node_info.status[i])
     {
-      char *p = AllocMemory(5);  //动态分配邮箱缓冲区
-      CopyMemory(p,&status[0],5);
-      OSMboxPost(led_mbox,(void *)p);
+//      char *p = AllocMemory(5);  //动态分配邮箱缓冲区
+      CopyMemory(led_status,&status[0],5);
+      OSMboxPost(led_mbox,(void *)led_status);
       break;                     //如果有变化，发送消息后不继续查找变化
     }
   }

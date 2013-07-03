@@ -111,7 +111,6 @@ void Net_Tick_Task(void *pdata)
     {
       NetTickStatus = NET_TICK_STATUS_SEND;
       
-     
 #if UIP_UDP    //主动轮询连接发心跳数据包
       OS_CPU_SR cpu_sr;
       OS_ENTER_CRITICAL(); 
@@ -185,7 +184,7 @@ void LED_Task(void *pdata)
       }
     }
     NodeAttr_SetStatus(status); //灯光操作完毕，更新灯光和PWM状态
-    FreeMemory(status);         //释放消息邮箱的动态内存
+//    FreeMemory(status);         //释放消息邮箱的动态内存
   }
 }
 
